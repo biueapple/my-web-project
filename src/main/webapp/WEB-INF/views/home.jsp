@@ -84,6 +84,7 @@
             <a href="<c:url value='/airplaneList'/>"><spring:message code="button.Listplane"/></a>
             <a href="<c:url value='/planeReservation'/>"><spring:message code="label.Reservation"/></a>
             <a href="<c:url value='/Reservation'/>">예매</a>
+            <a href="board">게시판</a>
         </nav>
         <main>
             <h3>Home</h3>

@@ -50,6 +50,10 @@
 	
 	<!-- Mapper 인터페이스 자동 스캔 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.airplane.mapper"/>
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.airplane.plane.mapper"/>
 	</bean>
 </beans>
