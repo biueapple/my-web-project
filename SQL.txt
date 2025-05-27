@@ -1,0 +1,14 @@
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    birth_date DATE,
+    gender VARCHAR(10),
+    country VARCHAR(50),
+    register_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    hobbies TEXT
+);
+
+INSERT INTO users (username, password, birth_date, gender, country, hobbies) VALUES (?, ?, ?, ?, ?, ?)
+
+SELECT * FROM users WHERE username = ? AND password = ?
