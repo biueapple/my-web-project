@@ -33,8 +33,6 @@
 		<property name="url" value="jdbc:mariadb://localhost:3307/airplane"/>
 		<property name="username" value="test"/>
 		<property name="password" value="1234"/>
-
-		
 		<property name="maxTotal" value="10"/>
 		<property name="maxIdle" value="5"/>
 	</bean>
