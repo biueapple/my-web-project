@@ -1,6 +1,5 @@
 package com.airplane.plane;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -88,7 +87,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "reserveSeat", method = RequestMethod.POST)
-	public String selectSeat(HttpSession session, Model model) {
+	public String selectSeat(@RequestParam("seatId") String seatId,HttpSession session, Model model) {
 		//업데이트
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc==null) {
@@ -114,8 +113,7 @@ public class HomeController {
 			req.setGender(user.getGender());
 			req.setDepart(e.getDeparture());
 			req.setArrive(e.getDestination());
-			req.setSeat("좌석번호");
-		
+			req.setSeat(seatId);
 			refundUserService.regist(req);
 			//여기서 비행기 정보 가져오기
 			return "redirect:/";
