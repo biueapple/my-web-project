@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title><spring:message code="register.title"/></title>
+<style>
+.error{
+	color: red;
+	font-weight: bold;
+	font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+<c:if test="${not empty message}">
+    <p style="color:red; font-weight:bold;">
+        ${message}
+    </p>
+</c:if>
+	<h2>회원정보 입력</h2>
+	
+	<form:form modelAttribute="userRegisterRequest" method="post">
+		<p>
+			<spring:message code="label.username"/>
+			<form:input path="username"/>
+			<form:errors path="username" cssClass="error"/>
+		</p>
+		
+		<p>
+			<spring:message code="label.birthDate"/>
+			<form:input path="birthDate" type="date"/>
+			<form:errors path="birthDate" cssClass="error"/>
+		</p>
+		<p>
+			<spring:message code="label.gender"/>
+			<form:radiobuttons path="gender" items="${genderOptions}"/>
+			<form:errors path="gender" cssClass="error"/>
+		</p>
+		<p>
+			<spring:message code="label.country"/>
+			<form:select path="country" items="${countryOptions}"/>
+			<form:errors path="country" cssClass="error"/>
+		</p>
+		
+		<button type="submit">
+			<spring:message code="button.submit"/>
+		</button>
+	</form:form>
+</body>
+</html>
+
+

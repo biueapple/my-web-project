@@ -46,7 +46,7 @@
 <h2>회원 가입</h2>
 <p>[${result}] 가입이 완료되었습니다.</p>
 
-  <a href="${pageContext.request.contextPath}/" class="btn">홈으로 이동</a>
+  <a href="/airplane" class="btn">홈으로 이동</a>
 
 </body>
 </html>
