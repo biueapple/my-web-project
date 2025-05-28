@@ -14,6 +14,4 @@ public interface UserMapper {
 	User idsearch(@Param("id")String id);
 	
 	
-	
-	
 }
