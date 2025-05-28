@@ -114,7 +114,6 @@ public class HomeController {
 			req.setDepart(e.getDeparture());
 			req.setArrive(e.getDestination());
 			req.setSeat(seatId);
-			req.setF_class("C1");
 			refundUserService.regist(req);
 			//여기서 비행기 정보 가져오기
 			return "redirect:/";
