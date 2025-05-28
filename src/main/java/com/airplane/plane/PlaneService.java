@@ -1,6 +1,6 @@
 package com.airplane.plane;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,9 @@ public class PlaneService
 	@Autowired
 	private PlaneMapper planeMapper;
 	
-	public List<Plane> selectAll(LocalDateTime time)
+	public List<Plane> selectAll(LocalDate time, String departure)
 	{
-		List<Plane> plane = planeMapper.selectReservationToTimeLate(time, "서울");
+		List<Plane> plane = planeMapper.selectReservationToTimeLate(time, departure);
 		return plane;
 	}
 	
