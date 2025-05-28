@@ -19,7 +19,7 @@ public class RefundUserService {
 	private RefundUserMapper userMapper;
 	
 	
-	public RefundUser findByName(String name) {
+	public List<RefundUser>  findByName(String name) {
 		return userMapper.findByName(name);
 	}
 	public void regist(RefundUserDto cmdObj) {
