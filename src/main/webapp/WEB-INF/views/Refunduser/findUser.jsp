@@ -10,26 +10,36 @@
 <meta charset="UTF-8">
 <title><spring:message code="register.title"/></title>
 <style>
+body {
+	background-color: #f0f8ff;
+		color: #333;
+		text-align: center;
+		}
 .error{
 	color: red;
 	font-weight: bold;
 	font-size: 0.9em;
 }
+button {
+  padding: 8px 16px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+}
 </style>
 </head>
 <body>
-<c:if test="${not empty message}">
-    <p style="color:red; font-weight:bold;">
-        ${message}
-    </p>
-</c:if>
+
 	<h2>회원정보 입력</h2>
 	
 	<form:form modelAttribute="userRegisterRequest" method="post">
 		<p>
 			<spring:message code="label.username"/>
-			<form:input path="username"/>
-			<form:errors path="username" cssClass="error"/>
+			<form:input path="name"/>
+			<form:errors path="name" cssClass="error"/>
 		</p>
 		
 		<p>
@@ -49,9 +59,15 @@
 		</p>
 		
 		<button type="submit">
-			<spring:message code="button.submit"/>
+			<spring:message code="Confirmbutton.submit"/>
 		</button>
 	</form:form>
+	
+	<c:if test="${not empty message}">
+    <p style="color:red; font-weight:bold;">
+        ${message}
+    </p>
+</c:if>
 </body>
 </html>
 

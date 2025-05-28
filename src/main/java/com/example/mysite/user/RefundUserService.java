@@ -27,7 +27,7 @@ public class RefundUserService {
 		System.out.println("userService.regist 동작");
 		RefundUserDto userDto = new RefundUserDto();
 		
-		userDto.setUsername(cmdObj.getUsername());
+		userDto.setUsername(cmdObj.getName());
 		userDto.setBirthDate(cmdObj.getBirthDate());
 		userDto.setGender(cmdObj.getGender());
 		userDto.setCountry(cmdObj.getCountry());
