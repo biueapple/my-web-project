@@ -29,9 +29,9 @@
 		class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
-		<property name="url" value="jdbc:mariadb://localhost:3307/airplane"/>
+		<property name="url" value="jdbc:mariadb://localhost:3305/airplane"/>
 		<property name="username" value="root"/>
-		<property name="password" value="0000"/>
+		<property name="password" value="1"/>
 		<property name="maxTotal" value="10"/>
 		<property name="maxIdle" value="5"/>
 	</bean>

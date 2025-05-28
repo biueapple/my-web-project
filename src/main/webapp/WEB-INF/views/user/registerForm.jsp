@@ -39,7 +39,8 @@
 
 		<p>
 			<spring:message code="label.name"/>
-			<form:input path="name"/>
+			<form:input path="name" pattern="[가-힣a-zA-Z]+" 
+			title="이름은 한글 또는 영문만 입력해야 합니다." required="true"/>/>
 			<form:errors path="name" cssClass="error"/>
 		</p>
 
