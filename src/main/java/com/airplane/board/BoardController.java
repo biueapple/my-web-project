@@ -75,7 +75,6 @@ public class BoardController {
 	@RequestMapping("/boardDelete")
 	public String boardDelete(@RequestParam("boardId")int boardId,Model model) {
 		boardService.delete(boardId);
-		model.addAttribute("list",boardService.selectAll());
-		return "boardMain";
+		return "redirect:/board";
 	}
 }
