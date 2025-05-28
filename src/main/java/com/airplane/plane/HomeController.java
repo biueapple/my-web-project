@@ -82,8 +82,8 @@ public class HomeController {
 		if(lrc==null) {
 			return "redirect:/login";
 		}else {
-			lrc.g
-			model.addAttribute("dto", airinfoDto);
+			//lrc.g
+			//model.addAttribute("dto", airinfoDto);
 			return "redirect:/";
 		}
 		
