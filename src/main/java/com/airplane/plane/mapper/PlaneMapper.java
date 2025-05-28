@@ -1,6 +1,6 @@
 package com.airplane.plane.mapper;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -14,7 +14,7 @@ public interface PlaneMapper {
 	int insertOriginal(PlaneOriginal orignal);
 	int insertReservation(PlaneReservation planeReservation);
 	PlaneOriginal selectOriginal(int id);
-	List<Plane> selectReservationToTimeLate(@Param("plane_time")LocalDateTime plane_time, @Param("departure")String departure);
+	List<Plane> selectReservationToTimeLate(@Param("plane_time")LocalDate plane_time, @Param("departure")String departure);
 	Plane selectPlane(int id);
 	int update(PlaneSeatUpdate up);
 }
