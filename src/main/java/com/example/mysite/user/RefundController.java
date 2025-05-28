@@ -31,9 +31,17 @@ public class RefundController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String findUserByName(@ModelAttribute("userRegisterRequest") RefundUserRegisterRequest userRegisterRequest,
+	public String findUserByName(@Valid @ModelAttribute("userRegisterRequest") RefundUserRegisterRequest userRegisterRequest,
+			BindingResult result,
 			Model model) {
-		String name = userRegisterRequest.getUsername();
+		
+	    if (result.hasErrors()) {
+	        // 검증 실패하면 다시 폼으로, 오류 메시지 뜸!
+	        model.addAttribute("genderOptions", List.of("남자", "여자"));
+	        model.addAttribute("countryOptions", List.of("한국", "미국", "일본", "중국", "독일"));
+	        return "/Refunduser/findUser";
+	    }
+		String name = userRegisterRequest.getName();
 		RefundUser user = userService.findByName(name);
 		if (user == null) {
 			model.addAttribute("message", "예약내역이 없습니다");
@@ -49,7 +57,7 @@ public class RefundController {
 		return "/Refunduser/userInfo";
 	}
 	@RequestMapping(value = "/refund", method = RequestMethod.POST)
-	public String refundUser(@RequestParam("username") String username, Model model) {
+	public String refundUser(@RequestParam("name") String username, Model model) {
 	    boolean deleted = userService.deleteUserByName(username);
 	    
 	    if (deleted) {

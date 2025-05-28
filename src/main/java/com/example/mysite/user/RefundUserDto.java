@@ -5,28 +5,37 @@ import java.util.List;
 
 public class RefundUserDto {
 	private String name;
-	private String password;
-	private LocalDate birthDate;
+
+	private String f_class;
+	private String depart;
+	private String arrive;
 	private String gender;
-	private String country;
+	private String seat;
 	 
-	public String getUsername() {
+	
+	public String getName() {
 		return name;
 	}
-	public void setUsername(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPassword() {
-		return password;
+	public String getF_class() {
+		return f_class;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setF_class(String f_class) {
+		this.f_class = f_class;
 	}
-	public LocalDate getBirthDate() {
-		return birthDate;
+	public String getDepart() {
+		return depart;
 	}
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
+	public void setDepart(String depart) {
+		this.depart = depart;
+	}
+	public String getArrive() {
+		return arrive;
+	}
+	public void setArrive(String arrive) {
+		this.arrive = arrive;
 	}
 	public String getGender() {
 		return gender;
@@ -34,11 +43,11 @@ public class RefundUserDto {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getCountry() {
-		return country;
+	public String getSeat() {
+		return seat;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+	public void setSeat(String seat) {
+		this.seat = seat;
 	}
 	
 
