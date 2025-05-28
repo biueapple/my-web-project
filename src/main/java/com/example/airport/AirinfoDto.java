@@ -1,6 +1,11 @@
 package com.example.airport;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class AirinfoDto {
 
@@ -10,8 +15,9 @@ public class AirinfoDto {
 	 private String departure;
 	@NotBlank(message = "{NotBlank.destination}")
 	private String destination;
-    @NotBlank(message = "{NotBlank.departureDate}")
-    private String departureDate;
+    @NotNull(message = "{NotBlank.departureDate}")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate departureDate;
     
     public String getDeparture() {
 		return departure;
@@ -45,11 +51,11 @@ public class AirinfoDto {
         this.airportName = airportName;
     }
     
-    public String getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(String departureDate) {
+    public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 }
