@@ -42,18 +42,17 @@ public class RefundController {
 	        return "/Refunduser/findUser";
 	    }
 		String name = userRegisterRequest.getName();
-		RefundUser user = userService.findByName(name);
+		List <RefundUser> user = userService.findByName(name);
 		if (user == null) {
 			model.addAttribute("message", "예약내역이 없습니다");
-
 			model.addAttribute("userRegisterRequest", userRegisterRequest);
 			model.addAttribute("genderOptions", List.of("남자", "여자"));
 			model.addAttribute("countryOptions", List.of("한국", "미국", "일본", "중국", "독일"));
 			return "/Refunduser/findUser";
 
 		}
-
-		model.addAttribute("user", user);
+		System.out.println(user.size());
+		model.addAttribute("list", user);
 		return "/Refunduser/userInfo";
 	}
 	@RequestMapping(value = "/refund", method = RequestMethod.POST)

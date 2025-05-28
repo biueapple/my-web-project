@@ -6,7 +6,6 @@ import java.util.List;
 public class RefundUserDto {
 	private String name;
 
-	private String f_class;
 	private String depart;
 	private String arrive;
 	private String gender;
@@ -19,12 +18,7 @@ public class RefundUserDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getF_class() {
-		return f_class;
-	}
-	public void setF_class(String f_class) {
-		this.f_class = f_class;
-	}
+	
 	public String getDepart() {
 		return depart;
 	}
