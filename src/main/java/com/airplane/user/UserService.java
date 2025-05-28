@@ -36,6 +36,14 @@ public class UserService {
 	}
 	
 	
+	
+	
+	
+	
+	public User search(String id) {
+		User user = userMapper.idsearch(id); //회원 정보 검색
+		return user;
+	}
 }
 
 
