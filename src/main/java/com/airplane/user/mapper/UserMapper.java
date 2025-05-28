@@ -11,4 +11,5 @@ public interface UserMapper {
 	User selectUser(
 			@Param("id")String id, 
 			@Param("password")String password);
+	
 }

@@ -60,10 +60,6 @@ public class HomeController {
 	@RequestMapping(value = "airplaneList", method = RequestMethod.GET)
 	public String airplaneListGet(@ModelAttribute("dto") AirinfoDto dto, Model model)
 	{
-		System.out.println("get" + dto);
-		System.out.println("get" + dto.getDeparture());
-		System.out.println("get" + dto.getDestination());
-		System.out.println("get" + dto.getDepartureDate());
 		List<Plane> plane = planeService.selectAll(dto.getDepartureDate(), dto.getDeparture());
 		System.out.println(plane.size());
 		model.addAttribute("list", plane);
@@ -80,11 +76,14 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "reserveSeat", method = RequestMethod.POST)
-	public String selectSeat(HttpSession session) {
+	public String selectSeat(HttpSession session, Model model) {
 		//업데이트
-		if(session.getAttribute("loginUser")==null) {
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc==null) {
 			return "redirect:/login";
 		}else {
+			lrc.g
+			model.addAttribute("dto", airinfoDto);
 			return "redirect:/";
 		}
 		

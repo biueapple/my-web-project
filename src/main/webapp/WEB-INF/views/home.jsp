@@ -88,7 +88,7 @@
             <a href="<c:url value='/user/logout'/>">로그아웃</a>
             <a href="<c:url value='/regist'/>">회원가입</a>
             <a href="board">게시판</a>
-            <%-- <a href="<c:url value='/user/regist'/>">예매확인</a> --%>
+             <a href="<c:url value='/user/regist'/>">예매확인</a>
             
         </nav>
         <main>

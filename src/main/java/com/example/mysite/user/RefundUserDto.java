@@ -5,7 +5,7 @@ import java.util.List;
 
 public class RefundUserDto {
 	private String name;
-	private String password;
+
 	private LocalDate birthDate;
 	private String gender;
 	private String country;
@@ -16,12 +16,7 @@ public class RefundUserDto {
 	public void setUsername(String name) {
 		this.name = name;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 	public LocalDate getBirthDate() {
 		return birthDate;
 	}

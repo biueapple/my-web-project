@@ -64,7 +64,7 @@ button {
 </form>
 
 <form action="<c:url value='/'/>" method="get" style="display: inline-block;">
-  <button type="submit">홈으로</button>
+  <button type="submit">이전으로</button>
 </form>
 
 		</body>
