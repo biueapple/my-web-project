@@ -1,0 +1,57 @@
+package com.example.mysite.user;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.example.mysite.user.mapper.RefundUserMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@Service
+public class RefundUserService {
+	@Autowired
+	//private UserDao userDao;
+	private RefundUserMapper userMapper;
+	
+	
+	public RefundUser findByName(String name) {
+		return userMapper.findByName(name);
+	}
+	public void regist(RefundUserRegisterRequest cmdObj) {
+		// dao를 이용하여 데이터베이스에 저장
+		System.out.println("userService.regist 동작");
+		RefundUserDto userDto = new RefundUserDto();
+		
+		userDto.setUsername(cmdObj.getUsername());
+		userDto.setBirthDate(cmdObj.getBirthDate());
+		userDto.setGender(cmdObj.getGender());
+		userDto.setCountry(cmdObj.getCountry());
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			String hobbiesJson = objectMapper.writeValueAsString(cmdObj.getCountry());
+			userDto.setCountry(hobbiesJson);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		System.out.println("데이터 가공 및 DTO생성");
+		userMapper.insert(userDto);
+	}
+	
+	public boolean deleteUserByName(String name) {
+		   int deletedCount = userMapper.deleteUserByName(name);
+		    return deletedCount > 0;
+	}
+}
+
+
+
+
+
+
+
