@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.airport.AirService;
 import com.example.airport.AirinfoDto;
@@ -31,7 +32,8 @@ public class AirPortController {
 	public String submitAirportForm(@Valid
 			AirinfoDto airinfoDto, 
 			BindingResult bindingResult, 
-			Model model) {
+			Model model,
+			 RedirectAttributes redirectAttributes) {
 		System.out.println(airinfoDto.getDeparture());
 		System.out.println(airinfoDto.getDestination());
 		if (airinfoDto.getDeparture().equals(airinfoDto.getDestination())) {
@@ -43,8 +45,8 @@ public class AirPortController {
 			model.addAttribute("dto", airinfoDto);
 			return "Reservation";
 		}
-
-		model.addAttribute("dto", airinfoDto);
-		return "airplaneList";
+		
+		redirectAttributes.addFlashAttribute("dto", airinfoDto); // 리다이렉트 시 dto 전달
+		return "redirect:/airplaneList";
 	}
 }

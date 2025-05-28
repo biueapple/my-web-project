@@ -6,16 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.airport.AirService;
 import com.example.airport.AirinfoDto;
-
-import jakarta.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -28,6 +24,8 @@ public class HomeController {
 		model.addAttribute("now", now);
 		return "home";
 	}
+	
+	
 	
 	@RequestMapping(value = "planeAdd", method = RequestMethod.GET)
 	public String airplaneAddGET()
@@ -56,9 +54,14 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "airplaneList", method = RequestMethod.GET)
-	public String airplaneListGet(Model model)
+	public String airplaneListGet(@ModelAttribute("dto") AirinfoDto dto, Model model)
 	{
-		List<Plane> plane = planeService.selectAll(LocalDateTime.now());
+		System.out.println("get" + dto);
+		System.out.println("get" + dto.getDeparture());
+		System.out.println("get" + dto.getDestination());
+		System.out.println("get" + dto.getDepartureDate());
+		List<Plane> plane = planeService.selectAll(dto.getDepartureDate(), dto.getDeparture());
+		System.out.println(plane.size());
 		model.addAttribute("list", plane);
 		return "airplaneList";
 	}
@@ -66,6 +69,7 @@ public class HomeController {
 	@RequestMapping(value = "airplaneList", method = RequestMethod.POST)
 	public String airplaneListPOST(@RequestParam("id") int id, Model model)
 	{
+		System.out.println("post");
 		PlaneOriginal original = planeService.planeOriginal(id);
 		model.addAttribute("original", original);
 		return "seat";
