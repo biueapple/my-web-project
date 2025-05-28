@@ -58,7 +58,9 @@ public class HomeController {
 	@RequestMapping(value = "airplaneList", method = RequestMethod.GET)
 	public String airplaneListGet(Model model)
 	{
-		List<Plane> plane = planeService.selectAll(LocalDateTime.now());
+		LocalDateTime time = (LocalDateTime)model.getAttribute("time");
+		String d = (String)model.getAttribute("time");
+		List<Plane> plane = planeService.selectAll(time, d);
 		model.addAttribute("list", plane);
 		return "airplaneList";
 	}
