@@ -1,5 +1,7 @@
 package com.example.mysite.user.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.example.mysite.user.RefundUser;
@@ -11,6 +13,6 @@ public interface RefundUserMapper {
 	RefundUser RefundselectOne(
 			@Param("username")String u, @Param("Country")String c);
 
-	RefundUser findByName(String name);
+	List<RefundUser> findByName(String name);
 	int deleteUserByName(String name);
 }
