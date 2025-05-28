@@ -32,7 +32,6 @@
 		<property name="url" value="jdbc:mariadb://localhost:3306/airplane"/>
 		<property name="username" value="tester"/>
 		<property name="password" value="1234"/>
-		
 		<property name="maxTotal" value="10"/>
 		<property name="maxIdle" value="5"/>
 	</bean>
@@ -59,6 +58,10 @@
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.airplane.user.mapper"/>
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.example.mysite.user.mapper"/>
 	</bean>
 </beans>
 
