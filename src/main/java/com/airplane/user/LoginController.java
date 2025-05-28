@@ -48,7 +48,7 @@ public class LoginController {
 		
 		if(result) {
 			System.out.println("로그인 성공");
-			session.setAttribute("loginUser", loginRequestCommand.getId());
+			session.setAttribute("loginUser", loginRequestCommand);
 			
 			Cookie cookie = new Cookie(
 					"remember", loginRequestCommand.getId());

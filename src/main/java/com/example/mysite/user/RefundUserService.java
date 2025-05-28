@@ -22,25 +22,12 @@ public class RefundUserService {
 	public RefundUser findByName(String name) {
 		return userMapper.findByName(name);
 	}
-	public void regist(RefundUserRegisterRequest cmdObj) {
+	public void regist(RefundUserDto cmdObj) {
 		// dao를 이용하여 데이터베이스에 저장
 		System.out.println("userService.regist 동작");
-		RefundUserDto userDto = new RefundUserDto();
 		
-		userDto.setUsername(cmdObj.getName());
-		userDto.setBirthDate(cmdObj.getBirthDate());
-		userDto.setGender(cmdObj.getGender());
-		userDto.setCountry(cmdObj.getCountry());
-		
-		ObjectMapper objectMapper = new ObjectMapper();
-		try {
-			String hobbiesJson = objectMapper.writeValueAsString(cmdObj.getCountry());
-			userDto.setCountry(hobbiesJson);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
 		System.out.println("데이터 가공 및 DTO생성");
-		userMapper.insert(userDto);
+		userMapper.refundInsert(cmdObj);
 	}
 	
 	public boolean deleteUserByName(String name) {
