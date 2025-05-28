@@ -6,7 +6,8 @@ import com.example.mysite.user.RefundUser;
 import com.example.mysite.user.RefundUserDto;
 
 public interface RefundUserMapper {
-	int insert(RefundUserDto userDto);
+
+	int refundInsert(RefundUserDto user);
 	RefundUser RefundselectOne(
 			@Param("username")String u, @Param("Country")String c);
 

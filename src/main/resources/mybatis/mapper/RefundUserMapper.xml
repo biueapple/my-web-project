@@ -3,9 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.mysite.user.mapper.RefundUserMapper">
+<mapper
+	namespace="com.example.mysite.user.mapper.RefundUserMapper">
 
-	<select id="RefundselectOne" resultType="com.example.mysite.user.RefundUser">
+	<insert id="refundInsert"
+		parameterType="com.example.mysite.user.RefundUserDto"
+		useGeneratedKeys="true">
+		INSERT INTO seat (name, gender, depart, arrive, seat, class)
+		VALUES (#{name}, #{gender}, #{depart}, #{arrive}, #{seat}, #{f_class});
+	</insert>
+
+	<select id="RefundselectOne"
+		resultType="com.example.mysite.user.RefundUser">
 		SELECT * FROM seat WHERE name = #{name}
 	</select>
 
@@ -15,6 +24,7 @@
 	</select>
 
 	<delete id="deleteUserByName" parameterType="String">
-		DELETE FROM seat WHERE name = #{name}
+		DELETE FROM seat
+		WHERE name = #{name}
 	</delete>
 </mapper>
