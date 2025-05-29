@@ -4,6 +4,7 @@ public class PlaneSeatUpdate
 {
 	private int id;
 	private int count;
+	
 	public int getId()
 	{
 		return id;

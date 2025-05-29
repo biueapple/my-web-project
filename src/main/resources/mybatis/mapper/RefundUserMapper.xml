@@ -9,22 +9,21 @@
 	<insert id="refundInsert"
 		parameterType="com.example.mysite.user.RefundUserDto"
 		useGeneratedKeys="true">
-		INSERT INTO seat (name, gender, depart, arrive, seat)
-		VALUES (#{name}, #{gender}, #{depart}, #{arrive}, #{seat});
+		INSERT INTO seat (user_id, gender, depart, arrive, seat)
+		VALUES (#{userId}, #{gender}, #{depart}, #{arrive}, #{seat});
 	</insert>
 
 	<select id="RefundselectOne"
 		resultType="com.example.mysite.user.RefundUser">
-		SELECT * FROM seat WHERE name = #{name}
+		SELECT * FROM seat WHERE userId = #{userId}
 	</select>
 
-	<select id="findByName"
+	<select id="findByUserId"
 		resultType="com.example.mysite.user.RefundUser">
-		SELECT * FROM seat WHERE name= #{name}
+		SELECT * FROM seat WHERE userId= #{userId}
 	</select>
 
-	<delete id="deleteUserByName" parameterType="String">
-		DELETE FROM seat
-		WHERE name = #{name}
+	<delete id="deleteUserByUserId" parameterType="String">
+		DELETE FROM seat WHERE userId = #{userId}
 	</delete>
 </mapper>

@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Past;
 // 커맨드 객체 정의
 public class RefundUserRegisterRequest {
 	@NotBlank(message = "{NotBlank.name}")
-	private String name;
+	private int userId;
 	
 	@NotNull(message = "{NotNull.userRegisterRequest.birthDate}")
 	@Past(message = "{Past.userRegisterRequest.birthDate}")
@@ -25,13 +25,13 @@ public class RefundUserRegisterRequest {
 	@NotBlank(message = "{NotBlank.userRegisterRequest.country}")
 	private String country;
 
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	public LocalDate getBirthDate() {
 		return birthDate;
 	}
