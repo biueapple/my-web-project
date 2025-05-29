@@ -40,8 +40,8 @@ button {
 	<form:form modelAttribute="userRegisterRequest" method="post">
 		<p>
 			<spring:message code="label.username" />
-			<form:input path="name" />
-			<form:errors path="name" cssClass="error" />
+			<form:input path="userId" />
+			<form:errors path="userId" cssClass="error" />
 		</p>
 
 		<p>

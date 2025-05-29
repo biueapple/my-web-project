@@ -110,7 +110,7 @@ public class HomeController {
 				}
 			}
 			RefundUserDto req = new RefundUserDto();
-			req.setName(user.getName());
+			req.setUserId(user.getUserId());
 			req.setGender(user.getGender());
 			req.setDepart(e.getDeparture());
 			req.setArrive(e.getDestination());
