@@ -131,7 +131,7 @@ public class HomeController {
 					arrive = a.getAirportName();
 			}
 			RefundUserDto req = new RefundUserDto();
-			req.setName(user.getName());
+			req.setUserId(user.getUserId());
 			req.setGender(user.getGender());
 			req.setDepart(depart);
 			req.setArrive(arrive);

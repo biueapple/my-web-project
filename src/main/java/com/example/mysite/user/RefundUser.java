@@ -8,14 +8,20 @@ public class RefundUser {
 	private String depart;
 	private String arrive;
 	private String seat;
-	private Long id;
-	private String name;
+	private int userId;
+	
 	private String password;
 	private LocalDate birthDate;
 	private String gender;
 	private List<String> country;
 	private LocalDateTime registerDate;
 	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	
 	public String getDepart() {
 		return depart;
@@ -35,18 +41,7 @@ public class RefundUser {
 	public void setSeat(String seat) {
 		this.seat = seat;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getUsername() {
-		return name;
-	}
-	public void setUsername(String name) {
-		this.name = name;
-	}
+	
 	public String getPassword() {
 		return password;
 	}
