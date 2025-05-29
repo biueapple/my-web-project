@@ -66,6 +66,7 @@
                     <th>Departure</th>
                     <th>Destination</th>
                     <th>Plane Time</th>
+                    <th>Price</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,6 +80,7 @@
                         <td>${plane.departure}</td>
                         <td>${plane.destination}</td>
                         <td>${plane.plane_time}</td>
+                        <td>${plane.price}</td>
                     </tr>
                 </c:forEach>
             </tbody>
