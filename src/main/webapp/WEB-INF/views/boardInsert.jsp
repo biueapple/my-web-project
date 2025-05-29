@@ -11,6 +11,7 @@
 <body>
 <h2><spring:message code="board.insertTitle"/></h2>
 	<form:form modelAttribute="board" method="post">
+		<form:hidden path="userId" value="${userId}"/>
 		<p>
 			<spring:message code="label.boardTitle"/>
 			<form:input path="boardTitle"/>

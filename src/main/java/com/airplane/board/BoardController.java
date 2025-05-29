@@ -1,5 +1,7 @@
 package com.airplane.board;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,12 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.airplane.user.LoginRequestCommand;
+import com.airplane.user.User;
+import com.airplane.user.UserService;
+
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private UserService userService;
 	
 //	@RequestMapping("/")
 //	public String home() {
@@ -22,20 +31,31 @@ public class BoardController {
 	
 	@RequestMapping("/board")
 	public String boardMain(Model model){
-		model.addAttribute("list",boardService.selectAll());
+		List<Board> list = boardService.selectAll();
+		model.addAttribute("list",list);
 		return "boardMain";
 	}
 	
 	@RequestMapping("/boardSelectOne")
-	public String boardSelectOne(@RequestParam("boardId") int boardId, Model model) {
-		model.addAttribute("board",boardService.selectOne(boardId));
+	public String boardSelectOne(@RequestParam("boardId") int boardId, Model model, HttpSession session) {
+		Board board = boardService.selectOne(boardId);
+		LoginRequestCommand loginRequestCommand = (LoginRequestCommand)session.getAttribute("loginUser");
+		User user = userService.search(loginRequestCommand.getId());
+		model.addAttribute("board",board);
+		model.addAttribute("id",user.getId());
 		return "boardSelect";
 	}
 	
 	@RequestMapping(value="/boardInsert", method=RequestMethod.GET)
-	public String boardInsertForm(Model model) {
+	public String boardInsertForm(Model model,HttpSession session) {
 		Board board = new Board();
 		model.addAttribute(board);
+		LoginRequestCommand loginRequestCommand = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(loginRequestCommand==null) {
+			return "redirect:/login";
+		}
+		User user = userService.search(loginRequestCommand.getId());
+		model.addAttribute("userId", user.getUserId());
 		return "boardInsert";
 	}
 	
