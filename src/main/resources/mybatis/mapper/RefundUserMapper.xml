@@ -24,7 +24,6 @@
 	</select>
 
 	<delete id="deleteUserByName" parameterType="String">
-		DELETE FROM seat
-		WHERE name = #{name}
+		DELETE FROM seat WHERE name = #{name}
 	</delete>
 </mapper>

@@ -62,7 +62,7 @@ button {
 
 	<form action="<c:url value='/user/regist/refund'/>" method="post"
 		style="display: inline-block;">
-		<input type="hidden" name="username" value="${user.username}" />
+		<input type="hidden" name="name" value="${user.username}" />
 		<button type="submit">환불요청</button>
 	</form>
 

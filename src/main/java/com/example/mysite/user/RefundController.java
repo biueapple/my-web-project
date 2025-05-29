@@ -56,8 +56,8 @@ public class RefundController {
 		return "/Refunduser/userInfo";
 	}
 	@RequestMapping(value = "/refund", method = RequestMethod.POST)
-	public String refundUser(@RequestParam("name") String username, Model model) {
-	    boolean deleted = userService.deleteUserByName(username);
+	public String refundUser(@RequestParam("userId") String userId, Model model) {
+	    boolean deleted = userService.deleteUserByName(userId);
 	    
 	    if (deleted) {
 	        model.addAttribute("refund", "환불이 완료되었습니다.");
