@@ -78,11 +78,14 @@ public class HomeController {
 		{
 			if(a.getAirportName().equals(dto.getDeparture()))
 				depart_id = a.getAirportId();
-			if(a.getAirportName().equals(dto.getDeparture()))
+			if(a.getAirportName().equals(dto.getDestination()))
 				destination_id = a.getAirportId();
 		}
 		List<Plane> plane = planeService.selectAll(dto.getDepartureDate(), depart_id, destination_id);
-		System.out.println(plane.size());
+		System.out.println(plane.get(0).getId());
+		System.out.println(plane.get(0).getOriginal_id());
+		System.out.println(plane.get(0).getDeparture_id());
+		System.out.println(plane.get(0).getDestination_id());
 		model.addAttribute("list", plane);
 		session.setAttribute("list", plane);
 		return "airplaneList";

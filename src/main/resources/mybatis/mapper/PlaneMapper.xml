@@ -8,8 +8,8 @@
 		<id property="id" column="id" />
 		<result property="original_id" column="original_id" />
 		<result property="plane_time" column="plane_time" jdbcType="TIMESTAMP" />
-		<result property="departure_id" column="departure" />
-		<result property="destination_id" column="destination" />
+		<result property="departure_id" column="departure_id" />
+		<result property="destination_id" column="destination_id" />
 		<result property="economy_seat" column="economy_seat"/>
 		<result property="business_seat" column="business_seat"/>
 		<result property="first_seat" column="first_seat"/>
