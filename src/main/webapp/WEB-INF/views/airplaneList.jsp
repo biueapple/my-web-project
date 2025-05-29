@@ -63,9 +63,9 @@
                 <tr>
                     <th>선택</th>
                     <th>ID</th>
-                    <th>Airport ID</th>
-                    <th>Plane Time</th>
+                    <th>Departure</th>
                     <th>Destination</th>
+                    <th>Plane Time</th>
                 </tr>
             </thead>
             <tbody>
