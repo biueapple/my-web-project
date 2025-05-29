@@ -11,8 +11,8 @@ public interface RefundUserMapper {
 
 	int refundInsert(RefundUserDto user);
 	RefundUser RefundselectOne(
-			@Param("username")String u, @Param("Country")String c);
+			@Param("userId")String u, @Param("Country")String c);
 
-	List<RefundUser> findByName(String name);
-	int deleteUserByName(String name);
+	List<RefundUser> findByUserId(int userId);
+	int deleteUserByUserId(String userId);
 }

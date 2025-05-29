@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:if test="${empty username}">
+<c:if test="${empty userId}">
     <p style="color:red; font-weight:bold;">
         ${refund}
     </p>
