@@ -33,6 +33,7 @@ button {
 	cursor: pointer;
 	margin: 10px;
 }
+
 </style>
 </head>
 <body>
