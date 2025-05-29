@@ -1,10 +1,8 @@
 package com.example.mysite.user;
 
-import java.time.LocalDate;
-import java.util.List;
-
 public class RefundUserDto {
 	private int userId;
+	private int reservation_id;
 	private String depart;
 	private String arrive;
 	private String gender;
@@ -16,6 +14,14 @@ public class RefundUserDto {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public int getReservation_id()
+	{
+		return reservation_id;
+	}
+	public void setReservation_id(int reservation_id)
+	{
+		this.reservation_id = reservation_id;
 	}
 	public String getDepart() {
 		return depart;
