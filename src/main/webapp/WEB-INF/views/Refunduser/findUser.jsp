@@ -35,9 +35,8 @@ button {
 </head>
 <body>
 
-	<h2>회원정보 입력</h2>
 
-	<form:form modelAttribute="userRegisterRequest" method="post">
+	<%-- <form:form modelAttribute="userRegisterRequest" method="post">
 		<p>
 			<spring:message code="label.username" />
 			<form:input path="userId" />
@@ -62,13 +61,12 @@ button {
 
 		<button type="submit">
 			<spring:message code="Confirmbutton.submit" />
-			
+			 --%>
 			
 		</button>
 			<button type="button" onclick="history.back()">이전으로</button>
 
 		
-	</form:form>
 
 	<c:if test="${not empty message}">
 		<p style="color: red; font-weight: bold;">${message}</p>

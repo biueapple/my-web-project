@@ -1,7 +1,7 @@
 package com.airplane.user;
 
 public class User {
-	private int Userid;
+	private int userId;
     private String id;
     private String password;
     private String name;
@@ -10,10 +10,10 @@ public class User {
     private String phoneNumber;
     
     
-    public User(int Userid, String id, String password, String name, String gender, String age,
+    public User(int userId, String id, String password, String name, String gender, String age,
 			String phoneNumber) {
 		super();
-		this.Userid = Userid;
+		this.userId = userId;
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -24,10 +24,10 @@ public class User {
 	
 	
 	public int getUserId() {
-		return Userid;
+		return userId;
 	}
-	public void setUserId(int Userid) {
-		this.Userid = Userid;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getId() {
 		return id;

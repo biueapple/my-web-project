@@ -48,7 +48,7 @@ button {
 		</tr>
 		<c:forEach var="RefundUser" items="${list}">
 			<tr>
-				<td>${RefundUser.userId}</td>
+				<td>${RefundUser.id}</td>
 				<td>${RefundUser.gender}</td>
 				<td>${RefundUser.depart}</td>
 				<td>${RefundUser.arrive}</td>
@@ -62,7 +62,7 @@ button {
 
 	<form action="<c:url value='/user/regist/refund'/>" method="post"
 		style="display: inline-block;">
-		<input type="hidden" name="userId" value="${user.userId}" />
+		<input type="hidden" name="id" value="${user.userId}" />
 		<button type="submit">환불요청</button>
 	</form>
 
@@ -70,6 +70,9 @@ button {
 		style="display: inline-block;">
 		<button type="submit">이전으로</button>
 	</form>
+	<c:if test="${not empty message}">
+		<p style="color: red; font-weight: bold;">${message}</p>
+	</c:if>
 
 </body>
 </html>

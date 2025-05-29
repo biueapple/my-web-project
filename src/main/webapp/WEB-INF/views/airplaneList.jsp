@@ -76,8 +76,8 @@
                             <input type="radio" name="id" value="${plane.id}" onclick="enableNextButton()">
                         </td>
                         <td>${plane.id}</td>
-                        <td>${plane.departure_id}</td>
-                        <td>${plane.destination_id}</td>
+                        <td>${plane.departure}</td>
+                        <td>${plane.destination}</td>
                         <td>${plane.plane_time}</td>
                     </tr>
                 </c:forEach>

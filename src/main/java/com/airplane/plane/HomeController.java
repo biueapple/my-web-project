@@ -1,6 +1,8 @@
 package com.airplane.plane;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,11 +84,12 @@ public class HomeController {
 				destination_id = a.getAirportId();
 		}
 		List<Plane> plane = planeService.selectAll(dto.getDepartureDate(), depart_id, destination_id);
-		System.out.println(plane.get(0).getId());
-		System.out.println(plane.get(0).getOriginal_id());
-		System.out.println(plane.get(0).getDeparture_id());
-		System.out.println(plane.get(0).getDestination_id());
-		model.addAttribute("list", plane);
+		List<PlaneListVO> vo = new ArrayList<>();
+		for(Plane p : plane)
+		{
+			vo.add(new PlaneListVO(p.getId(), dto.getDeparture(), dto.getDestination(), p.getPlane_time()));
+		}
+		model.addAttribute("list", vo);
 		session.setAttribute("list", plane);
 		return "airplaneList";
 	}
@@ -99,12 +102,16 @@ public class HomeController {
 		PlaneOriginal original = planeService.planeOriginal(id);
 		session.setAttribute("planeId", id);
 		model.addAttribute("original", original);
+		//모든 예약된 좌석 불러오기
+		
+		List<String> reservedSeats = refundUserService.seatName(id);//Arrays.asList("first_1", "economy_3", "business_4");
+		model.addAttribute("reservedSeats", reservedSeats);
 		return "seat";
 	}
 
 	@RequestMapping(value = "reserveSeat", method = RequestMethod.POST)
 	public String selectSeat(@RequestParam("seatId") String seatId,HttpSession session, Model model) {
-		//업데이트
+		
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc==null) {
 			return "redirect:/login";
@@ -112,9 +119,7 @@ public class HomeController {
 			User user =	userService.search(lrc.getId());
 			List<Plane> plane = (List<Plane>) session.getAttribute("list");
 			int id = (int) session.getAttribute("planeId");
-			System.out.println(user.getAge());
-			System.out.println(plane.size());
-			System.out.println(id);
+		
 			Plane e =null ;
 			for(Plane p : plane ) 
 			{
@@ -136,12 +141,14 @@ public class HomeController {
 			}
 			RefundUserDto req = new RefundUserDto();
 			req.setUserId(user.getUserId());
+			req.setReservation_id(e.getId());
 			req.setGender(user.getGender());
 			req.setDepart(depart);
 			req.setArrive(arrive);
 			req.setSeat(seatId);
 			refundUserService.regist(req);
-			//여기서 비행기 정보 가져오기
+			//업데이트 필요 없을듯
+			//planeService.updateSeat(seatId, id);
 			return "redirect:/";
 		}
 		
