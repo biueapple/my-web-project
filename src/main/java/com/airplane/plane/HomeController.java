@@ -112,9 +112,7 @@ public class HomeController {
 			User user =	userService.search(lrc.getId());
 			List<Plane> plane = (List<Plane>) session.getAttribute("list");
 			int id = (int) session.getAttribute("planeId");
-			System.out.println(user.getAge());
-			System.out.println(plane.size());
-			System.out.println(id);
+		
 			Plane e =null ;
 			for(Plane p : plane ) 
 			{

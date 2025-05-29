@@ -70,6 +70,9 @@ button {
 		style="display: inline-block;">
 		<button type="submit">이전으로</button>
 	</form>
+	<c:if test="${not empty message}">
+		<p style="color: red; font-weight: bold;">${message}</p>
+	</c:if>
 
 </body>
 </html>

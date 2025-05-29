@@ -26,7 +26,7 @@ public class LoginRequestCommand {			//로그인 유효성 검증
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setId(String string) {
+		this.id = string;
 	}
 }
