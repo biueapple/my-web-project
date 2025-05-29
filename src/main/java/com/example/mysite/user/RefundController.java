@@ -59,13 +59,16 @@ public class RefundController {
 		        model.addAttribute("message", "조회된 회원 정보가 없습니다.");
 		        return "/Refunduser/userInfo";
 		    }
-
+		    for(RefundUser f : findUsers) {
+		    	f.setId(id);
+		    }
 		    model.addAttribute("list", findUsers);
+		    model.addAttribute("user", user);
 		    return "/Refunduser/userInfo";
 		}
 
 	@RequestMapping(value = "/refund", method = RequestMethod.POST)
-	public String refundUser(@RequestParam("user_Id") Integer userId, Model model) {
+	public String refundUser(@RequestParam("id") int userId, Model model) {
 		boolean deleted = userService.deleteUserByUserId(userId);
 
 		if (deleted) {

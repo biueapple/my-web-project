@@ -23,7 +23,7 @@
 		SELECT * FROM seat WHERE user_Id= #{userId}
 	</select>
 
-	<delete id="deleteUserByUserId" parameterType="String">
+	<delete id="deleteUserByUserId" parameterType="int">
 		DELETE FROM seat WHERE user_Id = #{userId}
 	</delete>
 </mapper>

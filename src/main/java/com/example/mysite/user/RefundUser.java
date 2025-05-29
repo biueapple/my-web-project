@@ -9,6 +9,7 @@ public class RefundUser {
 	private String arrive;
 	private String seat;
 	private int userId;
+	private String id;
 	
 	private String password;
 	private LocalDate birthDate;
@@ -16,6 +17,12 @@ public class RefundUser {
 	private List<String> country;
 	private LocalDateTime registerDate;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public int getUserId() {
 		return userId;
 	}
