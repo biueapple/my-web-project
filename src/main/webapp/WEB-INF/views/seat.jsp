@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,66 +100,80 @@
 </head>
 <body>
     <h1 style="text-align:center;">비행기 좌석 선택</h1>
+    
+	<c:set var="reserved" value="${reservedSeats}" />
 
     <form action="/airplane/reserveSeat" method="post" onsubmit="return validateForm();">
         <!-- 선택된 좌석 ID 저장용 -->
         <input type="hidden" id="selectedSeatId" name="seatId" value="">
 
         <h2>First Class (총 좌석: ${original.first_seat})</h2>
-        <table>
-            <tr>
-            <c:forEach var="i" begin="1" end="${original.first_seat}">
-                <td>
-                    <div id="seat_first_${i}" 
-                         class="seat available" 
-                         onclick="selectSeat('first_${i}')">
-                        F${i}
-                    </div>
-                </td>
-                <c:if test="${i % 6 == 0}">
-                    </tr><tr>
-                </c:if>
-            </c:forEach>
-            </tr>
-        </table>
+		<table>
+			<tr>
+				<c:forEach var="i" begin="1" end="${original.first_seat}">
+					<c:set var="seatId" value="first_${i}" />
+					<td><c:choose>
+							   <c:when test="${fn:contains(reserved, seatId)}">
+								<div id="seat_${seatId}" class="seat booked">F${i}</div>
+							</c:when>
+							<c:otherwise>
+								<div id="seat_${seatId}" class="seat available"
+									onclick="selectSeat('${seatId}')">F${i}</div>
+							</c:otherwise>
+						</c:choose></td>
+					<c:if test="${i % 6 == 0}">
+			</tr>
+			<tr>
+				</c:if>
+				</c:forEach>
+			</tr>
+		</table>
 
-        <h2>Business Class (총 좌석: ${original.business_seat})</h2>
-        <table>
-            <tr>
-            <c:forEach var="i" begin="1" end="${original.business_seat}">
-                <td>
-                    <div id="seat_business_${i}" 
-                         class="seat available" 
-                         onclick="selectSeat('business_${i}')">
-                        B${i}
-                    </div>
-                </td>
-                <c:if test="${i % 6 == 0}">
-                    </tr><tr>
-                </c:if>
-            </c:forEach>
-            </tr>
-        </table>
+		<h2>Business Class (총 좌석: ${original.business_seat})</h2>
+		<table>
+			<tr>
+				<c:forEach var="i" begin="1" end="${original.business_seat}">
+					<c:set var="seatId" value="business_${i}" />
+					<td><c:choose>
+							   <c:when test="${fn:contains(reserved, seatId)}">
+								<div id="seat_${seatId}" class="seat booked">B${i}</div>
+							</c:when>
+							<c:otherwise>
+								<div id="seat_${seatId}" class="seat available"
+									onclick="selectSeat('${seatId}')">B${i}</div>
+							</c:otherwise>
+						</c:choose></td>
+					<c:if test="${i % 6 == 0}">
+			</tr>
+			<tr>
+				</c:if>
+				</c:forEach>
+			</tr>
+		</table>
 
-        <h2>Economy Class (총 좌석: ${original.economy_seat})</h2>
-        <table>
-            <tr>
-            <c:forEach var="i" begin="1" end="${original.economy_seat}">
-                <td>
-                    <div id="seat_economy_${i}" 
-                         class="seat available" 
-                         onclick="selectSeat('economy_${i}')">
-                        E${i}
-                    </div>
-                </td>
-                <c:if test="${i % 6 == 0}">
-                    </tr><tr>
-                </c:if>
-            </c:forEach>
-            </tr>
-        </table>
+		<h2>Economy Class (총 좌석: ${original.economy_seat})</h2>
+		<table>
+			<tr>
+				<c:forEach var="i" begin="1" end="${original.economy_seat}">
+					<c:set var="seatId" value="economy_${i}" />
+					<td><c:choose>
+							   <c:when test="${fn:contains(reserved, seatId)}">
+								<div id="seat_${seatId}" class="seat booked">E${i}</div>
+							</c:when>
+							<c:otherwise>
+								<div id="seat_${seatId}" class="seat available"
+									onclick="selectSeat('${seatId}')">E${i}</div>
+							</c:otherwise>
+						</c:choose></td>
+					<c:if test="${i % 6 == 0}">
+			</tr>
+			<tr>
+				</c:if>
+				</c:forEach>
+			</tr>
+		</table>
 
-        <button type="submit">좌석 선택 완료</button>
+		<button type="submit">좌석 선택 완료</button>
     </form>
 </body>
 </html>
