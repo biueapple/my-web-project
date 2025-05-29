@@ -19,8 +19,8 @@ public class RefundUserService {
 	private RefundUserMapper userMapper;
 	
 	
-	public List<RefundUser>  findByName(String name) {
-		return userMapper.findByName(name);
+	public List<RefundUser>  findByName(int userId) {
+		return userMapper.findByUserId(userId);
 	}
 	public void regist(RefundUserDto cmdObj) {
 		// dao를 이용하여 데이터베이스에 저장
@@ -30,8 +30,8 @@ public class RefundUserService {
 		userMapper.refundInsert(cmdObj);
 	}
 	
-	public boolean deleteUserByName(String name) {
-		   int deletedCount = userMapper.deleteUserByName(name);
+	public boolean deleteUserByUserId(String userId) {
+		   int deletedCount = userMapper.deleteUserByUserId(userId);
 		    return deletedCount > 0;
 	}
 }
