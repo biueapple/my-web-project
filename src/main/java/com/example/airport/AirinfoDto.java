@@ -12,7 +12,7 @@ public class AirinfoDto {
 	private int airportId;
     private String airportName;
 	@NotBlank(message = "{NotBlank.departure}")
-	 private String departure;
+	private String departure;
 	@NotBlank(message = "{NotBlank.destination}")
 	private String destination;
     @NotNull(message = "{NotBlank.departureDate}")

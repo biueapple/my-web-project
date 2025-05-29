@@ -77,20 +77,34 @@
 
 <div class="container">
         <header>
+        <div class="inner-header">
             <h1><spring:message code="label.Main"/></h1>
-        </header>
-        <nav>
+            <div class="top-right-auth">
+                <c:if test="${empty sessionScope.loginUser}">
+                    <a href="<c:url value='/login'/>">로그인</a>
+                    <a href="<c:url value='/regist'/>">회원가입</a>
+                </c:if>
+                <c:if test="${not empty sessionScope.loginUser}">
+                    <a href="<c:url value='/user/logout'/>">로그아웃</a>
+                </c:if>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <c:if test="${empty sessionScope.loginUser}">
+            <a href="board">게시판</a>
+            <a href="<c:url value='/Reservation'/>">예매</a>
+        </c:if>
+        <c:if test="${not empty sessionScope.loginUser}">
             <a href="<c:url value='/planeAdd'/>"><spring:message code="button.Addplane"/></a>
             <a href="<c:url value='/airplaneList'/>"><spring:message code="button.Listplane"/></a>
             <a href="<c:url value='/planeReservation'/>"><spring:message code="label.Reservation"/></a>
             <a href="<c:url value='/Reservation'/>">예매</a>
-            <a href="<c:url value='/login'/>">로그인</a>
-            <a href="<c:url value='/user/logout'/>">로그아웃</a>
-            <a href="<c:url value='/regist'/>">회원가입</a>
+            <a href="<c:url value='/user/regist'/>">예매확인</a>
             <a href="board">게시판</a>
-             <a href="<c:url value='/user/regist'/>">예매확인</a>
-            
-        </nav>
+        </c:if>
+    </nav>
         <main>
             <h3>Home</h3>
             <p>현재 시간: ${now}입니다.</p>
