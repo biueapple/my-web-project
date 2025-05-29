@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.airplane.user.LoginRequestCommand;
 import com.airplane.user.User;
 import com.airplane.user.UserService;
+import com.example.airport.AirService;
 import com.example.airport.AirinfoDto;
 import com.example.mysite.user.RefundUserDto;
 import com.example.mysite.user.RefundUserService;
@@ -28,6 +29,8 @@ public class HomeController {
 	UserService userService;
 	@Autowired
 	RefundUserService refundUserService;
+	@Autowired
+	AirService airService;
 	
 	@RequestMapping("/")
 	public String home(Model model) {
@@ -68,7 +71,17 @@ public class HomeController {
 	public String airplaneListGet(@ModelAttribute("dto") AirinfoDto dto, Model model, HttpSession session)
 	{
 		//비행기 정보 리스트
-		List<Plane> plane = planeService.selectAll(dto.getDepartureDate(), dto.getDeparture());
+		List<AirinfoDto> aid = airService.info();
+		int depart_id = 0;
+		int destination_id = 0;
+		for(AirinfoDto a : aid)
+		{
+			if(a.getAirportName().equals(dto.getDeparture()))
+				depart_id = a.getAirportId();
+			if(a.getAirportName().equals(dto.getDeparture()))
+				destination_id = a.getAirportId();
+		}
+		List<Plane> plane = planeService.selectAll(dto.getDepartureDate(), depart_id, destination_id);
 		System.out.println(plane.size());
 		model.addAttribute("list", plane);
 		session.setAttribute("list", plane);
@@ -108,11 +121,21 @@ public class HomeController {
 					break;
 				}
 			}
+			List<AirinfoDto> aid = airService.info();
+			String depart = null;
+			String arrive = null;
+			for(AirinfoDto a : aid)
+			{
+				if(a.getAirportId() == e.getDeparture_id())
+					depart = a.getAirportName();
+				if(a.getAirportId() == e.getDestination_id())
+					arrive = a.getAirportName();
+			}
 			RefundUserDto req = new RefundUserDto();
 			req.setName(user.getName());
 			req.setGender(user.getGender());
-			req.setDepart(e.getDeparture());
-			req.setArrive(e.getDestination());
+			req.setDepart(depart);
+			req.setArrive(arrive);
 			req.setSeat(seatId);
 			refundUserService.regist(req);
 			//여기서 비행기 정보 가져오기
