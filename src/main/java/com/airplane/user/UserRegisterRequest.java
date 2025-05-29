@@ -3,6 +3,7 @@ package com.airplane.user;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 
 // 커맨드 객체 정의
@@ -21,7 +22,9 @@ public class UserRegisterRequest {
 	@NotBlank(message = "{NotBlank.userRegisterRequest.age}")
 	private String age;
 	@NotEmpty(message = "{NotBlank.userRegisterRequest.phoneNumber}")
+	@Pattern(regexp = "^010\\d{8}$", message = "010으로 시작하는 11자리 숫자만 입력해야 합니다.")
 	private String phoneNumber;
+
 	
 	
 	public String getId() {

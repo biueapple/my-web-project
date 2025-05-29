@@ -29,6 +29,9 @@
 	<select id="idsearch" resultType="com.airplane.user.User" resultMap="userMap">
 		SELECT * FROM users WHERE id = #{id} 
 	</select>
+	
+	
+	
 </mapper>
   
   
