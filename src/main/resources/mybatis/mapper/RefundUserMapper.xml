@@ -15,15 +15,15 @@
 
 	<select id="RefundselectOne"
 		resultType="com.example.mysite.user.RefundUser">
-		SELECT * FROM seat WHERE userId = #{userId}
+		SELECT * FROM seat WHERE user_Id = #{userId}
 	</select>
 
 	<select id="findByUserId"
 		resultType="com.example.mysite.user.RefundUser">
-		SELECT * FROM seat WHERE userId= #{userId}
+		SELECT * FROM seat WHERE user_Id= #{userId}
 	</select>
 
 	<delete id="deleteUserByUserId" parameterType="String">
-		DELETE FROM seat WHERE userId = #{userId}
+		DELETE FROM seat WHERE user_Id = #{userId}
 	</delete>
 </mapper>

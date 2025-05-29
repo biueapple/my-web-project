@@ -12,7 +12,7 @@ import jakarta.validation.constraints.Past;
 
 // 커맨드 객체 정의
 public class RefundUserRegisterRequest {
-	@NotBlank(message = "{NotBlank.name}")
+	@NotNull(message = "{NotBlank.name}")
 	private int userId;
 	
 	@NotNull(message = "{NotNull.userRegisterRequest.birthDate}")

@@ -14,5 +14,5 @@ public interface RefundUserMapper {
 			@Param("userId")String u, @Param("Country")String c);
 
 	List<RefundUser> findByUserId(int userId);
-	int deleteUserByUserId(String userId);
+	int deleteUserByUserId(int userId);
 }
