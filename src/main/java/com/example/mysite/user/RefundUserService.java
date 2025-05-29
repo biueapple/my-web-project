@@ -34,6 +34,10 @@ public class RefundUserService {
 		   int deletedCount = userMapper.deleteUserByUserId(userId);
 		    return deletedCount > 0;
 	}
+	
+	public List<String> seatName(int rid){
+		return userMapper.seatName(rid);
+	}
 }
 
 

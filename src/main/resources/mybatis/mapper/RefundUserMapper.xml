@@ -26,4 +26,9 @@
 	<delete id="deleteUserByUserId" parameterType="int">
 		DELETE FROM seat WHERE user_Id = #{userId}
 	</delete>
+	
+	<select id="seatName"
+		resultType="String" parameterType="int">
+		SELECT seat FROM seat WHERE reservation_id = #{rid}
+	</select>
 </mapper>
