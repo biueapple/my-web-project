@@ -9,8 +9,8 @@
 	<insert id="refundInsert"
 		parameterType="com.example.mysite.user.RefundUserDto"
 		useGeneratedKeys="true">
-		INSERT INTO seat (user_id, gender, depart, arrive, seat)
-		VALUES (#{userId}, #{gender}, #{depart}, #{arrive}, #{seat});
+		INSERT INTO seat (user_id, reservation_id, gender, depart, arrive, seat)
+		VALUES (#{userId}, #{reservation_id}, #{gender}, #{depart}, #{arrive}, #{seat});
 	</insert>
 
 	<select id="RefundselectOne"

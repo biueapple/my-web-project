@@ -29,26 +29,10 @@ public class PlaneService
 		planeMapper.insertOriginal(ori);
 	}
 	
-//	public void insertReservation(int original_id, int airport_id, LocalDateTime plane_time, String departure, String destination)
-//	{
-//		PlaneReservation reservation = new PlaneReservation();
-//		reservation.setOriginal_id(original_id);
-//		reservation.setAirport_id(airport_id);
-//		reservation.setPlane_time(plane_time);
-//		reservation.setDeparture(departure);
-//		reservation.setDestination(destination);
-//		planeMapper.insertReservation(reservation);
-//	}
-	
 	public void insertReservation(PlaneReservation planeReservation)
 	{
 		System.out.println(planeReservation.getPlane_time());
 		planeMapper.insertReservation(planeReservation);
-		
-		//PlaneSeatUpdate up = new PlaneSeatUpdate();
-		//up.setId(id);
-		//up.setCount(count);
-		//planeMapper.update(up);
 	}
 	
 	public PlaneOriginal planeOriginal(int id)
@@ -59,5 +43,45 @@ public class PlaneService
 		PlaneOriginal original = planeMapper.selectOriginal(plane.getOriginal_id());
 		
 		return original;
+	}
+	
+	public void updateSeat(String str, int id)
+	{
+		PlaneSeatUpdate seatUpdate = new PlaneSeatUpdate();
+		seatUpdate.setId(id);
+		seatUpdate.setCount(1);
+		if (str == null || !str.contains("_")) {
+	        throw new IllegalArgumentException("잘못된 좌석 형식입니다: " + str);
+	    }
+
+	    String[] parts = str.split("_");
+	    String seatClass = parts[0]; // "first", "business", "economy"
+	    int seatNumber;
+
+	    try {
+	        seatNumber = Integer.parseInt(parts[1]); // 1, 2, 3...
+	    } catch (NumberFormatException e) {
+	        throw new IllegalArgumentException("좌석 번호가 숫자가 아닙니다: " + parts[1]);
+	    }
+
+	    // 여기서 클래스별 분기 처리
+	    switch (seatClass.toLowerCase()) {
+	        case "first":
+	            System.out.println("퍼스트 클래스 좌석 번호: " + seatNumber);
+	            // 예: DB에서 퍼스트 클래스 좌석 1번 예약 처리
+	            
+	            break;
+	        case "business":
+	            System.out.println("비즈니스 클래스 좌석 번호: " + seatNumber);
+	            // 예: business_seat 업데이트
+	            break;
+	        case "economy":
+	            System.out.println("이코노미 클래스 좌석 번호: " + seatNumber);
+	            // 예: economy_seat 업데이트
+	            planeMapper.planeEconomySeatUpdate(seatUpdate);
+	            break;
+	        default:
+	            throw new IllegalArgumentException("알 수 없는 좌석 클래스입니다: " + seatClass);
+	    }
 	}
 }
