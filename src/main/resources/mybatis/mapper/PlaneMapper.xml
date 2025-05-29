@@ -7,10 +7,9 @@
 	<resultMap id="planeMap" type="com.airplane.plane.Plane">
 		<id property="id" column="id" />
 		<result property="original_id" column="original_id" />
-		<result property="airport_id" column="airport_id" />
 		<result property="plane_time" column="plane_time" jdbcType="TIMESTAMP" />
-		<result property="departure" column="departure" />
-		<result property="destination" column="destination" />
+		<result property="departure_id" column="departure" />
+		<result property="destination_id" column="destination" />
 		<result property="economy_seat" column="economy_seat"/>
 		<result property="business_seat" column="business_seat"/>
 		<result property="first_seat" column="first_seat"/>
@@ -32,12 +31,16 @@
 	<insert id="insertReservation" parameterType="com.airplane.plane.PlaneReservation"
 			useGeneratedKeys="true">
 		INSERT INTO plane_reservation
-			(airport_id, original_id, plane_time, departure, destination)
-			VALUES (#{airport_id}, #{original_id}, #{plane_time}, #{departure}, #{destination})
+			(original_id, plane_time, departure_id, destination_id)
+			VALUES (#{original_id}, #{plane_time}, #{departure_id}, #{destination_id})
 	</insert>
 	
 	<select id="selectReservationToTimeLate" resultType="com.airplane.plane.Plane" resultMap="planeMap">
-		SELECT * FROM plane_reservation WHERE plane_time > #{plane_time}  AND DATE_ADD(CURDATE(), INTERVAL 1 DAY) > plane_time AND departure = #{departure}
+		SELECT * FROM plane_reservation 
+		WHERE plane_time > #{plane_time}
+		AND DATE_ADD(CURDATE(), INTERVAL 1 DAY) > plane_time 
+		AND departure_id = #{departure_id}
+		AND destination_id = #{destination_id}
 	</select>
 	
 	<select id="selectPlane" resultType="com.airplane.plane.Plane" resultMap="planeMap">
@@ -48,8 +51,8 @@
 		SELECT * FROM plane_original WHERE id = #{id}
 	</select>
 	
-	<update id="update" parameterType="com.airplane.plane.PlaneSeatUpdate" useGeneratedKeys="true" keyProperty="id">
-	 UPDATE plane_reservation SET current_seat = current_seat + #{count} WHERE id = #{id}
+	<update id="planeEconomySeatUpdate" parameterType="com.airplane.plane.PlaneSeatUpdate" useGeneratedKeys="true" keyProperty="id">
+	 UPDATE plane_reservation SET current_seat = economy_seat + #{count} WHERE id = #{id}
 	</update>
 </mapper>
   

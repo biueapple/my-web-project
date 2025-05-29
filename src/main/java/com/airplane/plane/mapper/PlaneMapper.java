@@ -14,7 +14,8 @@ public interface PlaneMapper {
 	int insertOriginal(PlaneOriginal orignal);
 	int insertReservation(PlaneReservation planeReservation);
 	PlaneOriginal selectOriginal(int id);
-	List<Plane> selectReservationToTimeLate(@Param("plane_time")LocalDate plane_time, @Param("departure")String departure);
+	List<Plane> selectReservationToTimeLate
+	(@Param("plane_time")LocalDate plane_time, @Param("departure_id")int departure_id,@Param("destination_id") int destination_id);
 	Plane selectPlane(int id);
-	int update(PlaneSeatUpdate up);
+	int planeEconomySeatUpdate(PlaneSeatUpdate up);
 }

@@ -14,9 +14,9 @@ public class PlaneService
 	@Autowired
 	private PlaneMapper planeMapper;
 	
-	public List<Plane> selectAll(LocalDate time, String departure)
+	public List<Plane> selectAll(LocalDate time, int departure_id, int destination_id)
 	{
-		List<Plane> plane = planeMapper.selectReservationToTimeLate(time, departure);
+		List<Plane> plane = planeMapper.selectReservationToTimeLate(time, departure_id, destination_id);
 		return plane;
 	}
 	
