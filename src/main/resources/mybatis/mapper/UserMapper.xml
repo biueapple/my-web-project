@@ -12,7 +12,8 @@
 		<result property="gender" column="gender" />
 		<result property="age" column="age"/>
 		<result property="phoneNumber" column="phoneNumber"/>
-		<result property="registerDate" column="register_date" jdbcType="TIMESTAMP" />
+		<result property="admin" column="admin"/>
+		
 	</resultMap>
 
 	<insert id="insertUser" parameterType="com.airplane.user.UserDto"
@@ -30,11 +31,9 @@
 		SELECT * FROM users WHERE id = #{id} 
 	</select>
 	
-	<select id="selectUserByUserId" parameterType="String" resultType="User">
-    SELECT admin
-    FROM users
-    WHERE user_id = #{userId}
-</select>
+	<select id="selectAdminByUserId" parameterType="String" resultType="int">
+    SELECT admin FROM users WHERE user_id = #{userId}
+	</select>
 	
 </mapper>
   

@@ -9,8 +9,7 @@ public class User {
     private String age;
     private String phoneNumber;
     private int admin;
-    
-    
+        
     public boolean isAdmin() {
         return admin == 1;
     } 
