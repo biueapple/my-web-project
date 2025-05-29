@@ -45,6 +45,7 @@ public class PlaneService
 		return original;
 	}
 	
+	//사용하지 않음
 	public void updateSeat(String str, int id)
 	{
 		PlaneSeatUpdate seatUpdate = new PlaneSeatUpdate();

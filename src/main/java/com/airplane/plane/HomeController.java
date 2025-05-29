@@ -103,7 +103,8 @@ public class HomeController {
 		session.setAttribute("planeId", id);
 		model.addAttribute("original", original);
 		//모든 예약된 좌석 불러오기
-		List<String> reservedSeats = Arrays.asList("first_1", "economy_3", "business_4");
+		
+		List<String> reservedSeats = refundUserService.seatName(id);//Arrays.asList("first_1", "economy_3", "business_4");
 		model.addAttribute("reservedSeats", reservedSeats);
 		return "seat";
 	}
