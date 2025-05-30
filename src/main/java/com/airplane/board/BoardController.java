@@ -66,6 +66,8 @@ public class BoardController {
 		if(bindingResult.hasErrors()) {
 			return "boardInsert";
 		}
+		BoardDto boardDto = new BoardDto(board);
+		boardService.insertBoard(boardDto);
 		return "redirect:/board";
 	}
 	
