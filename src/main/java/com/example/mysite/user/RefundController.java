@@ -85,4 +85,20 @@ public class RefundController {
 
 		return "/Refunduser/refundResult";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String damageClaim(HttpSession httpSession, Model model) {
+		
+		LoginRequestCommand lrc = (LoginRequestCommand)httpSession.getAttribute("loginUser");
+		
+		if(lrc==null) {
+			return "redirect:/login";
+		}
+		
+		model.addAttribute(lrc);
+		return "/RefundUser/damageUpload";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String g
 }
