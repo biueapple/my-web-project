@@ -15,7 +15,7 @@
     <style>
         body {
             background-color: #f8f9fa;
-            padding-top: 50px;
+            padding-top: 0px;
         }
         .form-container {
             max-width: 500px;
@@ -32,6 +32,8 @@
     </style>
 </head>
 <body>
+
+<%@ include file="/WEB-INF/views/header.jsp" %>
 
 <div class="form-container">
     <h3>여행지를 선택하세요</h3>
