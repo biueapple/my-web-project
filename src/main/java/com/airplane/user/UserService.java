@@ -48,7 +48,20 @@ public class UserService {
         return admin == 1;
     
 	}
-	
+	// 회원 탈퇴
+    public boolean deleteUser(int userId, String inputPassword) {
+        // 1. DB에서 현재 비밀번호 조회
+        String dbPassword = userMapper.selectPassword(userId);
+        
+        // 2. 비밀번호 일치 확인
+        if (!dbPassword.equals(inputPassword)) {
+            return false;
+        }
+        
+        // 3. 논리 삭제 수행
+        int result = userMapper.logicalDeleteUser(userId);
+        return result > 0;
+    }
 	
 }
 

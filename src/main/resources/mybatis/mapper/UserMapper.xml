@@ -8,33 +8,49 @@
 		<id property="userId" column="user_id" />
 		<result property="id" column="id" />
 		<result property="password" column="password" />
-		<result property="name" column="name"/>
+		<result property="name" column="name" />
 		<result property="gender" column="gender" />
-		<result property="age" column="age"/>
-		<result property="phoneNumber" column="phoneNumber"/>
-		<result property="admin" column="admin"/>
-		
+		<result property="age" column="age" />
+		<result property="phoneNumber" column="phoneNumber" />
+		<result property="admin" column="admin" />
+
 	</resultMap>
 
-	<insert id="insertUser" parameterType="com.airplane.user.UserDto"
-			useGeneratedKeys="true" keyProperty="userId">
+	<insert id="insertUser"
+		parameterType="com.airplane.user.UserDto" useGeneratedKeys="true"
+		keyProperty="userId">
 		INSERT INTO users
-			(id, password, name, gender, age, phoneNumber)
-			VALUES (#{id}, #{password}, #{name}, #{gender}, #{age}, #{phoneNumber})
+		(id, password, name, gender, age, phoneNumber)
+		VALUES (#{id}, #{password}, #{name}, #{gender}, #{age}, #{phoneNumber})
 	</insert>
-	
-	<select id="selectUser" resultType="com.airplane.user.User" resultMap="userMap">
-		SELECT * FROM users WHERE id = #{id} AND password = #{password}
+
+	<select id="selectUser" resultType="com.airplane.user.User"
+		resultMap="userMap">
+		SELECT * FROM users WHERE id = #{id} AND password =
+		#{password}
+	</select>
+
+	<select id="idsearch" resultType="com.airplane.user.User"
+		resultMap="userMap">
+		SELECT * FROM users WHERE id = #{id}
+	</select>
+
+	<select id="selectAdminByUserId" parameterType="int"
+		resultType="int">
+		SELECT admin FROM users WHERE user_id = #{userId}
+	</select>
+
+	<!-- //회원 탈퇴 전 비밀번호 확인 -->
+	<select id="selectPassword" resultType="String">
+		SELECT password FROM users
+		WHERE user_id = #{userId} AND deleted = 0
 	</select>
 	
-	<select id="idsearch" resultType="com.airplane.user.User" resultMap="userMap">
-		SELECT * FROM users WHERE id = #{id} 
-	</select>
-	
-	<select id="selectAdminByUserId" parameterType="int" resultType="int">
-    SELECT admin FROM users WHERE user_id = #{userId}
-	</select>
-	
+	<!-- //회원 탈퇴  -->
+	<update id="logicalDeleteUser">
+		UPDATE users SET deleted = 1 WHERE user_id = #{userId}
+	</update>
+
 </mapper>
   
   
