@@ -12,6 +12,15 @@
 		<result property="registDate" column="regist_date" jdbcType="TIMESTAMP" />
 	</resultMap>
 	
+	<resultMap id="boardUserIdMap" type="com.airplane.board.BoardIdDto">
+		<id property="boardId" column="board_id" />
+		<id property="userId" column="user_id" />
+		<result property="id" column="id" />
+		<result property="boardTitle" column="board_title"/>
+		<result property="board" column="board" />
+		<result property="registDate" column="regist_date" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
 	<insert id="insert" parameterType="com.airplane.board.BoardDto">
 		INSERT INTO board
 			(user_id, board_title, board)
@@ -24,6 +33,10 @@
 	
 	<select id="selectAll" resultMap="boardMap">
 		SELECT * From board
+	</select>
+	
+	<select id="selectIdAll" resultMap="boardUserIdMap">
+		select b.board_id, b.user_id, u.id, b.board_title, b.board, b.regist_date from board b join users u on b.user_id = u.user_id;
 	</select>
 	
 	<update id="update" parameterType="com.airplane.board.Board">

@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 public class BoardIdDto {
 	private int boardId;
 	private int userId;
+	private String id;
 	private String boardTitle;
 	private String board;
 	private LocalDateTime registDate;
-	
 	
 	public int getBoardId() {
 		return boardId;
@@ -39,6 +39,12 @@ public class BoardIdDto {
 	}
 	public void setRegistDate(LocalDateTime registDate) {
 		this.registDate = registDate;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	

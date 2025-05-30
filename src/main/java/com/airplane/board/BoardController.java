@@ -31,7 +31,7 @@ public class BoardController {
 	
 	@RequestMapping("/board")
 	public String boardMain(Model model){
-		List<Board> list = boardService.selectAll();
+		List<BoardIdDto> list = boardService.selectIdAll();
 		model.addAttribute("list",list);
 		return "boardMain";
 	}
@@ -66,10 +66,7 @@ public class BoardController {
 		if(bindingResult.hasErrors()) {
 			return "boardInsert";
 		}
-		BoardDto boardDto = new BoardDto(board);
-		boardService.insertBoard(boardDto);
-		model.addAttribute("list",boardService.selectAll());
-		return "boardMain";
+		return "redirect:/board";
 	}
 	
 	@RequestMapping(value="/boardUpdate", method=RequestMethod.GET)
