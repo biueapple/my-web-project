@@ -22,7 +22,5 @@ public class RefundUserRegisterRequest {
 		this.userId = userId;
 	}
 
-
-	
 	
 }

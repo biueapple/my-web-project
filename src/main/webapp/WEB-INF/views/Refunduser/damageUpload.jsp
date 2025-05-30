@@ -7,14 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>파손 정보 업로드</h2>
-	<h3>캐리어가 파손되셨습니까? 사진을 업로드하세요</h3>
+	<h2>파손 보상 신청</h2>
+	<h3>파손된 캐리어 사진을 업로드 해주세요</h3>
 
 
-	<form method="post" action="/user/regist/damage"
-		enctype="multipart/form-data" style="display: inline-block;">
+	<form method="post" action="/user/damage/upload"
+		enctype="multipart/form-data" >
+		<label>파손 사진 업로드</label>
 		<input type="file" name="damagePhotos" multiple />
-		<textarea name="description" placeholder="파손 내용 입력"></textarea>
+		<!-- <textarea name="description" placeholder="파손 내용 입력"></textarea>-->
 		<button type="submit">보상신청</button>
 	</form>
 

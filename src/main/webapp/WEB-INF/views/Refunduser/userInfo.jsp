@@ -70,6 +70,11 @@ button {
 		style="display: inline-block;">
 		<button type="submit"><spring:message code="label.Home"/></button>
 	</form>
+		<form action="<c:url value='/user/damage/upload'/>" method="get"
+		style="display: inline-block;">
+		<input type="hidden" name="id" value="${user.userId}" />
+		<button type="submit">보상요청</button>
+	</form>
 	<c:if test="${not empty message}">
 		<p style="color: red; font-weight: bold;">${message}</p>
 	</c:if>
