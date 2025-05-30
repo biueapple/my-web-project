@@ -87,7 +87,7 @@ public class HomeController {
 		List<PlaneListVO> vo = new ArrayList<>();
 		for(Plane p : plane)
 		{
-			vo.add(new PlaneListVO(p.getId(), dto.getDeparture(), dto.getDestination(), p.getPlane_time()));
+			vo.add(new PlaneListVO(p.getId(), dto.getDeparture(), dto.getDestination(), p.getPlane_time(), p.getPrice()));
 		}
 		model.addAttribute("list", vo);
 		session.setAttribute("list", plane);

@@ -22,7 +22,7 @@ public class UserRegisterRequest {
 	private String age;
 	@NotEmpty(message = "{NotBlank.userRegisterRequest.phoneNumber}")
 	private String phoneNumber;
-	
+	private int admin;
 	
 	public String getId() {
 		return id;
@@ -68,10 +68,18 @@ public class UserRegisterRequest {
 	}
 	
 	
+	public int getAdmin() {
+		return admin;
+	}
+	public void setAdmin(int admin) {
+		this.admin = admin;
+	}
+	
 	@Override
 	public String toString() {
 		return "UserRegisterRequest [id=" + id + ", password=" + password + ", passwordConfirm=" + passwordConfirm
-				+ ", name=" + name + ", gender=" + gender + ", age=" + age + ", phoneNumber=" + phoneNumber + "]";
+				+ ", name=" + name + ", gender=" + gender + ", age=" + age + ", phoneNumber=" + phoneNumber + ", admin="
+				+ admin + "]";
 	}
 	
 	
