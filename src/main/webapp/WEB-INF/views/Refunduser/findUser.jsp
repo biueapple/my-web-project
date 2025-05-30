@@ -61,9 +61,10 @@ button {
 
 		<button type="submit">
 			<spring:message code="Confirmbutton.submit" />
-			 --%>
+			 
 			
 		</button>
+		--%>
 			<button type="button" onclick="history.back()">이전으로</button>
 
 		

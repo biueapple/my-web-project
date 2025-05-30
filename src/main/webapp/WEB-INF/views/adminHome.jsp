@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><spring:message code="label.Main" /></title>
+<title>관리자 홈</title>
 <style>
 /* Global Styles */
 body {
@@ -85,16 +85,10 @@ footer {
 		<header>
 			<div class="inner-header">
 				<h1>
-					<spring:message code="label.Main" />
+					관리자 홈
 				</h1>
 				<div class="top-right-auth">
-					<c:if test="${empty sessionScope.loginUser}">
-						<a href="<c:url value='/login'/>"><spring:message code="label.login" /></a>
-						<a href="<c:url value='/regist'/>"><spring:message code="register.title" /></a>
-					</c:if>
-					<c:if test="${not empty sessionScope.loginUser}">
 						<a href="<c:url value='/user/logout'/>"><spring:message code="label.logout" /></a>
-					</c:if>
 				</div>
 			</div>
 			<div style="text-align: right; margin-top: 10px;">
@@ -104,18 +98,16 @@ footer {
 		</header>
 
 		<nav>
-			<c:if test="${empty sessionScope.loginUser}">
-				<a href="<c:url value='/Reservation'/>"><spring:message code="label.Reservation" /></a>
-				<a href="<c:url value='/board'/>"><spring:message code="board.title" /></a>
-			</c:if>
-			<c:if test="${not empty sessionScope.loginUser}">
+				<a href="<c:url value='/planeAdd'/>"><spring:message code="button.Addplane" /></a>
+				<a href="<c:url value='/airplaneList'/>"><spring:message code="button.Listplane" /></a>
+				<a href="<c:url value='/planeReservation'/>"><spring:message code="label.AirReservation" /></a>
 				<a href="<c:url value='/Reservation'/>"><spring:message code="label.Reservation" /></a>
 				<a href="<c:url value='/user/regist'/>"><spring:message code="label.BookingConfirmation" /></a>
 				<a href="<c:url value='/board'/>"><spring:message code="board.title" /></a>
-			</c:if>
 		</nav>
 		<main>
-			<h3>Home</h3>
+			<h3>관리자 홈</h3>
+
 		</main>
 		<footer> &copy; 2025 Airplane Reservation. All Rights
 			Reserved. </footer>

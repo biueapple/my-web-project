@@ -8,6 +8,7 @@ public class PlaneReservation
 	private LocalDateTime plane_time;
 	private int departure_id;
 	private int destination_id;
+	private int price;
 
 	
 	public int getOriginal_id()
@@ -41,5 +42,13 @@ public class PlaneReservation
 	public void setDestination_id(int destination_id)
 	{
 		this.destination_id = destination_id;
+	}
+	public int getPrice()
+	{
+		return price;
+	}
+	public void setPrice(int price)
+	{
+		this.price = price;
 	}
 }

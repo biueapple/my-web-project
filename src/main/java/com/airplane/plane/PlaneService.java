@@ -31,7 +31,11 @@ public class PlaneService
 	
 	public void insertReservation(PlaneReservation planeReservation)
 	{
+		System.out.println(planeReservation.getOriginal_id());
+		System.out.println(planeReservation.getDeparture_id());
+		System.out.println(planeReservation.getDestination_id());
 		System.out.println(planeReservation.getPlane_time());
+		System.out.println(planeReservation.getPrice());
 		planeMapper.insertReservation(planeReservation);
 	}
 	
@@ -45,6 +49,7 @@ public class PlaneService
 		return original;
 	}
 	
+	//사용하지 않음
 	public void updateSeat(String str, int id)
 	{
 		PlaneSeatUpdate seatUpdate = new PlaneSeatUpdate();

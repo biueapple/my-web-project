@@ -35,15 +35,20 @@ public class UserService {
 		return (user != null) ? true : false;
 	}
 	
-	
-	
-	
-	
-	
+
 	public User search(String id) {
 		User user = userMapper.idsearch(id); //회원 정보 검색
 		return user;
 	}
+	
+	// 아이디로 관리자 여부 체크
+    public boolean isAdmin(int userId) {
+        int admin = userMapper.selectAdminByUserId(userId);
+        return admin == 1;
+    
+	}
+	
+	
 }
 
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,15 +36,15 @@ button {
 </style>
 </head>
 <body>
-	<h2>예매 정보 확인</h2>
-	<h3>회원정보</h3>
+	<h2><spring:message code="label.Info.CheckReservationInformation"/></h2>
+	<h3><spring:message code="label.Info.MemberInformation"/></h3>
 	<table border="1">
 		<tr>
-			<th>이름</th>
-			<th>성별</th>
-			<th>출발지</th>
-			<th>도착지</th>
-			<th>좌석번호</th>
+			<th><spring:message code="label.Info.username"/></th>
+			<th><spring:message code="label.Info.gender"/></th>
+			<th><spring:message code="label.Info.Departure"/></th>
+			<th><spring:message code="label.Info.Destination"/></th>
+			<th><spring:message code="label.Info.SeatNumber"/></th>
 		</tr>
 		<c:forEach var="RefundUser" items="${list}">
 			<tr>
@@ -63,12 +63,12 @@ button {
 	<form action="<c:url value='/user/regist/refund'/>" method="post"
 		style="display: inline-block;">
 		<input type="hidden" name="id" value="${user.userId}" />
-		<button type="submit">환불요청</button>
+		<button type="submit"><spring:message code="label.Info.RefundRequest"/></button>
 	</form>
 
 	<form action="<c:url value='/'/>" method="get"
 		style="display: inline-block;">
-		<button type="submit">이전으로</button>
+		<button type="submit"><spring:message code="label.Home"/></button>
 	</form>
 	<c:if test="${not empty message}">
 		<p style="color: red; font-weight: bold;">${message}</p>

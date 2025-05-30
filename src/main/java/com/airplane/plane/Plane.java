@@ -12,7 +12,7 @@ public class Plane
 	private int economy_seat;
 	private int business_seat;
 	private int first_seat;
-	
+	private int price;
 	
 	public int getId()
 	{
@@ -77,5 +77,14 @@ public class Plane
 	public void setFirst_seat(int first_seat)
 	{
 		this.first_seat = first_seat;
+	}
+	
+	public int getPrice()
+	{
+		return price;
+	}
+	public void setPrice(int price)
+	{
+		this.price = price;
 	}
 }

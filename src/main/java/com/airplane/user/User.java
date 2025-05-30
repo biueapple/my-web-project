@@ -8,10 +8,14 @@ public class User {
     private String gender;
     private String age;
     private String phoneNumber;
-    
+    private int admin;
+        
+    public boolean isAdmin() {
+        return admin == 1;
+    } 
     
     public User(int userId, String id, String password, String name, String gender, String age,
-			String phoneNumber) {
+			String phoneNumber, int admin) {
 		super();
 		this.userId = userId;
 		this.id = id;
@@ -23,6 +27,16 @@ public class User {
 	}
 	
 	
+	public int getAdmin() {
+		return admin;
+	}
+
+
+	public void setAdmin(int admin) {
+		this.admin = admin;
+	}
+
+
 	public int getUserId() {
 		return userId;
 	}

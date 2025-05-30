@@ -63,7 +63,7 @@
 
         <!-- 출발 날짜 선택 -->
         <div class="mb-3">
-            <label for="flightDate" class="form-label">출발 날짜:</label>
+            <label for="flightDate" class="form-label"><spring:message code='label.DepartureDate'/></label>
             <input type="text" id="flightDate" name="departureDate" class="form-control" placeholder="날짜를 선택하세요" readonly required>
             <form:errors path="departureDate" cssClass="text-danger" />
         </div>
@@ -71,7 +71,7 @@
         <!-- 버튼 -->
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button type="submit" class="btn btn-primary"><spring:message code='label.next'/></button>
-            <button type="reset" class="btn btn-outline-secondary"><spring:message code='label.cancellation'/></button>
+            <button type="button" class="btn btn-outline-secondary" onclick="location.href='/airplane'"><spring:message code='label.cancellation'/></button>
         </div>
 
     </form:form>

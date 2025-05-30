@@ -13,6 +13,7 @@
 		<result property="economy_seat" column="economy_seat"/>
 		<result property="business_seat" column="business_seat"/>
 		<result property="first_seat" column="first_seat"/>
+		<result property="price" column="price"/>
 	</resultMap>
 	<resultMap id="planeOriginalMap" type="com.airplane.plane.PlaneOriginal">
 		<id property="id" column="id" />
@@ -31,8 +32,8 @@
 	<insert id="insertReservation" parameterType="com.airplane.plane.PlaneReservation"
 			useGeneratedKeys="true">
 		INSERT INTO plane_reservation
-			(original_id, plane_time, departure_id, destination_id)
-			VALUES (#{original_id}, #{plane_time}, #{departure_id}, #{destination_id})
+			(original_id, plane_time, departure_id, destination_id, price)
+			VALUES (#{original_id}, #{plane_time}, #{departure_id}, #{destination_id}, #{price})
 	</insert>
 	
 	<select id="selectReservationToTimeLate" resultType="com.airplane.plane.Plane" resultMap="planeMap">
