@@ -137,26 +137,10 @@ footer {
 </head>
 
 <body>
-
+	<%@ include file="/WEB-INF/views/adminHeader.jsp" %>
+	
 	<div class="container">
-		<header>
-			<div class="inner-header">
-				<h1>
-					관리자 홈
-				</h1>
-				<div class="top-right-auth">
-					<div class="language-selector">
-						<label for="languageSelect">Language:</label>
-						<select id="languageSelect" onchange="changeLanguage(this.value)">
-							<option value="ko_KR" ${param.lang == 'ko_KR' ? 'selected' : ''}>한글</option>
-							<option value="en_US" ${param.lang == 'en_US' ? 'selected' : ''}>English</option>
-						</select>
-					</div>
-					<a href="<c:url value='/user/logout'/>"><spring:message code="label.logout" /></a>
-				</div>
-			</div>
-		</header>
-
+		
 		<nav>
 				<a href="<c:url value='/planeAdd'/>"><spring:message code="button.Addplane" /></a>
 				<a href="<c:url value='/airplaneList'/>"><spring:message code="button.Listplane" /></a>

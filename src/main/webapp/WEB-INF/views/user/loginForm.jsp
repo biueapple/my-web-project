@@ -8,6 +8,27 @@
 <meta charset="UTF-8">
 <title><spring:message code="label.login"/></title>
 <style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+}
+
+h2, p {
+  margin: 0;
+  padding: 0;
+}
+
 .error{
 	color: red;
 	font-weight: bold;
@@ -16,6 +37,9 @@
 </style>
 </head>
 <body>
+
+<%@ include file="/WEB-INF/views/header.jsp" %>
+
 <h2><spring:message code="label.login"/></h2>
 <form:form modelAttribute="loginRequestCommand" method="post">
 	<p>

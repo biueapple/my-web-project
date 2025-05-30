@@ -6,22 +6,25 @@
 <meta charset="UTF-8">
 <title>회원 가입완료</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f9f9f9;
-        text-align: center;
-        padding-top: 100px;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    h2 {
-        color: #333;
-        margin-bottom: 20px;
-    }
+body {
+  font-family: Arial, sans-serif;
+}
 
-    p {
-        font-size: 18px;
-        color: #555;
-    }
+form {
+  margin: 0;
+  padding: 0;
+}
+
+h2, p {
+  margin: 0;
+  padding: 0;
+}
 
     .btn {
         display: inline-block;
@@ -42,6 +45,8 @@
 </style>
 </head>
 <body>
+
+<%@ include file="/WEB-INF/views/header.jsp" %>
 
 <h2>회원 가입</h2>
 <p>[${result}] 가입이 완료되었습니다.</p>
