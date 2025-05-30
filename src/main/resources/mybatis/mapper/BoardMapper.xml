@@ -31,6 +31,11 @@
 		SELECT * FROM board WHERE board_id = #{boardId}
 	</select>
 	
+	<select id="selectIdOne" resultMap="boardUserIdMap">
+		SELECT b.board_id, b.user_id, u.id, b.board_title, b.board, b.regist_date 
+			FROM board b JOIN users u ON b.user_id = u.user_id WHERE b.board_id = #{boardId};
+	</select>
+	
 	<select id="selectAll" resultMap="boardMap">
 		SELECT * From board
 	</select>

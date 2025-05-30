@@ -11,22 +11,22 @@
 <h2><spring:message code="board.selectTitle"/></h2>
 	<p>
 		<spring:message code="label.boardTitle"/>
-		${board.boardTitle}
+		${boardIdDto.boardTitle}
 	</p>
 	<p>
 		<spring:message code="label.userId"/>
-		${id}
+		${boardIdDto.id}
 	</p>
 	<p>
 		<spring:message code="label.board"/>
-		${board.board}
+		${boardIdDto.board}
 	</p>
 	<p>
 		<spring:message code="label.registDate"/>
-		${board.registDate}
+		${boardIdDto.registDate}
 	</p>
 <button onclick="location.href='board';">목록</button>
-<button onclick="location.href='boardUpdate?boardId=${board.boardId}';">수정</button>
-<button onclick="location.href='boardDelete?boardId=${board.boardId}';">삭제</button>
+<button onclick="location.href='boardUpdate?boardId=${boardIdDto.boardId}';">수정</button>
+<button onclick="location.href='boardDelete?boardId=${boardIdDto.boardId}';">삭제</button>
 </body>
 </html>
