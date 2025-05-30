@@ -24,6 +24,7 @@ public class User {
 		this.gender = gender;
 		this.age = age;
 		this.phoneNumber = phoneNumber;
+		this.admin = admin;
 	}
 	
 	

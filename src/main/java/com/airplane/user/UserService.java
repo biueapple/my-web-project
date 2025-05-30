@@ -25,8 +25,9 @@ public class UserService {
 		// 이 코드가 있어야 DB에 등록됨
 		userMapper.insertUser(userDto);
 
-		System.out.println("회원가입 완료. 자동 생성된 키: " + userDto.getId());
+		System.out.println("회원가입 완료. 자동 생성된 키: " + userDto.getUserId());
 	}
+	
 	public boolean login(LoginRequestCommand cmd) {
 		System.out.println("로그인 서비스 동작");
 		//User user = userDao.select(cmd.getUsername(), cmd.getPassword()); //회원 정보 검색

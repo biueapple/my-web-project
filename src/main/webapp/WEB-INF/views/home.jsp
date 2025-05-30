@@ -28,13 +28,65 @@ header {
 	background-color: #007BFF;
 	color: #fff;
 	padding: 20px 0;
-	text-align: center;
+}
+
+.inner-header {
+	max-width: 1200px;
+	margin: 0 auto;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 header h1 {
 	margin: 0;
 	font-size: 2em;
+	text-align: left;
+	flex-shrink: 0;
 }
+
+/* 오른쪽 메뉴 flex 박스: 언어선택, 로그인, 회원가입 한줄로 */
+.right-menu {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.right-menu a {
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.right-menu a:hover {
+	text-decoration: underline;
+}
+
+.language-selector label {
+	font-weight: bold;
+	margin-right: 5px;
+	color: #fff;
+	white-space: nowrap;
+}
+
+#languageSelect {
+	padding: 5px 10px;
+	border-radius: 4px;
+	border: none;
+	font-weight: bold;
+	background-color: #ffffff;
+	color: #007BFF;
+	font-size: 14px;
+	cursor: pointer;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+	transition: background-color 0.3s ease;
+}
+
+#languageSelect:hover {
+	background-color: #f0f0f0;
+}
+
 /* Navigation Styles */
 nav {
 	background-color: #fff;
@@ -87,7 +139,16 @@ footer {
 				<h1>
 					<spring:message code="label.Main" />
 				</h1>
-				<div class="top-right-auth">
+
+				<div class="right-menu">
+					<div class="language-selector">
+						<label for="languageSelect">Language:</label>
+						<select id="languageSelect" onchange="location.href='?lang=' + this.value;">
+							<option value="ko_KR" ${param.lang == 'ko_KR' ? 'selected' : ''}>한국어</option>
+							<option value="en_US" ${param.lang == 'en_US' ? 'selected' : ''}>English</option>
+						</select>
+					</div>
+
 					<c:if test="${empty sessionScope.loginUser}">
 						<a href="<c:url value='/login'/>"><spring:message code="label.login" /></a>
 						<a href="<c:url value='/regist'/>"><spring:message code="register.title" /></a>
@@ -96,10 +157,7 @@ footer {
 						<a href="<c:url value='/user/logout'/>"><spring:message code="label.logout" /></a>
 					</c:if>
 				</div>
-			</div>
-			<div style="text-align: right; margin-top: 10px;">
-				<a href="<c:url value='/' />?lang=ko_KR" style="margin-right: 10px;">한글</a> 
-				<a href="<c:url value='/' />?lang=en_US">영어</a>
+
 			</div>
 		</header>
 
@@ -123,7 +181,3 @@ footer {
 
 </body>
 </html>
-
-
-
-
