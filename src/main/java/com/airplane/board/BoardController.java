@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airplane.user.LoginRequestCommand;
 import com.airplane.user.User;
@@ -59,6 +61,7 @@ public class BoardController {
 	@RequestMapping(value="/boardInsert", method=RequestMethod.POST)
 	public String boardInsertSubmit(
 			@Valid
+			@ModelAttribute
 			Board board, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
 			return "boardInsert";
@@ -69,11 +72,22 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardUpdate", method=RequestMethod.GET)
-	public String boardUpdateForm(@RequestParam("boardId")int boardId,Model model) {
-		Board board = new Board();
-		model.addAttribute(board);
-		model.addAttribute("boardBefore",boardService.selectOne(boardId));
-		return "boardUpdate";
+	public String boardUpdateForm(@RequestParam("boardId")int boardId, Model model, HttpSession session, RedirectAttributes redirectAttrs) {
+		BoardIdDto boardIdDto = boardService.selectIdOne(boardId);
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc==null) {
+			redirectAttrs.addFlashAttribute("userNotMatchError", "작성자만 수정할 수 있습니다.");
+			return "redirect:/boardSelectOne?boardId="+boardId;
+		}else {
+			User user = userService.search(lrc.getId());
+			if(user.getUserId()==boardIdDto.getUserId()) {
+				model.addAttribute("board",boardService.selectOne(boardId));
+				return "boardUpdate";
+			}else {
+				redirectAttrs.addFlashAttribute("userNotMatchError", "작성자만 수정할 수 있습니다.");
+				return "redirect:/boardSelectOne?boardId="+boardId;
+			}
+		}
 	}
 	
 	@RequestMapping(value="/boardUpdate", method=RequestMethod.POST)
@@ -88,8 +102,21 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardDelete")
-	public String boardDelete(@RequestParam("boardId")int boardId,Model model) {
-		boardService.delete(boardId);
-		return "redirect:/board";
+	public String boardDelete(@RequestParam("boardId")int boardId,Model model, HttpSession session, RedirectAttributes redirectAttrs) {
+		BoardIdDto boardIdDto = boardService.selectIdOne(boardId);
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc==null) {
+			redirectAttrs.addFlashAttribute("userNotMatchError", "작성자만 삭제할 수 있습니다.");
+			return "redirect:/boardSelectOne?boardId="+boardId;
+		}else {
+			User user = userService.search(lrc.getId());
+			if(user.getUserId()==boardIdDto.getUserId()) {
+				boardService.delete(boardId);
+				return "redirect:/board";
+			}else {
+				redirectAttrs.addFlashAttribute("userNotMatchError", "작성자만 삭제할 수 있습니다.");
+				return "redirect:/boardSelectOne?boardId="+boardId;
+			}
+		}
 	}
 }
