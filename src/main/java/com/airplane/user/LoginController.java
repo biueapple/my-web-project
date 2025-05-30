@@ -54,7 +54,7 @@ public class LoginController {
 					"remember", loginRequestCommand.getId());
 			cookie.setPath("/");
 			if(loginRequestCommand.isRemember()) {
-				cookie.setMaxAge(60*60); // 60*60*24*30*3
+				cookie.setMaxAge(60*60*24); // 60*60*24*30*3
 			}else {
 				cookie.setMaxAge(0);
 			}
