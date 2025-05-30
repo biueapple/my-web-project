@@ -14,7 +14,7 @@ public class UserRegisterRequest {
 	private String password;
 	private String passwordConfirm;
 	
-	@NotNull(message = "{NotNull.userRegisterRequest.name}")
+	@NotBlank(message = "{NotNull.userRegisterRequest.name}")
 	private String name;
 	@NotBlank(message = "{NotBlank.userRegisterRequest.gender}")
 	private String gender;

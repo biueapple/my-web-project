@@ -1,7 +1,7 @@
 package com.airplane.user;
 
 public class UserDto {
-    private String userId;  // 변경
+    private int userId;  // 변경
 
     private String id;
     private String password;
@@ -18,15 +18,12 @@ public class UserDto {
 	public void setAdmin(int admin) {
 		this.admin = admin;
 	}
-	// getter/setter 모두 변경
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
-
-    // 나머지는 그대로
     public String getId() {
         return id;
     }
