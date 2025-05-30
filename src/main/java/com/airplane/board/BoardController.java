@@ -37,12 +37,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardSelectOne")
-	public String boardSelectOne(@RequestParam("boardId") int boardId, Model model, HttpSession session) {
-		Board board = boardService.selectOne(boardId);
-		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
-		User user = userService.search(lrc.getId());
-		model.addAttribute("board",board);
-		model.addAttribute("id",user.getId());
+	public String boardSelectIdOne(@RequestParam("boardId") int boardId, Model model, HttpSession session) {
+		BoardIdDto boardIdDto = boardService.selectIdOne(boardId);
+		model.addAttribute("boardIdDto",boardIdDto);
 		return "boardSelect";
 	}
 	
@@ -50,11 +47,11 @@ public class BoardController {
 	public String boardInsertForm(Model model,HttpSession session) {
 		Board board = new Board();
 		model.addAttribute(board);
-		LoginRequestCommand loginRequestCommand = (LoginRequestCommand)session.getAttribute("loginUser");
-		if(loginRequestCommand==null) {
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc==null) {
 			return "redirect:/login";
 		}
-		User user = userService.search(loginRequestCommand.getId());
+		User user = userService.search(lrc.getId());
 		model.addAttribute("userId", user.getUserId());
 		return "boardInsert";
 	}
@@ -87,8 +84,7 @@ public class BoardController {
 			return "boardUpdate";
 		}
 		boardService.update(board);
-		model.addAttribute(board.getBoardId());
-		return "boardSelect"; 
+		return "redirect:/boardSelectOne?boardId="+board.getBoardId();
 	}
 	
 	@RequestMapping("/boardDelete")

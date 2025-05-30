@@ -35,4 +35,8 @@ public class BoardService {
 	public List<BoardIdDto> selectIdAll(){
 		return boardMapper.selectIdAll();
 	}
+	
+	public BoardIdDto selectIdOne(int boardId) {
+		return boardMapper.selectIdOne(boardId);
+	}
 }
