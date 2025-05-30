@@ -2,8 +2,8 @@ package com.airplane.plane;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,7 @@ public class HomeController {
 	AirService airService;
 	
 	@RequestMapping("/")
-	public String home(Model model) {
+	public String home(Model model, Locale locale) {
 		LocalDateTime now = LocalDateTime.now();
 		model.addAttribute("now", now);
 		return "home";

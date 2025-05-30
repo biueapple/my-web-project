@@ -101,14 +101,15 @@ footer {
 				</div>
 			</div>
 			<div style="text-align: right; margin-top: 10px;">
-				<a href="?lang=ko" style="margin-right: 10px;">한글</a> 
-				<a href="?lang=en">영어</a>
+				<a href="<c:url value='/' />?lang=ko_KR" style="margin-right: 10px;">한글</a> 
+				<a href="<c:url value='/' />?lang=en_US">영어</a>
 			</div>
 		</header>
 
 		<nav>
 			<c:if test="${empty sessionScope.loginUser}">
-				<a href="board">게시판</a>
+				<a href="board"><spring:message
+						code="board.title" /></a>
 				<a href="<c:url value='/Reservation'/>"><spring:message
 						code="label.Reservation" /></a>
 			</c:if>
