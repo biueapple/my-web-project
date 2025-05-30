@@ -31,7 +31,7 @@
 		SELECT * FROM users WHERE id = #{id} 
 	</select>
 	
-	<select id="selectAdminByUserId" parameterType="String" resultType="int">
+	<select id="selectAdminByUserId" parameterType="int" resultType="int">
     SELECT admin FROM users WHERE user_id = #{userId}
 	</select>
 	

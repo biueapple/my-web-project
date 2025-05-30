@@ -42,7 +42,7 @@ public class UserService {
 	}
 	
 	// 아이디로 관리자 여부 체크
-    public boolean isAdmin(String userId) {
+    public boolean isAdmin(int userId) {
         int admin = userMapper.selectAdminByUserId(userId);
         return admin == 1;
     

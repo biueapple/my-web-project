@@ -35,10 +35,20 @@ public class HomeController {
 	AirService airService;
 	
 	@RequestMapping("/")
-	public String home(Model model, Locale locale) {
+	public String home(Model model, Locale locale, HttpSession session) {
 		LocalDateTime now = LocalDateTime.now();
 		model.addAttribute("now", now);
-		return "home";
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc!=null) {
+			User user = userService.search(lrc.getId());
+			if(userService.isAdmin(user.getUserId())){
+				return "adminHome";
+			}else {
+				return "home";
+			}
+		}else {
+			return "home";
+		}
 	}
 	
 	

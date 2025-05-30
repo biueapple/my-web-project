@@ -39,8 +39,8 @@ public class BoardController {
 	@RequestMapping("/boardSelectOne")
 	public String boardSelectOne(@RequestParam("boardId") int boardId, Model model, HttpSession session) {
 		Board board = boardService.selectOne(boardId);
-		LoginRequestCommand loginRequestCommand = (LoginRequestCommand)session.getAttribute("loginUser");
-		User user = userService.search(loginRequestCommand.getId());
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		User user = userService.search(lrc.getId());
 		model.addAttribute("board",board);
 		model.addAttribute("id",user.getId());
 		return "boardSelect";
