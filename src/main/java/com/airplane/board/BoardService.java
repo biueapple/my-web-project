@@ -31,4 +31,8 @@ public class BoardService {
 	public int delete(int boardId) {
 		return boardMapper.delete(boardId);
 	}
+	
+	public List<BoardIdDto> selectIdAll(){
+		return boardMapper.selectIdAll();
+	}
 }

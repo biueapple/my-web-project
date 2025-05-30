@@ -17,15 +17,16 @@
         <th><spring:message code="label.userId"/></th>
         <th><spring:message code="label.registDate"/></th>
     </tr>
-    <c:forEach var="board" items="${list}">
+    <c:forEach var="boardIdDto" items="${list}">
         <tr>
-            <td>${board.boardId}</td>
-            <td><a href="boardSelectOne?boardId=${board.boardId}">${board.boardTitle}</a></td>
-            <td>${board.userId}</td>
-            <td>${board.registDate}</td>
+            <td>${boardIdDto.boardId}</td>
+            <td><a href="boardSelectOne?boardId=${boardIdDto.boardId}">${boardIdDto.boardTitle}</a></td>
+            <td>${boardIdDto.id}</td>
+            <td>${boardIdDto.registDate}</td>
         </tr>
     </c:forEach>
 </table>
 <button onclick="location.href='boardInsert';">글작성</button>
+<button onclick="location.href='/airplane';">홈으로</button>
 </body>
 </html>

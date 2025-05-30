@@ -15,7 +15,7 @@
 	</p>
 	<p>
 		<spring:message code="label.userId"/>
-		${board.userId}
+		${id}
 	</p>
 	<p>
 		<spring:message code="label.board"/>

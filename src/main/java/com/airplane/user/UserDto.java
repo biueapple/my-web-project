@@ -9,8 +9,16 @@ public class UserDto {
     private String gender;
     private String age;
     private String phoneNumber;
-
-    // getter/setter 모두 변경
+    private int admin;
+    
+    
+    public int getAdmin() {
+		return admin;
+	}
+	public void setAdmin(int admin) {
+		this.admin = admin;
+	}
+	// getter/setter 모두 변경
     public String getUserId() {
         return userId;
     }

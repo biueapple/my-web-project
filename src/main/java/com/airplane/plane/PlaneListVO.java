@@ -8,6 +8,8 @@ public class PlaneListVO
 	private String departure;
 	private String destination;
 	private LocalDateTime plane_time;
+	private int price;
+	
 	public int getId()
 	{
 		return id;
@@ -40,11 +42,20 @@ public class PlaneListVO
 	{
 		this.plane_time = plane_time;
 	}
-	public PlaneListVO(int id, String departure, String destination, LocalDateTime plane_time)
+	public int getPrice()
+	{
+		return price;
+	}
+	public void setPrice(int price)
+	{
+		this.price = price;
+	}
+	public PlaneListVO(int id, String departure, String destination, LocalDateTime plane_time, int price)
 	{
 		this.id = id;
 		this.departure = departure;
 		this.destination = destination;
 		this.plane_time = plane_time;
+		this.price = price;
 	}
 }
