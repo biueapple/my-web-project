@@ -119,7 +119,7 @@ footer {
 				<a href="<c:url value='/airplaneList'/>"><spring:message
 						code="button.Listplane" /></a>
 				<a href="<c:url value='/planeReservation'/>"><spring:message
-						code="label.Reservation" /></a>
+						code="label.AirReservation" /></a>
 				<a href="<c:url value='/Reservation'/>"><spring:message
 						code="label.Reservation" /></a>
 				<a href="<c:url value='/user/regist'/>"><spring:message

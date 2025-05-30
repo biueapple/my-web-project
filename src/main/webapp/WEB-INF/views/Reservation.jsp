@@ -71,7 +71,7 @@
         <!-- 버튼 -->
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button type="submit" class="btn btn-primary"><spring:message code='label.next'/></button>
-            <button type="reset" class="btn btn-outline-secondary"><spring:message code='label.cancellation'/></button>
+            <button type="button" class="btn btn-outline-secondary" onclick="location.href='/airplane'"><spring:message code='label.cancellation'/></button>
         </div>
 
     </form:form>
