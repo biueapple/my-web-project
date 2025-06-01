@@ -27,13 +27,6 @@ public class DamageController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String damageClaim(HttpSession httpSession, Model model) {
 
-		LoginRequestCommand lrc = (LoginRequestCommand) httpSession.getAttribute("loginUser");
-
-		if (lrc == null) {
-			return "redirect:/login";
-		}
-
-		// 보상신청 DTO 준비
 		model.addAttribute("damageRequest", new DamageDto());
 		return "/RefundUser/damageUpload";
 	}
