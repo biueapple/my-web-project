@@ -57,10 +57,9 @@ h2, p {
 	</c:if>
 </c:if>
 <c:if test="${empty notice}">
+	<c:if test="${not empty matchUser}">
 	<button onclick="location.href='boardUpdate?boardId=${boardIdDto.boardId}';">수정</button>
 	<button onclick="location.href='boardDelete?boardId=${boardIdDto.boardId}';">삭제</button><br>
-	<c:if test="${not empty userNotMatchError}">
-	${userNotMatchError}
 	</c:if>
 </c:if>
 </body>

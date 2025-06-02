@@ -49,8 +49,15 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardSelectOne")
-	public String boardSelectIdOne(@RequestParam("boardId") int boardId, Model model) {
+	public String boardSelectIdOne(@RequestParam("boardId") int boardId, Model model,HttpSession session) {
 		BoardIdDto boardIdDto = boardService.selectIdOne(boardId);
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc!=null) {
+			User user = userService.search(lrc.getId());
+			if(user.getUserId()==boardIdDto.getUserId()) {
+				model.addAttribute("matchUser","matchUser");
+			}
+		}
 		model.addAttribute("boardIdDto",boardIdDto);
 		return "boardSelect";
 	}
@@ -82,11 +89,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/boardUpdate", method=RequestMethod.GET)
-	public String boardUpdateForm(@RequestParam("boardId")int boardId, Model model, HttpSession session, RedirectAttributes redirectAttrs) {
+	public String boardUpdateForm(@RequestParam("boardId")int boardId, Model model, HttpSession session) {
 		BoardIdDto boardIdDto = boardService.selectIdOne(boardId);
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc==null) {
-			redirectAttrs.addFlashAttribute("userNotMatchError", "작성자만 수정할 수 있습니다.");
 			return "redirect:/boardSelectOne?boardId="+boardId;
 		}else {
 			User user = userService.search(lrc.getId());
@@ -94,7 +100,6 @@ public class BoardController {
 				model.addAttribute("board",boardService.selectOne(boardId));
 				return "boardUpdate";
 			}else {
-				redirectAttrs.addFlashAttribute("userNotMatchError", "작성자만 수정할 수 있습니다.");
 				return "redirect:/boardSelectOne?boardId="+boardId;
 			}
 		}
@@ -112,11 +117,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardDelete")
-	public String boardDelete(@RequestParam("boardId")int boardId,Model model, HttpSession session, RedirectAttributes redirectAttrs) {
+	public String boardDelete(@RequestParam("boardId")int boardId,Model model, HttpSession session) {
 		BoardIdDto boardIdDto = boardService.selectIdOne(boardId);
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc==null) {
-			redirectAttrs.addFlashAttribute("userNotMatchError", "작성자만 삭제할 수 있습니다.");
 			return "redirect:/boardSelectOne?boardId="+boardId;
 		}else {
 			User user = userService.search(lrc.getId());
@@ -124,7 +128,6 @@ public class BoardController {
 				boardService.delete(boardId);
 				return "redirect:/board";
 			}else {
-				redirectAttrs.addFlashAttribute("userNotMatchError", "작성자만 삭제할 수 있습니다.");
 				return "redirect:/boardSelectOne?boardId="+boardId;
 			}
 		}
