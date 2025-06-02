@@ -49,11 +49,18 @@ h2, p {
 		<spring:message code="label.registDate"/>
 		${boardIdDto.registDate}
 	</p>
-<button onclick="location.href='board';">목록</button>
-<button onclick="location.href='boardUpdate?boardId=${boardIdDto.boardId}';">수정</button>
-<button onclick="location.href='boardDelete?boardId=${boardIdDto.boardId}';">삭제</button><br>
-<c:if test="${not empty userNotMatchError}">
-	${userNotMatchError}
+<button onclick="location.href='board';"><spring:message code="label.List" /></button>
+<c:if test="${not empty notice}">
+	<c:if test="${not empty admin}">
+		<button onclick="location.href='noticeBoardUpdate?boardId=${boardIdDto.boardId}';"><spring:message code="label.NoticeModification" /></button>
+		<button onclick="location.href='noticeBoardDelete?boardId=${boardIdDto.boardId}';"><spring:message code="label.DeleteNotice" /></button>
+	</c:if>
+</c:if>
+<c:if test="${empty notice}">
+	<c:if test="${not empty matchUser}">
+	<button onclick="location.href='boardUpdate?boardId=${boardIdDto.boardId}';"><spring:message code="label.correction" /></button>
+	<button onclick="location.href='boardDelete?boardId=${boardIdDto.boardId}';"><spring:message code="label.DeleteText" /></button><br>
+	</c:if>
 </c:if>
 </body>
 </html>

@@ -13,18 +13,36 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <style>
-        body {
-            background-color: #f8f9fa;
-            padding-top: 0px;
-        }
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	position: relative;
+}
+
+body::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('<c:url value="/images/patrick-tomasso-GOErUf5yNFA-unsplash.jpg" />');
+	background-size: cover;
+	background-position: center top;
+	background-repeat: no-repeat;
+	z-index: -1; /* 가장 아래에 배경 위치시킴 */
+}
         .form-container {
-            max-width: 500px;
-            margin: auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
+    max-width: 500px;
+    margin-left: 180px;
+    margin-right: auto;
+    padding: 30px;
+    background: transparent;
+    border: none;
+    box-shadow: none;     
+}
+
         h3 {
             text-align: center;
             margin-bottom: 30px;
@@ -36,7 +54,7 @@
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
 <div class="form-container">
-    <h3>여행지를 선택하세요</h3>
+    <h3><spring:message code="label.selectDestination" /></h3>
 
     <form:form modelAttribute="airinfoDto" action="/airplane/Reservation" method="post">
 

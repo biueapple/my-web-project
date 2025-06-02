@@ -37,11 +37,12 @@
 	</insert>
 	
 	<select id="selectReservationToTimeLate" resultType="com.airplane.plane.Plane" resultMap="planeMap">
-		SELECT * FROM plane_reservation 
+		SELECT *
+		FROM plane_reservation
 		WHERE plane_time > #{plane_time}
-		AND DATE_ADD(CURDATE(), INTERVAL 1 DAY) > plane_time 
-		AND departure_id = #{departure_id}
-		AND destination_id = #{destination_id}
+  		AND DATE_ADD(DATE(#{plane_time}), INTERVAL 1 DAY) > plane_time
+  		AND departure_id = #{departure_id}
+  		AND destination_id = #{destination_id}
 	</select>
 	
 	<select id="selectPlane" resultType="com.airplane.plane.Plane" resultMap="planeMap">

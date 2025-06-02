@@ -41,7 +41,15 @@ h2, p {
         <th><spring:message code="label.userId"/></th>
         <th><spring:message code="label.registDate"/></th>
     </tr>
-    <c:forEach var="boardIdDto" items="${list}">
+    <c:forEach var="boardIdDto" items="${noticeBoardList}">
+        <tr>
+            <td>${boardIdDto.boardId}</td>
+            <td><a href="noticeBoardSelectOne?boardId=${boardIdDto.boardId}">[공지] ${boardIdDto.boardTitle}</a></td>
+            <td>${boardIdDto.id}</td>
+            <td>${boardIdDto.registDate}</td>
+        </tr>
+    </c:forEach>
+    <c:forEach var="boardIdDto" items="${boardList}">
         <tr>
             <td>${boardIdDto.boardId}</td>
             <td><a href="boardSelectOne?boardId=${boardIdDto.boardId}">${boardIdDto.boardTitle}</a></td>
@@ -50,7 +58,10 @@ h2, p {
         </tr>
     </c:forEach>
 </table>
-<button onclick="location.href='boardInsert';">글작성</button>
-<button onclick="location.href='/airplane';">홈으로</button>
+<c:if test="${not empty admin}">
+	<button onclick="location.href='noticeBoardInsert';">공지작성</button>
+</c:if>
+<button onclick="location.href='boardInsert';"><spring:message code="label.Writing" /></button>
+<button onclick="location.href='/airplane';"><spring:message code="label.board.Home" /></button>
 </body>
 </html>

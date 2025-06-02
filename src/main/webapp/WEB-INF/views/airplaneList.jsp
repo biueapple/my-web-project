@@ -9,25 +9,53 @@
 <meta charset="UTF-8">
 <title><spring:message code="button.Listplane"/></title>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-}
-
-form {
-  margin: 0;
-  padding: 0;
-}
-
-h2, p {
-  margin: 0;
-  padding: 0;
-}
+        body {
+   			font-family: Arial, sans-serif;
+   	 		background-color: #f7f7f7;
+    		margin: 0 !important;
+    		padding: 0px;
+		}
+		
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        header h1 a {
+  			color: white !important;
+		}
+        
+        table {
+            margin: 0 auto;
+            width: 80%;
+            border-collapse: collapse;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        .submit-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
 </style>
     
 </head>
@@ -41,12 +69,12 @@ h2, p {
         <table>
             <thead>
                 <tr>
-                    <th>선택</th>
-                    <th>ID</th>
-                    <th>Departure</th>
-                    <th>Destination</th>
-                    <th>Plane Time</th>
-                    <th>Price</th>
+                    <th><spring:message code="label.Choice" /></th>
+                    <th><spring:message code="label.id" /></th>
+                    <th><spring:message code="label.Departure" /></th>
+                    <th><spring:message code="label.Destination" /></th>
+                    <th><spring:message code="label.PlaneTime" /></th>
+                    <th><spring:message code="label.Price" /></th>
                 </tr>
             </thead>
             <tbody>

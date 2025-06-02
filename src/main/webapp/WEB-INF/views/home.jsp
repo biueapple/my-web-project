@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,22 @@
 html, body {
 	margin: 0;
 	padding: 0;
+	height: 100%;
+	position: relative;
 }
 
-body {
-	font-family: Arial, sans-serif;
-	background-color: #f7f7f7;
+body::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('<c:url value="/images/patrick-tomasso-GOErUf5yNFA-unsplash.jpg" />');
+	background-size: cover;
+	background-position: center top;
+	background-repeat: no-repeat;
+	z-index: -1; /* 가장 아래에 배경 위치시킴 */
 }
 
 .container {
