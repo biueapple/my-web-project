@@ -1,24 +1,23 @@
 package com.example.mysite.user;
 
-import java.util.List;
 
 public class DamageDto {
-	private String id;
-	private List<String> savepath;
+	private int id;
+	private String savepath;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public List<String> getSavepath() {
+	public String getSavepath() {
 		return savepath;
 	}
 
-	public void setSavepath(List<String> savepath) {
+	public void setSavepath(String savepath) {
 		this.savepath = savepath;
 	}
 

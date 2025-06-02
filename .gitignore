@@ -22,3 +22,17 @@ Thumbs.db
 *.war
 *.ear
 *.jar
+
+# 이미지 파일
+*.jpg
+*.JPG
+*.jpeg
+*.JPEG
+*.png
+*.PNG
+*.gif
+*.GIF
+*.bmp
+*.BMP
+*.svg
+*.SVG

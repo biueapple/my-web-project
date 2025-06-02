@@ -36,8 +36,8 @@
 	</select>
 	
 	<insert id="insertDamage" parameterType="com.example.mysite.user.DamageDto">
-		INSERT INTO damage (user_id, image_paths)
-		VALUES (#{userId}, #{imagePaths})
+		INSERT INTO damage (user_id, path)
+		VALUES (#{id}, #{savepath})
 	</insert>
 
 </mapper>
