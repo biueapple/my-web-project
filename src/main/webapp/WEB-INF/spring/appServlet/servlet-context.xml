@@ -1,80 +1,98 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
     https://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context
     https://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/mvc
     https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.airplane" />
-    <context:component-scan base-package="com.example" />
+	<context:component-scan
+		base-package="com.airplane" />
+	<context:component-scan
+		base-package="com.example" />
 
-    <mvc:annotation-driven />
+	<mvc:annotation-driven />
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="classpath:messages" />
-        <property name="defaultEncoding" value="UTF-8" />
-    </bean>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="org.mariadb.jdbc.Driver" />
-        <property name="url" value="jdbc:mariadb://192.168.52.178:3306/airplane" />
-        <property name="username" value="tester" />
-        <property name="password" value="1234" />
-        <property name="maxTotal" value="10" />
-        <property name="maxIdle" value="5" />
-    </bean>
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName"
+			value="org.mariadb.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mariadb://192.168.52.178:3306/airplane" />
+		<property name="username" value="tester" />
+		<property name="password" value="1234" />
+		<property name="maxTotal" value="10" />
+		<property name="maxIdle" value="5" />
+	</bean>
 
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
-    <!-- SqlSessionFactory -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" value="classpath:mybatis/mapper/*.xml" />
-    </bean>
+	<!-- SqlSessionFactory -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations"
+			value="classpath:mybatis/mapper/*.xml" />
+	</bean>
 
-    <!-- Mapper 인터페이스 자동 스캔 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.airplane.mapper" />
-    </bean>
+	<!-- Mapper 인터페이스 자동 스캔 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.airplane.mapper" />
+	</bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.airplane.plane.mapper" />
-    </bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage"
+			value="com.airplane.plane.mapper" />
+	</bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.airplane.user.mapper" />
-    </bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.airplane.user.mapper" />
+	</bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.example.mysite.user.mapper" />
-    </bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage"
+			value="com.example.mysite.user.mapper" />
+	</bean>
 
-    <!-- 세션 기반 로케일 리졸버 설정 -->
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale">
-            <bean class="java.util.Locale">
-                <constructor-arg value="ko" />
-                <constructor-arg value="KR" />
-            </bean>
-        </property>
-    </bean>
+	<!-- 세션 기반 로케일 리졸버 설정 -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale">
+			<bean class="java.util.Locale">
+				<constructor-arg value="ko" />
+				<constructor-arg value="KR" />
+			</bean>
+		</property>
+	</bean>
 
-    <!-- 인터셉터 등록 (lang 파라미터로 Locale 변경) -->
-    <mvc:interceptors>
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-            <property name="paramName" value="lang" />
-        </bean>
-    </mvc:interceptors>
+	<!-- 인터셉터 등록 (lang 파라미터로 Locale 변경) -->
+	<mvc:interceptors>
+		<bean
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+	</mvc:interceptors>
 
+	<!-- 파일 처리용 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 </beans>

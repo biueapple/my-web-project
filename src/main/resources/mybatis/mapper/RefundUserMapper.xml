@@ -9,8 +9,10 @@
 	<insert id="refundInsert"
 		parameterType="com.example.mysite.user.RefundUserDto"
 		useGeneratedKeys="true">
-		INSERT INTO seat (user_id, reservation_id, gender, depart, arrive, seat)
-		VALUES (#{userId}, #{reservation_id}, #{gender}, #{depart}, #{arrive}, #{seat});
+		INSERT INTO seat (user_id, reservation_id, gender,
+		depart, arrive, seat)
+		VALUES (#{userId}, #{reservation_id}, #{gender},
+		#{depart}, #{arrive}, #{seat});
 	</insert>
 
 	<select id="RefundselectOne"
@@ -24,11 +26,18 @@
 	</select>
 
 	<delete id="deleteUserByUserId" parameterType="int">
-		DELETE FROM seat WHERE user_Id = #{userId}
+		DELETE FROM seat
+		WHERE user_Id = #{userId}
 	</delete>
-	
-	<select id="seatName"
-		resultType="String" parameterType="int">
-		SELECT seat FROM seat WHERE reservation_id = #{rid}
+
+	<select id="seatName" resultType="String" parameterType="int">
+		SELECT
+		seat FROM seat WHERE reservation_id = #{rid}
 	</select>
+	
+	<insert id="insertDamage" parameterType="com.example.mysite.user.DamageDto">
+		INSERT INTO damage (user_id, image_paths)
+		VALUES (#{userId}, #{imagePaths})
+	</insert>
+
 </mapper>
