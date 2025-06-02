@@ -24,71 +24,15 @@ body {
 	padding: 0 20px; /* 적당한 좌우 여백만 */
 }
 
- header {
-	background-color: #007BFF;
-	color: #fff;
-	padding: 20px 0;
-	width: 100%;
-}
-
-.inner-header {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 20px; /* 좌우 정렬을 위한 내부 패딩 */
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
- header h1 {
-	margin: 0;
-	/* font-size: 2em; */
-	text-align: left;
-}
-
 .right-menu {
 	display: flex;
 	align-items: center;
 	gap: 20px;
 }
 
-.right-menu a {
-	color: #fff;
-	font-weight: bold;
-	text-decoration: none;
-}
-
-.right-menu a:hover {
-	text-decoration: underline;
-}
-
-.language-selector label {
-	font-weight: bold;
-	margin-right: 5px;
-	color: #fff;
-	white-space: nowrap;
-}
-
-#languageSelect {
-	padding: 5px 10px;
-	border-radius: 4px;
-	border: none;
-	font-weight: bold;
-	background-color: #ffffff;
-	color: #007BFF;
-	font-size: 14px;
-	cursor: pointer;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-	transition: background-color 0.3s ease;
-}
-
-#languageSelect:hover {
-	background-color: #f0f0f0;
-}
-
 nav {
 	background-color: #fff;
-	border-bottom: 2px solid #007BFF;
+	border-bottom: 2px solid #1a1a1a;
 	padding: 10px 0;
 	text-align: center;
 	margin: 0;
@@ -96,7 +40,7 @@ nav {
 
 nav a {
 	text-decoration: none;
-	color: #007BFF;
+	color: 	#1a1a1a;
 	font-weight: bold;
 	margin: 0 15px;
 	padding: 5px 10px;
@@ -104,10 +48,6 @@ nav a {
 	transition: background-color 0.3s, color 0.3s;
 }
 
-nav a:hover {
-	background-color: #007BFF;
-	color: #fff;
-}
 
 /* ✅ Main Content Styles */
 main {

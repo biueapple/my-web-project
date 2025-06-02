@@ -7,8 +7,32 @@
 <head>
 <meta charset="UTF-8">
 <title><spring:message code="board.title"/></title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+}
+
+h2, p {
+  margin: 0;
+  padding: 0;
+}
+</style>
 </head>
 <body>
+
+<%@ include file="/WEB-INF/views/header.jsp" %>
+
 <h1><spring:message code="board.title"/></h1>
 <table border="1">
     <tr>
