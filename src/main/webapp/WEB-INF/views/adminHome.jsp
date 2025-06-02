@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 홈</title>
+<title><spring:message code="label.Admin" /></title>
 <style>
 /* Global Styles */
 body {
@@ -28,13 +28,70 @@ header {
 	background-color: #007BFF;
 	color: #fff;
 	padding: 20px 0;
-	text-align: center;
+}
+
+.inner-header {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 header h1 {
 	margin: 0;
 	font-size: 2em;
+	text-align: left;
+	flex-shrink: 0;
 }
+
+/* 오른쪽 메뉴 영역 (로그아웃 + 언어선택) */
+.top-right-auth {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	font-weight: bold;
+	color: #fff;
+}
+
+.top-right-auth a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.top-right-auth a:hover {
+	text-decoration: underline;
+}
+
+/* 언어 선택 박스 스타일 */
+.language-selector {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.language-selector label {
+	color: #fff;
+}
+
+#languageSelect {
+	padding: 5px 10px;
+	border-radius: 4px;
+	border: none;
+	font-weight: bold;
+	background-color: #ffffff;
+	color: #007BFF;
+	font-size: 14px;
+	cursor: pointer;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+	transition: background-color 0.3s ease;
+}
+
+#languageSelect:hover {
+	background-color: #f0f0f0;
+}
+
 /* Navigation Styles */
 nav {
 	background-color: #fff;
@@ -80,23 +137,10 @@ footer {
 </head>
 
 <body>
-
+	<%@ include file="/WEB-INF/views/adminHeader.jsp" %>
+	
 	<div class="container">
-		<header>
-			<div class="inner-header">
-				<h1>
-					관리자 홈
-				</h1>
-				<div class="top-right-auth">
-						<a href="<c:url value='/user/logout'/>"><spring:message code="label.logout" /></a>
-				</div>
-			</div>
-			<div style="text-align: right; margin-top: 10px;">
-				<a href="<c:url value='/' />?lang=ko_KR" style="margin-right: 10px;">한글</a> 
-				<a href="<c:url value='/' />?lang=en_US">영어</a>
-			</div>
-		</header>
-
+		
 		<nav>
 				<a href="<c:url value='/planeAdd'/>"><spring:message code="button.Addplane" /></a>
 				<a href="<c:url value='/airplaneList'/>"><spring:message code="button.Listplane" /></a>
@@ -106,16 +150,20 @@ footer {
 				<a href="<c:url value='/board'/>"><spring:message code="board.title" /></a>
 		</nav>
 		<main>
-			<h3>관리자 홈</h3>
+			<h3><spring:message code="label.Admin" /></h3>
 
 		</main>
 		<footer> &copy; 2025 Airplane Reservation. All Rights
 			Reserved. </footer>
 	</div>
 
+<script>
+	function changeLanguage(lang) {
+		const url = new URL(window.location.href);
+		url.searchParams.set('lang', lang);
+		window.location.href = url.toString();
+	}
+</script>
+
 </body>
 </html>
-
-
-
-

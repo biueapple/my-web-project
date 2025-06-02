@@ -29,15 +29,6 @@ public class RefundController {
 	@Autowired
 	private UserService userService2;
 	
-//	@RequestMapping(method = RequestMethod.GET)
-//	public String form(Model model) {
-//		System.out.println("검사");
-//		RefundUserRegisterRequest userRegisterRequest = new RefundUserRegisterRequest();
-//		model.addAttribute("userRegisterRequest", userRegisterRequest);
-//		model.addAttribute("genderOptions", List.of("남자", "여자"));
-//		model.addAttribute("countryOptions", List.of("한국", "미국", "일본", "중국", "독일"));
-//		return "/Refunduser/findUser";
-//	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String findUserByUserId(
@@ -85,4 +76,5 @@ public class RefundController {
 
 		return "/Refunduser/refundResult";
 	}
+	
 }

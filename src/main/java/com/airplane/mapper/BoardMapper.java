@@ -12,6 +12,7 @@ import com.airplane.board.BoardIdDto;
 public interface BoardMapper {
 	int insert(BoardDto boardDto);
 	Board selectOne(@Param("boardId") int boardId);
+	BoardIdDto selectIdOne(@Param("boardId") int boardId);
 	List<Board> selectAll();
 	List<BoardIdDto> selectIdAll();
 	int update(Board board);
