@@ -31,15 +31,25 @@ public class BoardController {
 //		return "home";
 //	}
 	
+	//board
 	@RequestMapping("/board")
-	public String boardMain(Model model){
-		List<BoardIdDto> list = boardService.selectIdAll();
-		model.addAttribute("list",list);
+	public String boardMain(Model model, HttpSession session){
+		List<BoardIdDto> boardList = boardService.selectIdAll();
+		List<BoardIdDto> noticeBoardList = boardService.noticeSelectIdAll();
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("noticeBoardList",noticeBoardList);
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc!=null) {
+			User user = userService.search(lrc.getId());
+			if(userService.isAdmin(user.getUserId())) {
+				model.addAttribute("admin","admin");
+			}
+		}
 		return "boardMain";
 	}
 	
 	@RequestMapping("/boardSelectOne")
-	public String boardSelectIdOne(@RequestParam("boardId") int boardId, Model model, HttpSession session) {
+	public String boardSelectIdOne(@RequestParam("boardId") int boardId, Model model) {
 		BoardIdDto boardIdDto = boardService.selectIdOne(boardId);
 		model.addAttribute("boardIdDto",boardIdDto);
 		return "boardSelect";
@@ -80,7 +90,7 @@ public class BoardController {
 			return "redirect:/boardSelectOne?boardId="+boardId;
 		}else {
 			User user = userService.search(lrc.getId());
-			if(user.getUserId()==boardIdDto.getUserId()) {
+			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
 				model.addAttribute("board",boardService.selectOne(boardId));
 				return "boardUpdate";
 			}else {
@@ -110,12 +120,99 @@ public class BoardController {
 			return "redirect:/boardSelectOne?boardId="+boardId;
 		}else {
 			User user = userService.search(lrc.getId());
-			if(user.getUserId()==boardIdDto.getUserId()) {
+			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
 				boardService.delete(boardId);
 				return "redirect:/board";
 			}else {
 				redirectAttrs.addFlashAttribute("userNotMatchError", "작성자만 삭제할 수 있습니다.");
 				return "redirect:/boardSelectOne?boardId="+boardId;
+			}
+		}
+	}
+	
+	//noticeBaord
+	@RequestMapping(value="/noticeBoardInsert", method=RequestMethod.GET)
+	public String noticeBoardInsertForm(Model model,HttpSession session) {
+		Board board = new Board();
+		model.addAttribute(board);
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc==null) {
+			return "redirect:/login";
+		}
+		User user = userService.search(lrc.getId());
+		model.addAttribute("userId", user.getUserId());
+		return "boardInsert";
+	}
+	
+	@RequestMapping(value="/noticeBoardInsert", method=RequestMethod.POST)
+	public String noticeBoardInsertSubmit(
+			@Valid
+			@ModelAttribute
+			Board board, BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) {
+			return "boardInsert";
+		}
+		BoardDto boardDto = new BoardDto(board);
+		boardService.insertNoticeBoard(boardDto);
+		return "redirect:/board";
+	}
+	
+	@RequestMapping("/noticeBoardSelectOne")
+	public String noticeBoardSelectIdOne(@RequestParam("boardId") int boardId, Model model,HttpSession session) {
+		BoardIdDto boardIdDto = boardService.noticeSelectIdOne(boardId);
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc!=null) {
+			User user = userService.search(lrc.getId());
+			if(userService.isAdmin(user.getUserId())) {
+				model.addAttribute("admin","admin");
+			}
+		}
+		model.addAttribute("notice","notice");
+		model.addAttribute("boardIdDto",boardIdDto);
+		return "boardSelect";
+	}
+	
+	@RequestMapping(value="/noticeBoardUpdate", method=RequestMethod.GET)
+	public String noticeBoardUpdateForm(@RequestParam("boardId")int boardId, Model model, HttpSession session) {
+		BoardIdDto boardIdDto = boardService.noticeSelectIdOne(boardId);
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc==null) {
+			return "redirect:/noticeBoardSelectOne?boardId="+boardId;
+		}else {
+			User user = userService.search(lrc.getId());
+			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
+				model.addAttribute("board",boardService.noticeSelectOne(boardId));
+				return "boardUpdate";
+			}else {
+				return "redirect:/noticeBoardSelectOne?boardId="+boardId;
+			}
+		}
+	}
+	
+	@RequestMapping(value="/noticeBoardUpdate", method=RequestMethod.POST)
+	public String noticeBoardUpdateSubmit(
+			@Valid
+			Board board, BindingResult bindingResult,Model model) {
+		if(bindingResult.hasErrors()) {
+			return "boardUpdate";
+		}
+		boardService.noticeUpdate(board);
+		return "redirect:/noticeBoardSelectOne?boardId="+board.getBoardId();
+	}
+	
+	@RequestMapping("/noticeBoardDelete")
+	public String noticeBoardDelete(@RequestParam("boardId")int boardId,Model model, HttpSession session) {
+		BoardIdDto boardIdDto = boardService.noticeSelectIdOne(boardId);
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc==null) {
+			return "redirect:/noticeBoardSelectOne?boardId="+boardId;
+		}else {
+			User user = userService.search(lrc.getId());
+			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
+				boardService.noticeDelete(boardId);
+				return "redirect:/board";
+			}else {
+				return "redirect:/noticeBoardSelectOne?boardId="+boardId;
 			}
 		}
 	}
