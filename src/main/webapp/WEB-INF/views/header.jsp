@@ -100,6 +100,7 @@
         <select id="languageSelect" onchange="location.href='?lang=' + this.value;">
           <option value="ko_KR" ${param.lang == 'ko_KR' ? 'selected' : ''}>한국어</option>
           <option value="en_US" ${param.lang == 'en_US' ? 'selected' : ''}>English</option>
+          <option value="ja_JP" ${param.lang == 'ja_JP' ? 'selected' : ''}>日本語</option>
         </select>
       </div>
 
