@@ -49,16 +49,16 @@ public class DamageController {
 				String savePath = "C:/cho/";
 				String fileName = f.getOriginalFilename(); // 업로드된 파일 이름
 				File dest = new File(savePath + fileName);
-				try {
-					if (!uploadDir.exists()) {
-  					uploadDir.mkdirs(); // 폴더가 없으면 자동 생성
-				}
-					f.transferTo(new File(dest));
-				} catch (Exception e) {
-					e.printStackTrace();
-					model.addAttribute("message", "파일 업로드 중 오류가 발생하였습니다");
-					return "/RefundUser/damageResult";
-				}
+//				try {
+//					//if (!uploadDir.exists()) {
+//  					//uploadDir.mkdirs(); // 폴더가 없으면 자동 생성
+//				}
+//					//f.transferTo(new File(dest));
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//					model.addAttribute("message", "파일 업로드 중 오류가 발생하였습니다");
+//					return "/RefundUser/damageResult";
+//				}
 			}
 		}
 		damageDto.setId(lrc.getId());
