@@ -1,33 +1,31 @@
 package com.example.mysite.user;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-
 public class RefundUser {
+	private int id;
+	private String userId;
 	private String depart;
 	private String arrive;
 	private String seat;
-	private int userId;
-	private String id;
-	
-	private String password;
-	private LocalDate birthDate;
 	private String gender;
-	private List<String> country;
-	private LocalDateTime registerDate;
+	private String state;
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 	public String getDepart() {
@@ -49,35 +47,11 @@ public class RefundUser {
 		this.seat = seat;
 	}
 	
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
 	public String getGender() {
 		return gender;
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public List<String> getCountry() {
-		return country;
-	}
-	public void setCountry(List<String> country) {
-		this.country = country;
-	}
-	
-	public LocalDateTime getRegisterDate() {
-		return registerDate;
-	}
-	public void setRegisterDate(LocalDateTime registerDate) {
-		this.registerDate = registerDate;
-	}
+
 }

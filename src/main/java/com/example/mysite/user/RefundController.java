@@ -51,7 +51,7 @@ public class RefundController {
 		        return "/Refunduser/userInfo";
 		    }
 		    for(RefundUser f : findUsers) {
-		    	f.setId(id);
+		    	f.setUserId(id);
 		    }
 		    model.addAttribute("list", findUsers);
 		    model.addAttribute("user", user);
@@ -59,21 +59,25 @@ public class RefundController {
 		}
 
 	@RequestMapping(value = "/refund", method = RequestMethod.POST)
-	public String refundUser(@RequestParam("id") int userId, Model model) {
-		boolean deleted = userService.deleteUserByUserId(userId);
-
-		if (deleted) {
-			model.addAttribute("refund", "환불이 완료되었습니다.");
-		} else {
-			model.addAttribute("refund", "존재하지 않는 회원입니다.");
+	public String refundUser(@RequestParam(value = "ids", required = false) List<Integer> ids, Model model) {
+		if(ids==null) {
+			model.addAttribute("refund", "환불할 내역을 선택하세요");
 		}
-
-//	    // 환불 후 다시 사용자 찾기 페이지로 이동
-//	    // 폼에 기본 객체랑 옵션도 다시 넣어줘야 함
+		else {
+		for(int idid : ids) {
+			
+			boolean update = userService.updateStatus(idid);
+			if (update) {
+				model.addAttribute("refund", "환불이 완료되었습니다.");
+			} else {
+				model.addAttribute("refund", "오류가 생겼습니다.");
+			}
+		}
+	    // 환불 후 다시 사용자 찾기 페이지로 이동
+	    // 폼에 기본 객체랑 옵션도 다시 넣어줘야 함
 		model.addAttribute("userRegisterRequest", new RefundUserRegisterRequest());
-		model.addAttribute("genderOptions", List.of("남자", "여자"));
-		model.addAttribute("countryOptions", List.of("한국", "미국", "일본", "중국", "독일"));
 
+		}
 		return "/Refunduser/refundResult";
 	}
 	

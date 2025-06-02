@@ -15,35 +15,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class RefundUserService {
 	@Autowired
-	//private UserDao userDao;
+	// private UserDao userDao;
 	private RefundUserMapper userMapper;
-	
-	
-	public List<RefundUser>  findByName(int userId) {
+
+	public List<RefundUser> findByName(int userId) {
 		return userMapper.findByUserId(userId);
 	}
+
 	public void regist(RefundUserDto cmdObj) {
 		// dao를 이용하여 데이터베이스에 저장
 		System.out.println("userService.regist 동작");
-		
+
 		System.out.println("데이터 가공 및 DTO생성");
 		userMapper.refundInsert(cmdObj);
 	}
-	
-	public boolean deleteUserByUserId(int userId) {
-		   int deletedCount = userMapper.deleteUserByUserId(userId);
-		    return deletedCount > 0;
-	}
-	
-	public List<String> seatName(int rid){
+
+//	public boolean deleteUserByUserId(int id) {
+//		   int deletedCount = userMapper.deleteUserByUserId(id);
+//		    return deletedCount > 0;
+//	}
+
+	public List<String> seatName(int rid) {
 		return userMapper.seatName(rid);
 	}
-	
+
+	public boolean updateStatus(int id) {
+		int update = userMapper.updateStatus(id);
+		return update > 0;
+	}
 }
-
-
-
-
-
-
-
