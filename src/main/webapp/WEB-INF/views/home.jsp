@@ -102,18 +102,6 @@ footer {
 
 	<main>
 		<h3>Home</h3>
-		
-		<c:if test="${not empty Recently}">
-    <ul>
-      <c:forEach var="plane" items="${Recently}">
-        <li>
-          <!-- 예시로 Plane 객체의 정보를 출력, 실제 속성명으로 변경해주세요 -->
-          <spring:message code="label.departure" /> ${plane.departure} <spring:message code="label.arrival" /> ${plane.arrival}
-        </li>
-      </c:forEach>
-    </ul>
-  </c:if>
-		
 	</main>
 
 	<footer>&copy; 2025 Airplane Reservation. All Rights Reserved.</footer>
