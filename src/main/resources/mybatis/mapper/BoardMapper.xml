@@ -21,6 +21,7 @@
 		<result property="registDate" column="regist_date" jdbcType="TIMESTAMP" />
 	</resultMap>
 	
+	<!-- board -->
 	<insert id="insert" parameterType="com.airplane.board.BoardDto">
 		INSERT INTO board
 			(user_id, board_title, board)
@@ -51,6 +52,39 @@
 	
 	<delete id="delete">
 		DELETE FROM board WHERE board_id=#{boardId}
+	</delete>
+	
+	<!-- notice_board -->
+	<insert id="noticeInsert" parameterType="com.airplane.board.BoardDto">
+		INSERT INTO notice_board
+			(user_id, board_title, board)
+			VALUES (#{userId}, #{boardTitle}, #{board})
+	</insert>
+	
+	<select id="noticeSelectAll" resultMap="boardMap">
+		SELECT * From notice_board
+	</select>
+	
+	<select id="noticeSelectIdAll" resultMap="boardUserIdMap">
+		SELECT b.board_id, b.user_id, u.id, b.board_title, b.board, b.regist_date 
+			FROM notice_board b JOIN users u ON b.user_id = u.user_id ORDER BY b.regist_date DESC;
+	</select>
+	
+	<select id="noticeSelectOne" resultMap="boardMap">
+		SELECT * FROM notice_board WHERE board_id = #{boardId}
+	</select>
+	
+	<select id="noticeSelectIdOne" resultMap="boardUserIdMap">
+		SELECT b.board_id, b.user_id, u.id, b.board_title, b.board, b.regist_date 
+			FROM notice_board b JOIN users u ON b.user_id = u.user_id WHERE b.board_id = #{boardId};
+	</select>
+	
+	<update id="noticeUpdate" parameterType="com.airplane.board.Board">
+		UPDATE notice_board set board_title=#{boardTitle},board=#{board} WHERE board_id=#{boardId}
+	</update>
+	
+	<delete id="noticeDelete">
+		DELETE FROM notice_board WHERE board_id=#{boardId}
 	</delete>
 </mapper>
   
