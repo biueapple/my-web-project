@@ -46,16 +46,15 @@ public class DamageController {
 			return "redirect:/login";
 		}
 
-		String path = null;
-
 		// 파일업로드
 		for (MultipartFile f : damagePhotos) {
 			if (!f.isEmpty()) {
-				path = upload.fileUpload("D:/cho/workspacespring/my-web-project/upload/", f);
+				String path = upload.fileUpload("D:/cho/workspacespring/my-web-project/upload/", f);
+				uploadService.service(lrc, path);
 			}
 		}
 		
-		uploadService.service(lrc, path);
+		
 		model.addAttribute("message", "보상신청이 완료되었습니다");
 		return "Refunduser/damageResult";
 	}
