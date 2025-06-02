@@ -69,12 +69,12 @@
         <table>
             <thead>
                 <tr>
-                    <th>선택</th>
-                    <th>ID</th>
-                    <th>Departure</th>
-                    <th>Destination</th>
-                    <th>Plane Time</th>
-                    <th>Price</th>
+                    <th><spring:message code="label.Choice" /></th>
+                    <th><spring:message code="label.id" /></th>
+                    <th><spring:message code="label.Departure" /></th>
+                    <th><spring:message code="label.Destination" /></th>
+                    <th><spring:message code="label.PlaneTime" /></th>
+                    <th><spring:message code="label.Price" /></th>
                 </tr>
             </thead>
             <tbody>

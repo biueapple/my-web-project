@@ -61,7 +61,7 @@ h2, p {
 <c:if test="${not empty admin}">
 	<button onclick="location.href='noticeBoardInsert';">공지작성</button>
 </c:if>
-<button onclick="location.href='boardInsert';">글작성</button>
-<button onclick="location.href='/airplane';">홈으로</button>
+<button onclick="location.href='boardInsert';"><spring:message code="label.Writing" /></button>
+<button onclick="location.href='/airplane';"><spring:message code="label.board.Home" /></button>
 </body>
 </html>
