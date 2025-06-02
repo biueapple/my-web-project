@@ -9,6 +9,7 @@ public class BoardIdDto {
 	private String boardTitle;
 	private String board;
 	private LocalDateTime registDate;
+	private String state;
 	
 	public int getBoardId() {
 		return boardId;
@@ -45,6 +46,12 @@ public class BoardIdDto {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 	

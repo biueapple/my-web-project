@@ -29,6 +29,10 @@ public class BoardService {
 		return boardMapper.update(board);
 	}
 	
+	public int updateDelete(int boardId) {
+		return boardMapper.updateDelete(boardId);
+	}
+	
 	public int delete(int boardId) {
 		return boardMapper.delete(boardId);
 	}
@@ -37,7 +41,15 @@ public class BoardService {
 		return boardMapper.selectIdAll();
 	}
 	
+	public List<BoardIdDto> selectIdAllNormal(){
+		return boardMapper.selectIdAll();
+	}
+	
 	public BoardIdDto selectIdOne(int boardId) {
+		return boardMapper.selectIdOne(boardId);
+	}
+	
+	public BoardIdDto selectIdOneNormal(int boardId) {
 		return boardMapper.selectIdOne(boardId);
 	}
 	
@@ -50,7 +62,15 @@ public class BoardService {
 		return boardMapper.noticeSelectIdAll();
 	}
 	
+	public List<BoardIdDto> noticeSelectIdAllNormal(){
+		return boardMapper.noticeSelectIdAll();
+	}
+	
 	public BoardIdDto noticeSelectIdOne(int boardId) {
+		return boardMapper.noticeSelectIdOne(boardId);
+	}
+	
+	public BoardIdDto noticeSelectIdOneNormal(int boardId) {
 		return boardMapper.noticeSelectIdOne(boardId);
 	}
 	
@@ -60,6 +80,10 @@ public class BoardService {
 	
 	public int noticeUpdate(Board board) {
 		return boardMapper.noticeUpdate(board);
+	}
+	
+	public int noticeUpdateDelete(int boardId) {
+		return boardMapper.noticeUpdateDelete(boardId);
 	}
 	
 	public int noticeDelete(int boardId) {

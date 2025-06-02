@@ -9,23 +9,28 @@
 <title><spring:message code="board.title"/></title>
 <style>
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, sans-serif;
+	font-family: Arial, sans-serif;
 }
 
 form {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 h2, p {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.deleted-post {
+	color: gray;
+	font-style: italic;
 }
 </style>
 </head>
@@ -44,7 +49,9 @@ h2, p {
     <c:forEach var="boardIdDto" items="${noticeBoardList}">
         <tr>
             <td>${boardIdDto.boardId}</td>
-            <td><a href="noticeBoardSelectOne?boardId=${boardIdDto.boardId}">[공지] ${boardIdDto.boardTitle}</a></td>
+            <td><a href="noticeBoardSelectOne?boardId=${boardIdDto.boardId}" class="${boardIdDto.state == '삭제' ? 'deleted-post' : ''}">
+            	[공지] ${boardIdDto.boardTitle}
+            </a></td>
             <td>${boardIdDto.id}</td>
             <td>${boardIdDto.registDate}</td>
         </tr>
@@ -52,7 +59,9 @@ h2, p {
     <c:forEach var="boardIdDto" items="${boardList}">
         <tr>
             <td>${boardIdDto.boardId}</td>
-            <td><a href="boardSelectOne?boardId=${boardIdDto.boardId}">${boardIdDto.boardTitle}</a></td>
+            <td><a href="boardSelectOne?boardId=${boardIdDto.boardId}" class="${boardIdDto.state == '삭제' ? 'deleted-post' : ''}">
+            	${boardIdDto.boardTitle}
+            </a></td>
             <td>${boardIdDto.id}</td>
             <td>${boardIdDto.registDate}</td>
         </tr>
