@@ -12,6 +12,7 @@ public class BoardService {
 	@Autowired
 	private BoardMapper boardMapper;
 	
+	//board
 	public int insertBoard(BoardDto boardDto) {
 		return boardMapper.insert(boardDto);
 	}
@@ -38,5 +39,30 @@ public class BoardService {
 	
 	public BoardIdDto selectIdOne(int boardId) {
 		return boardMapper.selectIdOne(boardId);
+	}
+	
+	//noticeBoard
+	public int insertNoticeBoard(BoardDto boardDto) {
+		return boardMapper.noticeInsert(boardDto);
+	}
+	
+	public List<BoardIdDto> noticeSelectIdAll(){
+		return boardMapper.noticeSelectIdAll();
+	}
+	
+	public BoardIdDto noticeSelectIdOne(int boardId) {
+		return boardMapper.noticeSelectIdOne(boardId);
+	}
+	
+	public Board noticeSelectOne(int boardId) {
+		return boardMapper.noticeSelectOne(boardId);
+	}
+	
+	public int noticeUpdate(Board board) {
+		return boardMapper.noticeUpdate(board);
+	}
+	
+	public int noticeDelete(int boardId) {
+		return boardMapper.noticeDelete(boardId);
 	}
 }
