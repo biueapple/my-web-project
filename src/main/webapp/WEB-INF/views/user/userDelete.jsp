@@ -24,7 +24,7 @@
 <form:form modelAttribute="userDeleteCommand"
            action="${pageContext.request.contextPath}/delete"
            method="post">
-    비밀번호: <form:password path="password" />
+    비밀번호: <form:password path="password"/>
     <form:errors path="password" cssClass="error" />
     <br/>
     <input type="submit" value="회원 탈퇴" />
