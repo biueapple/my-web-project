@@ -13,8 +13,6 @@ public class DamageService {
 	private RefundUserMapper refundUserMapper;
 
 	public void registerRequest(DamageDto damageDto) {
-		List<String> savepathList = damageDto.getSavepath();
-
 		refundUserMapper.insertDamage(damageDto);
 	}
 }

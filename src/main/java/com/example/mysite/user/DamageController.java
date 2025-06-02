@@ -1,6 +1,5 @@
 package com.example.mysite.user;
 
-import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.airplane.user.LoginRequestCommand;
-import com.airplane.user.User;
-import com.airplane.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -22,7 +19,16 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/user/damage")
 public class DamageController {
 	@Autowired
-	DamageService damageService;
+	UploadService uploadService;
+	@Autowired
+	Upload upload;
+//
+//	@RequestMapping(method = RequestMethod.GET)
+//	public String damageClaim(HttpSession httpSession, Model model) {
+//
+//		model.addAttribute("damageRequest", new DamageDto());
+//		return "user/home";
+//	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String damageClaim(HttpSession httpSession, Model model) {
@@ -32,43 +38,24 @@ public class DamageController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String damageSubmit(
-			@RequestParam("damagePhotos") List<MultipartFile> damagePhotos,
+	public String damageSubmit(@RequestParam("damagePhotos") List<MultipartFile> damagePhotos,
 			@ModelAttribute DamageDto damageDto, HttpSession httpSession, Model model) {
-		
+
 		LoginRequestCommand lrc = (LoginRequestCommand) httpSession.getAttribute("loginUser");
 		if (lrc == null) {
 			return "redirect:/login";
 		}
-		String id = lrc.getId();
-		// User user = userService.search(id);
-		System.out.println(damagePhotos.size());
+
+		String path = null;
+
 		// 파일업로드
 		for (MultipartFile f : damagePhotos) {
 			if (!f.isEmpty()) {
-
-				String savePath = "D:/cho/workspacespring/my-web-project/upload/";
-				String fileName = f.getOriginalFilename(); // 업로드된 파일 이름
-				File uploadDir = new File(savePath);
-
-				if (!uploadDir.exists()) {
-					uploadDir.mkdirs(); // 폴더가 없으면 자동 생성
-				}
-				File dest = new File(savePath + fileName);
-
-				try {
-					f.transferTo((dest));
-				}
-
-				catch (Exception e) {
-					e.printStackTrace();
-					model.addAttribute("message", "파일 업로드 중 오류가 발생하였습니다");
-					return "/Refunduser/damageResult";
-				}
+				path = upload.fileUpload("D:/cho/workspacespring/my-web-project/upload/", f);
 			}
 		}
-		//damageDto.setId(lrc.getId());
-		//damageService.registerRequest(damageDto);
+		
+		uploadService.service(lrc, path);
 		model.addAttribute("message", "보상신청이 완료되었습니다");
 		return "Refunduser/damageResult";
 	}
