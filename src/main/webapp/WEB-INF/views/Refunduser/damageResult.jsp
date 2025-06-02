@@ -12,9 +12,9 @@
 
 
 	<p style="color: red; font-weight: bold;">${message}</p>
-	<form action="<c:url value='/user/home'/>" method="get"
+	<form action="<c:url value='/user/damage/home'/>" method="get"
 		style="display: inline-block;">
-		<button type="button">홈으로</button>
+		<button type="submit">홈으로</button>
 	</form>
 </body>
 </html>

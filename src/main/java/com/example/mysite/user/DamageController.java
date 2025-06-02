@@ -22,13 +22,12 @@ public class DamageController {
 	UploadService uploadService;
 	@Autowired
 	Upload upload;
-//
-//	@RequestMapping(method = RequestMethod.GET)
-//	public String damageClaim(HttpSession httpSession, Model model) {
-//
-//		model.addAttribute("damageRequest", new DamageDto());
-//		return "user/home";
-//	}
+
+	@RequestMapping(value="/home" , method = RequestMethod.GET)
+	public String damageResult() {
+
+		return "home";
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String damageClaim(HttpSession httpSession, Model model) {
