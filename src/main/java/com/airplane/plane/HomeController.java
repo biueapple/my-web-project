@@ -38,6 +38,11 @@ public class HomeController {
 	public String home(Model model, Locale locale, HttpSession session) {
 		LocalDateTime now = LocalDateTime.now();
 		model.addAttribute("now", now);
+		
+		List<Plane> recently = planeService.selectRecently();
+		
+		model.addAttribute("Recently", recently);
+		
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc!=null) {
 			User user = userService.search(lrc.getId());
@@ -120,45 +125,53 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "reserveSeat", method = RequestMethod.POST)
-	public String selectSeat(@RequestParam("seatId") String seatId,HttpSession session, Model model) {
-		
+	public String selectSeat(@RequestParam("seatIds") String seatIds,HttpSession session, Model model)
+	{
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
-		if(lrc==null) {
+		if(lrc == null)
+		{
 			return "redirect:/login";
-		}else {
+		}
+		else
+		{
+			String[] seatArray = seatIds.split(",");
+			
 			User user =	userService.search(lrc.getId());
-			List<Plane> plane = (List<Plane>) session.getAttribute("list");
-			int id = (int) session.getAttribute("planeId");
+			List<Plane> planes = (List<Plane>) session.getAttribute("list");
+			//session.invalidate();
+			int planeId = (int) session.getAttribute("planeId");
 		
-			Plane e =null ;
-			for(Plane p : plane ) 
-			{
-				if(p.getId()==id)
-				{
-					e = p; 
-					break;
-				}
-			}
+			//어떤 비행기를 선택했는가
+			Plane plane = planeService.FindCurrent(planes, planeId);
+			
+			//어느 공항에서 출발하고 도착하는지
 			List<AirinfoDto> aid = airService.info();
 			String depart = null;
 			String arrive = null;
 			for(AirinfoDto a : aid)
 			{
-				if(a.getAirportId() == e.getDeparture_id())
+				if(a.getAirportId() == plane.getDeparture_id())
 					depart = a.getAirportName();
-				if(a.getAirportId() == e.getDestination_id())
+				if(a.getAirportId() == plane.getDestination_id())
 					arrive = a.getAirportName();
 			}
-			RefundUserDto req = new RefundUserDto();
-			req.setUserId(user.getUserId());
-			req.setReservation_id(e.getId());
-			req.setGender(user.getGender());
-			req.setDepart(depart);
-			req.setArrive(arrive);
-			req.setSeat(seatId);
-			refundUserService.regist(req);
-			//업데이트 필요 없을듯
-			//planeService.updateSeat(seatId, id);
+			
+			//예약
+			for(int i = 0; i < seatArray.length; i++)
+			{
+				String seatId = seatArray[0];
+				RefundUserDto req = new RefundUserDto();
+				req.setUserId(user.getUserId());
+				req.setReservation_id(plane.getId());
+				req.setGender(user.getGender());
+				req.setDepart(depart);
+				req.setArrive(arrive);
+				req.setSeat(seatId);
+				refundUserService.regist(req);
+				//업데이트
+				planeService.updateSeat(seatId, planeId, 1);
+			}
+			
 			return "redirect:/";
 		}
 		

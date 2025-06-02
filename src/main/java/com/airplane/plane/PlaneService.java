@@ -31,11 +31,6 @@ public class PlaneService
 	
 	public void insertReservation(PlaneReservation planeReservation)
 	{
-		System.out.println(planeReservation.getOriginal_id());
-		System.out.println(planeReservation.getDeparture_id());
-		System.out.println(planeReservation.getDestination_id());
-		System.out.println(planeReservation.getPlane_time());
-		System.out.println(planeReservation.getPrice());
 		planeMapper.insertReservation(planeReservation);
 	}
 	
@@ -50,11 +45,11 @@ public class PlaneService
 	}
 	
 	//사용하지 않음
-	public void updateSeat(String str, int id)
+	public void updateSeat(String str, int id, int count)
 	{
 		PlaneSeatUpdate seatUpdate = new PlaneSeatUpdate();
 		seatUpdate.setId(id);
-		seatUpdate.setCount(1);
+		seatUpdate.setCount(count);
 		if (str == null || !str.contains("_")) {
 	        throw new IllegalArgumentException("잘못된 좌석 형식입니다: " + str);
 	    }
@@ -74,11 +69,12 @@ public class PlaneService
 	        case "first":
 	            System.out.println("퍼스트 클래스 좌석 번호: " + seatNumber);
 	            // 예: DB에서 퍼스트 클래스 좌석 1번 예약 처리
-	            
+	            planeMapper.planeFirstSeatUpdate(seatUpdate);
 	            break;
 	        case "business":
 	            System.out.println("비즈니스 클래스 좌석 번호: " + seatNumber);
 	            // 예: business_seat 업데이트
+	            planeMapper.planeBusinessSeatUpdate(seatUpdate);
 	            break;
 	        case "economy":
 	            System.out.println("이코노미 클래스 좌석 번호: " + seatNumber);
@@ -88,5 +84,22 @@ public class PlaneService
 	        default:
 	            throw new IllegalArgumentException("알 수 없는 좌석 클래스입니다: " + seatClass);
 	    }
+	}
+	
+	public List<Plane> selectRecently()
+	{
+		return planeMapper.selectReservationToTimeLateNow();
+	}
+	
+	public Plane FindCurrent(List<Plane> list, int id)
+	{
+		for(Plane plane : list) 
+		{
+			if(plane.getId() == id)
+			{
+				return plane;
+			}
+		}
+		return null;
 	}
 }
