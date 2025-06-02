@@ -1,14 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 가입</title>
+<title><spring:message code="label.Main" /></title>
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+}
+
+h2, p {
+  margin: 0;
+  padding: 0;
+}
 body {
+	font-family: Arial, sans-serif;
 	background-color: #f0f8ff;
 	color: #333;
 	text-align: center;
@@ -36,6 +52,8 @@ button {
 </style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header.jsp" %>
+
 	<h2><spring:message code="label.Info.CheckReservationInformation"/></h2>
 	<h3><spring:message code="label.Info.MemberInformation"/></h3>
 	<table border="1">

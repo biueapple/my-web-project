@@ -6,7 +6,7 @@
   header {
     font-family: Arial, sans-serif !important;
     font-size: 16px;
-    background-color: #007BFF;
+    background-color: #FF9800;
     color: #fff;
     padding: 20px 0;
     box-sizing: border-box;
@@ -73,7 +73,7 @@
     border: none;
     font-weight: bold;
     background-color: #ffffff;
-    color: #007BFF;
+    color: #1a1a1a;
     font-size: 14px;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
