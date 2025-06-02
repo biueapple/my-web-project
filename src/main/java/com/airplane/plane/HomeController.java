@@ -42,6 +42,20 @@ public class HomeController {
 		List<Plane> recently = planeService.selectRecently();
 		
 		model.addAttribute("Recently", recently);
+//		List<Plane> recently = planeService.selectRecently();
+//		List<PlaneDto> dtoList = new ArrayList<>();
+//
+//		for (Plane p : recently) {
+//		    PlaneDto dto = new PlaneDto();
+//		    dto.setId(p.getId());
+//		    dto.setPlaneTime(p.getPlane_time());
+//		    dto.setDepartureName(airService.getAirportNameById(p.getDeparture_id()));
+//		    dto.setDestinationName(airService.getAirportNameById(p.getDestination_id()));
+//		    // 나머지 세팅
+//		    dtoList.add(dto);
+//		}
+//
+//		model.addAttribute("Recently", dtoList);
 		
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc!=null) {
@@ -55,6 +69,8 @@ public class HomeController {
 			return "home";
 		}
 	}
+	
+	
 	
 	
 	
