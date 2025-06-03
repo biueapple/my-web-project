@@ -109,6 +109,7 @@ public class HomeController {
 	public String airplaneListGet(@ModelAttribute("dto") AirinfoDto dto, Model model, HttpSession session)
 	{
 		//비행기 정보 리스트
+		System.out.println("get");
 		List<AirinfoDto> aid = airService.info();
 		int depart_id = 0;
 		int destination_id = 0;
