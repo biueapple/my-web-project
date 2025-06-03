@@ -112,10 +112,11 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "airplaneList", method = RequestMethod.GET)
-	public String airplaneListGet(@ModelAttribute("dto") AirinfoDto dto,
+	public String airplaneListGet(
 			Model model, HttpSession session)
 	{
 		//비행기 정보 리스트number_of_people
+		AirinfoDto dto = (AirinfoDto)session.getAttribute("airinfoDto");
 		List<AirinfoDto> aid = airService.info();
 		int depart_id = 0;
 		int destination_id = 0;

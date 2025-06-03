@@ -36,8 +36,7 @@ public class AirPortController {
 			@RequestParam(name = "passenger_number", defaultValue = "1") Integer number_of_people,
 			BindingResult bindingResult, 
 			Model model,
-			 RedirectAttributes redirectAttributes,
-			 HttpSession session) 
+			HttpSession session) 
 	{
 		if (airinfoDto.getDeparture().equals(airinfoDto.getDestination())) {
 			bindingResult.rejectValue("destination", "error.destination", "출발지와 도착지는 같을 수 없습니다.");
@@ -49,7 +48,7 @@ public class AirPortController {
 			return "Reservation";
 		}
 		
-		redirectAttributes.addFlashAttribute("dto", airinfoDto); // 리다이렉트 시 dto 전달
+		session.setAttribute("airinfoDto", airinfoDto); // 리다이렉트 시 dto 전달
 		session.setAttribute("number_of_people", number_of_people);
 		//redirectAttributes.addFlashAttribute("number_of_people", number_of_people); // 
 		return "redirect:/airplaneList";
