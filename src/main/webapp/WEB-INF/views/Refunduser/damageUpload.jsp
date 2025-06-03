@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>파손 보상 신청</title>
+<title><spring:message code="label.DamageCompensation" /></title>
 <style>
 * {
 	margin: 0;
@@ -17,10 +17,16 @@
 body {
 	font-family: Arial, sans-serif;
 	background-color: #f4f4f4;
+	margin: 0;
+	padding: 0;
+}
+
+.page-wrapper {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: calc(100vh - 300px);
+	padding-top: 10px;
 }
 
 .main-content {
@@ -87,21 +93,28 @@ button:hover {
 </head>
 <body>
 
-<div class="main-content">
-	<h2>파손 보상 신청</h2>
-	<h3>파손된 캐리어 사진을 업로드 해주세요</h3>
+<%@ include file="/WEB-INF/views/header.jsp" %>
 
-	<form action="<c:url value='/user/damage/upload'/>" method="post" enctype="multipart/form-data">
-		<label for="damagePhotos">파손 사진 업로드</label>
-		<input type="file" id="damagePhotos" name="damagePhotos" multiple />
-		
-		<div class="buttons-container">
-			<button type="submit">보상신청</button>
-			<form action="<c:url value='/'/>" method="get">
+<div class="page-wrapper">
+	<div class="main-content">
+		<h2><spring:message code="label.DamageCompensation" /></h2>
+		<h3><spring:message code="label.UploadPhoto" /></h3>
+
+		<form action="<c:url value='/user/damage/upload'/>" method="post" enctype="multipart/form-data">
+			<label for="damagePhotos"><spring:message code="label.breakage" /></label>
+			<input type="file" id="damagePhotos" name="damagePhotos" multiple />
+
+			<div class="buttons-container">
+				<button type="submit"><spring:message code="label.application" /></button>
+			</div>
+		</form>
+
+		<form action="<c:url value='/'/>" method="get">
+			<div class="buttons-container">
 				<button type="submit"><spring:message code="button.return"/></button>
-			</form>
-		</div>
-	</form>
+			</div>
+		</form>
+	</div>
 </div>
 
 </body>
