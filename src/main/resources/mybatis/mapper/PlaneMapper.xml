@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.airplane.plane.mapper.PlaneMapper">
+<mapper namespace="com.airplane.mapper.PlaneMapper">
 	<resultMap id="planeMap" type="com.airplane.plane.Plane">
 		<id property="id" column="id" />
 		<result property="original_id" column="original_id" />

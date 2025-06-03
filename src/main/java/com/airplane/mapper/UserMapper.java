@@ -1,4 +1,4 @@
-package com.airplane.user.mapper;
+package com.airplane.mapper;
 
 import org.apache.ibatis.annotations.Param;
 
