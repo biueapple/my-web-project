@@ -1,6 +1,7 @@
 package com.airplane.plane;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -48,6 +49,9 @@ public class HomeController {
 		}
 		List<String> strings = airService.IDToSting(integer);
 		
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+		
 		//model.addAttribute("Recently", recently);
 		List<PlaneDto> dtoList = new ArrayList<>();
 
@@ -58,6 +62,9 @@ public class HomeController {
 		    dto.setPlaneTime(recently.get(i).getPlane_time());
 		    dto.setDepartureName(strings.get(i * 2));
 		    dto.setDestinationName(strings.get(i * 2 + 1));
+		    dto.setFormattedDate(dto.getPlaneTime().format(dateFormatter));
+		    dto.setFormattedTime(dto.getPlaneTime().format(timeFormatter));
+		    dtoList.add(dto);
 		}
 		
 		model.addAttribute("Recently", dtoList);
