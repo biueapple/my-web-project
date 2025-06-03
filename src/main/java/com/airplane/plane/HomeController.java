@@ -157,12 +157,13 @@ public class HomeController {
 	{
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc == null)
-		{
+		{	
 			return "redirect:/login";
 		}
 		else
 		{
 			String[] seatArray = seatIds.split(",");
+			System.out.println(seatArray.length);
 			
 			User user =	userService.search(lrc.getId());
 			List<Plane> planes = (List<Plane>) session.getAttribute("list");
@@ -187,7 +188,7 @@ public class HomeController {
 			//예약
 			for(int i = 0; i < seatArray.length; i++)
 			{
-				String seatId = seatArray[0];
+				String seatId = seatArray[i];
 				RefundUserDto req = new RefundUserDto();
 				req.setUserId(user.getUserId());
 				req.setReservation_id(plane.getId());

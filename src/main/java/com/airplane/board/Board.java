@@ -11,6 +11,7 @@ public class Board {
 	private String boardTitle;
 	private String board;
 	private LocalDateTime registDate;
+	private String state;
 	
 	public int getBoardId() {
 		return boardId;
@@ -42,6 +43,12 @@ public class Board {
 	}
 	public void setRegistDate(LocalDateTime registDate) {
 		this.registDate = registDate;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	@Override
 	public String toString() {
