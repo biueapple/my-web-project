@@ -86,14 +86,21 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "planeAdd", method = RequestMethod.GET)
-	public String airplaneAddGET()
+	public String airplaneAddGET(HttpSession session)
 	{
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc == null)
+			return "home";
 		return "airplaneAdd";
 	}
 	
 	@RequestMapping(value = "planeAdd", method = RequestMethod.POST)
-	public String airplaneAddPOST(@ModelAttribute PlaneOriginal planeOri)
+	public String airplaneAddPOST(@ModelAttribute PlaneOriginal planeOri, HttpSession session)
 	{
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc == null)
+			return "home";
+		
 		planeService.insertOriginal(planeOri.getEconomy_seat(), planeOri.getBusiness_seat(), planeOri.getFirst_seat());
 		return "airplaneAdd";
 	}
