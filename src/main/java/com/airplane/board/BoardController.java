@@ -47,7 +47,7 @@ public class BoardController {
 		}
 		model.addAttribute("boardList",boardList);
 		model.addAttribute("noticeBoardList",noticeBoardList);
-		return "boardMain";
+		return "board/boardMain";
 	}
 	
 	@RequestMapping("/boardSelectOne")
@@ -61,7 +61,7 @@ public class BoardController {
 			}
 		}
 		model.addAttribute("boardIdDto",boardIdDto);
-		return "boardSelect";
+		return "board/boardSelect";
 	}
 	
 	@RequestMapping(value="/boardInsert", method=RequestMethod.GET)
@@ -74,7 +74,7 @@ public class BoardController {
 		}
 		User user = userService.search(lrc.getId());
 		model.addAttribute("userId", user.getUserId());
-		return "boardInsert";
+		return "board/boardInsert";
 	}
 	
 	@RequestMapping(value="/boardInsert", method=RequestMethod.POST)
@@ -83,7 +83,7 @@ public class BoardController {
 			@ModelAttribute
 			Board board, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
-			return "boardInsert";
+			return "board/boardInsert";
 		}
 		BoardDto boardDto = new BoardDto(board);
 		boardService.insertBoard(boardDto);
@@ -100,7 +100,7 @@ public class BoardController {
 			User user = userService.search(lrc.getId());
 			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
 				model.addAttribute("board",boardService.selectOne(boardId));
-				return "boardUpdate";
+				return "board/boardUpdate";
 			}else {
 				return "redirect:/boardSelectOne?boardId="+boardId;
 			}
@@ -112,7 +112,7 @@ public class BoardController {
 			@Valid
 			Board board, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) {
-			return "boardUpdate";
+			return "board/boardUpdate";
 		}
 		boardService.update(board);
 		return "redirect:/boardSelectOne?boardId="+board.getBoardId();
@@ -146,7 +146,7 @@ public class BoardController {
 		}
 		User user = userService.search(lrc.getId());
 		model.addAttribute("userId", user.getUserId());
-		return "boardInsert";
+		return "board/boardInsert";
 	}
 	
 	@RequestMapping(value="/noticeBoardInsert", method=RequestMethod.POST)
@@ -155,7 +155,7 @@ public class BoardController {
 			@ModelAttribute
 			Board board, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
-			return "boardInsert";
+			return "board/boardInsert";
 		}
 		BoardDto boardDto = new BoardDto(board);
 		boardService.insertNoticeBoard(boardDto);
@@ -174,7 +174,7 @@ public class BoardController {
 		}
 		model.addAttribute("notice","notice");
 		model.addAttribute("boardIdDto",boardIdDto);
-		return "boardSelect";
+		return "board/boardSelect";
 	}
 	
 	@RequestMapping(value="/noticeBoardUpdate", method=RequestMethod.GET)
@@ -187,7 +187,7 @@ public class BoardController {
 			User user = userService.search(lrc.getId());
 			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
 				model.addAttribute("board",boardService.noticeSelectOne(boardId));
-				return "boardUpdate";
+				return "board/boardUpdate";
 			}else {
 				return "redirect:/noticeBoardSelectOne?boardId="+boardId;
 			}
@@ -199,7 +199,7 @@ public class BoardController {
 			@Valid
 			Board board, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) {
-			return "boardUpdate";
+			return "board/boardUpdate";
 		}
 		boardService.noticeUpdate(board);
 		return "redirect:/noticeBoardSelectOne?boardId="+board.getBoardId();
