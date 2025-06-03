@@ -54,15 +54,15 @@
 	</select>
 	
 	<update id="planeFirstSeatUpdate" parameterType="com.airplane.plane.PlaneSeatUpdate" useGeneratedKeys="true" keyProperty="id">
-	 UPDATE plane_reservation SET current_seat = first_seat + #{count} WHERE id = #{id}
+	 UPDATE plane_reservation SET first_seat = first_seat + #{count} WHERE id = #{id}
 	</update>
 	
 	<update id="planeBusinessSeatUpdate" parameterType="com.airplane.plane.PlaneSeatUpdate" useGeneratedKeys="true" keyProperty="id">
-	 UPDATE plane_reservation SET current_seat = business_seat + #{count} WHERE id = #{id}
+	 UPDATE plane_reservation SET business_seat = business_seat + #{count} WHERE id = #{id}
 	</update>
 	
 	<update id="planeEconomySeatUpdate" parameterType="com.airplane.plane.PlaneSeatUpdate" useGeneratedKeys="true" keyProperty="id">
-	 UPDATE plane_reservation SET current_seat = economy_seat + #{count} WHERE id = #{id}
+	 UPDATE plane_reservation SET economy_seat = economy_seat + #{count} WHERE id = #{id}
 	</update>
 	
 	<select id="selectReservationToTimeLateNow" resultType="com.airplane.plane.Plane" resultMap="planeMap">
