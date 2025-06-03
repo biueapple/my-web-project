@@ -40,22 +40,27 @@ public class HomeController {
 		model.addAttribute("now", now);
 		
 		List<Plane> recently = planeService.selectRecently();
+		List<Integer> integer = new ArrayList<>();
+		for(Plane p : recently)
+		{
+			integer.add(p.getDeparture_id());
+			integer.add(p.getDestination_id());
+		}
+		List<String> strings = airService.IDToSting(integer);
 		
-		model.addAttribute("Recently", recently);
-//		List<Plane> recently = planeService.selectRecently();
-//		List<PlaneDto> dtoList = new ArrayList<>();
-//
-//		for (Plane p : recently) {
-//		    PlaneDto dto = new PlaneDto();
-//		    dto.setId(p.getId());
-//		    dto.setPlaneTime(p.getPlane_time());
-//		    dto.setDepartureName(airService.getAirportNameById(p.getDeparture_id()));
-//		    dto.setDestinationName(airService.getAirportNameById(p.getDestination_id()));
-//		    // 나머지 세팅
-//		    dtoList.add(dto);
-//		}
-//
-//		model.addAttribute("Recently", dtoList);
+		//model.addAttribute("Recently", recently);
+		List<PlaneDto> dtoList = new ArrayList<>();
+
+		for(int i = 0; i < recently.size(); i++)
+		{
+			PlaneDto dto = new PlaneDto();
+		    dto.setId(recently.get(i).getId());
+		    dto.setPlaneTime(recently.get(i).getPlane_time());
+		    dto.setDepartureName(strings.get(i * 2));
+		    dto.setDestinationName(strings.get(i * 2 + 1));
+		}
+		
+		model.addAttribute("Recently", dtoList);
 		
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc!=null) {
