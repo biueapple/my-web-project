@@ -34,6 +34,11 @@
 		SELECT
 		seat FROM seat WHERE reservation_id = #{rid}
 	</select>
+	
+	<select id="seatNameNormal" resultType="String" parameterType="int">
+		SELECT
+		seat FROM seat WHERE reservation_id = #{rid} AND state = '정상';
+	</select>
 
 	<insert id="insertDamage"
 		parameterType="com.example.mysite.user.DamageDto">
