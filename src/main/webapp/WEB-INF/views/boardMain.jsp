@@ -54,7 +54,7 @@ h2, p {
             </a></td>
             <td>${boardIdDto.id}</td>
             <td>${boardIdDto.formattedRegistDate}</td>
-        </tr>
+        <tr>
     </c:forEach>
     <c:forEach var="boardIdDto" items="${boardList}">
         <tr>
