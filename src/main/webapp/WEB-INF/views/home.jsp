@@ -55,7 +55,7 @@ nav a {
 }
 
 main {
-	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0.7);
 	padding: 20px;
 	border-radius: 4px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -133,18 +133,6 @@ footer {
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
 <div class="container">
-	<nav>
-		<c:if test="${empty sessionScope.loginUser}">
-			<a href="<c:url value='/Reservation'/>"><spring:message code="label.Reservation" /></a>
-			<a href="<c:url value='/board'/>"><spring:message code="board.title" /></a>
-		</c:if>
-		<c:if test="${not empty sessionScope.loginUser}">
-			<a href="<c:url value='/Reservation'/>"><spring:message code="label.Reservation" /></a>
-			<a href="<c:url value='/user/regist'/>"><spring:message code="label.BookingConfirmation" /></a>
-			<a href="<c:url value='/board'/>"><spring:message code="board.title" /></a>
-		</c:if>
-	</nav>
-
 	<main>
 		<h3>Home</h3>
 
