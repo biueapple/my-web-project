@@ -90,7 +90,6 @@ button:hover {
 		enctype="multipart/form-data" style="display: inline-block;" >
 		<label>파손 사진 업로드</label>
 		<input type="file" name="damagePhotos" multiple /><br>
-		<!-- <textarea name="description" placeholder="파손 내용 입력"></textarea>-->
 		<button type="submit">보상신청</button>
 	</form>
 
