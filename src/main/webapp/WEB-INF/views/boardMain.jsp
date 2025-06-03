@@ -53,7 +53,7 @@ h2, p {
             	[공지] ${boardIdDto.boardTitle}
             </a></td>
             <td>${boardIdDto.id}</td>
-            <td>${boardIdDto.registDate}</td>
+            <td>${boardIdDto.formattedRegistDate}</td>
         </tr>
     </c:forEach>
     <c:forEach var="boardIdDto" items="${boardList}">
@@ -63,7 +63,7 @@ h2, p {
             	${boardIdDto.boardTitle}
             </a></td>
             <td>${boardIdDto.id}</td>
-            <td>${boardIdDto.registDate}</td>
+            <td>${boardIdDto.formattedRegistDate}</td>
         </tr>
     </c:forEach>
 </table>

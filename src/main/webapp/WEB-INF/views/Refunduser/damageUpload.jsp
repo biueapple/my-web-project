@@ -2,13 +2,11 @@
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<title>파손 보상 신청</title>
 <style>
 * {
 	margin: 0;
@@ -18,21 +16,20 @@
 
 body {
 	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
 }
 
-form {
-	margin: 0;
-	padding: 0;
-}
-
-h2, p {
-	margin: 0;
-	padding: 0;
-}
-
-/* 본문 영역 스타일만 별도로 정의 */
 .main-content {
-	padding: 30px 20px;
+	background: #fff;
+	padding: 40px 30px;
+	border-radius: 10px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+	width: 100%;
+	max-width: 600px;
 	text-align: center;
 }
 
@@ -41,32 +38,39 @@ h2, p {
 	margin-bottom: 20px;
 }
 
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+}
+
+label {
+	font-weight: bold;
+	color: #333;
+}
+
+input[type="file"] {
+	margin-top: 5px;
+}
 
 .buttons-container {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	max-width: 1000px;
-	margin: 0 auto 20px auto;
-	padding: 0 10px;
-	box-sizing: border-box;
+	justify-content: space-around;
+	margin-top: 30px;
+	gap: 20px;
+	flex-wrap: wrap;
 }
-
 
 button {
 	background-color: #2980b9;
 	color: #ffffff;
 	border: none;
-	padding: 10px 22px;
+	padding: 10px 24px;
 	border-radius: 6px;
 	font-size: 15px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
-	height: 40px;
-	line-height: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 button:hover {
@@ -80,24 +84,25 @@ button:hover {
 	font-weight: bold;
 }
 </style>
+</head>
 <body>
+
 <div class="main-content">
 	<h2>파손 보상 신청</h2>
 	<h3>파손된 캐리어 사진을 업로드 해주세요</h3>
-	
-	<div class="buttons-container">
-	<form action="<c:url value='/user/damage/upload'/>" method="post"
-		enctype="multipart/form-data" style="display: inline-block;" >
-		<label>파손 사진 업로드</label>
-		<input type="file" name="damagePhotos" multiple /><br>
-		<button type="submit">보상신청</button>
-	</form>
 
-	<form action="<c:url value='/'/>" method="get"
-		style="display: inline-block;">
-		<button type="submit"><spring:message code="button.return"/></button>
+	<form action="<c:url value='/user/damage/upload'/>" method="post" enctype="multipart/form-data">
+		<label for="damagePhotos">파손 사진 업로드</label>
+		<input type="file" id="damagePhotos" name="damagePhotos" multiple />
+		
+		<div class="buttons-container">
+			<button type="submit">보상신청</button>
+			<form action="<c:url value='/'/>" method="get">
+				<button type="submit"><spring:message code="button.return"/></button>
+			</form>
+		</div>
 	</form>
-	</div>
-	</div>
+</div>
+
 </body>
 </html>

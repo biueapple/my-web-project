@@ -106,8 +106,9 @@ h3 {
 				<label for="passenger_number" class="form-label"> 
 				<spring:message
 						code="label.number" />
-				</label> <input type="number" id="passenger_number" name="passenger_number"
-					required>
+				</label> <input type="number" id="passenger_number" name="passenger_number" class="form-control" 
+				 min="1" 
+					required/>
 			</div>
 
 			<!-- 버튼 -->
