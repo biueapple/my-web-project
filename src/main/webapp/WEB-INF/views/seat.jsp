@@ -8,6 +8,26 @@
 <meta charset="UTF-8">
 <title>비행기 좌석 선택</title>
 <style>
+	* {
+		  margin: 0;
+		  padding: 0;
+		  box-sizing: border-box;
+	}
+
+	body {
+		  font-family: Arial, sans-serif;
+	}
+
+	form {
+		  margin: 0;
+		  padding: 0;
+	}
+
+	h2, p {
+		  margin: 0;
+		  padding: 0;
+	}
+
     .seat {
         width: 40px;
         height: 40px;
@@ -100,7 +120,10 @@
 </script>
 </head>
 <body>
-    <h1 style="text-align:center;">비행기 좌석 선택</h1>
+
+<%@ include file="/WEB-INF/views/header.jsp" %>
+
+    <h1 style="text-align:center;"><spring:message code="label.airplaneSeat" /></h1>
 
     <!-- 테스트용 인원 수 고정 -->
     <c:set var="personCount" value="${number_of_people}" />
@@ -110,7 +133,7 @@
         <input type="hidden" id="personCount" value="${personCount}" />
         <input type="hidden" id="selectedSeatIds" name="seatIds" />
 
-        <h2>First Class (총 좌석: ${original.first_seat})</h2>
+        <h2>First Class (<spring:message code="label.totalSeats" />: ${original.first_seat})</h2>
         <table>
             <tr>
                 <c:forEach var="i" begin="1" end="${original.first_seat}">
@@ -133,7 +156,7 @@
             </tr>
         </table>
 
-        <h2>Business Class (총 좌석: ${original.business_seat})</h2>
+        <h2>Business Class (<spring:message code="label.totalSeats" />: ${original.business_seat})</h2>
         <table>
             <tr>
                 <c:forEach var="i" begin="1" end="${original.business_seat}">
@@ -179,7 +202,7 @@
             </tr>
         </table>
 
-        <button type="submit">좌석 선택 완료</button>
+        <button type="submit"><spring:message code="label.SeatSelection" /></button>
     </form>
 </body>
 </html>

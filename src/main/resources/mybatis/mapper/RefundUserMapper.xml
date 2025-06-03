@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper
-	namespace="com.example.mysite.user.mapper.RefundUserMapper">
+	namespace="com.airplane.mapper.RefundUserMapper">
 
 	<insert id="refundInsert"
 		parameterType="com.example.mysite.user.RefundUserDto"

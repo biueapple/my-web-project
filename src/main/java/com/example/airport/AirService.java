@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.airplane.plane.mapper.AirMapper;
+import com.airplane.mapper.AirMapper;
 @Service
 public class AirService {
 	@Autowired

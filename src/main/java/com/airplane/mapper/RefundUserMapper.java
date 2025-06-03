@@ -1,4 +1,4 @@
-package com.example.mysite.user.mapper;
+package com.airplane.mapper;
 
 import java.util.List;
 
