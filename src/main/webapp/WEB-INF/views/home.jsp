@@ -69,17 +69,32 @@ footer {
 	color: #777;
 }
 
-/* 스크롤 리스트 스타일 */
 .recent-slide-container {
+	width: 420px;
 	height: 256px;
 	overflow-y: auto;
 	margin-top: 20px;
+	margin-left: auto;
+	margin-right: 0;
+
+	scrollbar-width: thin;
+	scrollbar-color: rgba(0,0,0,0.15) transparent;
+}
+
+.recent-slide-container::-webkit-scrollbar {
+	width: 6px;
+	background: transparent;
+}
+
+.recent-slide-container::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
 }
 
 .recent-item {
 	height: 80px;
 	margin: 4px 0;
-	padding: 8px 12px;
+	padding: 8px 4px 8px 12px; /* ✅ 오른쪽 여백 줄임 */
 	box-sizing: border-box;
 	background: rgba(255, 255, 255, 0.92);
 	border-left: 5px solid #ff9900; /* 주황색 */
@@ -93,9 +108,8 @@ footer {
 	color: #333;
 }
 
-/* 각 줄(div) 사이에 살짝 간격 */
 .recent-item > div {
-    margin-bottom: 4px;
+	margin-bottom: 4px;
 }
 
 .recent-item strong {
@@ -104,10 +118,9 @@ footer {
 }
 
 .arrow {
-	margin: 0 4px; /* → 기호 좌우 약간 여백 */
+	margin: 0 4px;
 }
 
-/* 출발날짜, 출발시간 라벨 및 값 텍스트 검은색 */
 .label-text {
 	color: #000000;
 	font-weight: 600;
@@ -145,8 +158,10 @@ footer {
 							<strong>${plane.destinationName}</strong>
 						</div>
 						<div>
-							<span class="label-text"><spring:message code="label.DepartureDate" /></span> <span class="label-text">${plane.formattedDate}</span> &nbsp;&nbsp;
-							<span class="label-text"><spring:message code="label.Flight_time" /></span> <span class="label-text">${plane.formattedTime}</span>
+							<span class="label-text"><spring:message code="label.DepartureDate" /></span>
+							<span class="label-text">${plane.formattedDate}</span>&nbsp;&nbsp;
+							<span class="label-text"><spring:message code="label.Flight_time" /></span>
+							<span class="label-text">${plane.formattedTime}</span>
 						</div>
 					</div>
 				</c:forEach>
