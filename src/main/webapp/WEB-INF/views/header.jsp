@@ -8,7 +8,7 @@
     font-size: 16px;
     background-color: #FF9800;
     color: #fff;
-    padding: 20px 0;
+    padding: 20px 0 0 0;
     box-sizing: border-box;
   }
 
@@ -84,6 +84,31 @@
   #languageSelect:hover {
     background-color: #f0f0f0;
   }
+
+  /* ✅ nav 스타일 추가 */
+  nav {
+    background-color: #fff;
+    border-top: 2px solid #e0e0e0;
+    border-bottom: 2px solid #1a1a1a;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: bold;
+    margin: 0 15px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  nav a:hover {
+    background-color: #FF9800;
+    color: #ffffff;
+  }
 </style>
 
 <header>
@@ -115,4 +140,12 @@
       </c:choose>
     </div>
   </div>
+
+  <nav>
+    <a href="<c:url value='/Reservation'/>"><spring:message code="label.Reservation" /></a>
+    <c:if test="${not empty sessionScope.loginUser}">
+      <a href="<c:url value='/user/regist'/>"><spring:message code="label.BookingConfirmation" /></a>
+    </c:if>
+    <a href="<c:url value='/board'/>"><spring:message code="board.title" /></a>
+  </nav>
 </header>
