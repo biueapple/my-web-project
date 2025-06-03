@@ -70,7 +70,6 @@
             <thead>
                 <tr>
                     <th><spring:message code="label.Choice" /></th>
-                    <th><spring:message code="label.id" /></th>
                     <th><spring:message code="label.Departure" /></th>
                     <th><spring:message code="label.Destination" /></th>
                     <th><spring:message code="label.PlaneTime" /></th>
@@ -84,7 +83,6 @@
                         <td>
                             <input type="radio" name="id" value="${plane.id}" onclick="enableNextButton()">
                         </td>
-                        <td>${plane.id}</td>
                         <td>${plane.departure}</td>
                         <td>${plane.destination}</td>
                         <td>${plane.plane_time}</td>

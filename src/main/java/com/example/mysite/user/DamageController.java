@@ -50,11 +50,12 @@ public class DamageController {
 			if (!f.isEmpty()) {
 				String path = upload.fileUpload("D:/cho/workspacespring/my-web-project/upload/", f);
 				uploadService.service(lrc, path);
+				model.addAttribute("message", "보상신청이 완료되었습니다");
+			}
+			else {
+				model.addAttribute("message", "파일을 선택하세요");
 			}
 		}
-		
-		
-		model.addAttribute("message", "보상신청이 완료되었습니다");
 		return "Refunduser/damageResult";
 	}
 }

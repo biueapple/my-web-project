@@ -1,4 +1,4 @@
-package com.airplane.plane.mapper;
+package com.airplane.mapper;
 
 import java.util.List;
 

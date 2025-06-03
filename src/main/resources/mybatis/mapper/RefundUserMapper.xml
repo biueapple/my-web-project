@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper
-	namespace="com.example.mysite.user.mapper.RefundUserMapper">
+	namespace="com.airplane.mapper.RefundUserMapper">
 
 	<insert id="refundInsert"
 		parameterType="com.example.mysite.user.RefundUserDto"
@@ -33,6 +33,11 @@
 	<select id="seatName" resultType="String" parameterType="int">
 		SELECT
 		seat FROM seat WHERE reservation_id = #{rid}
+	</select>
+	
+	<select id="seatNameNormal" resultType="String" parameterType="int">
+		SELECT
+		seat FROM seat WHERE reservation_id = #{rid} AND state = '정상';
 	</select>
 
 	<insert id="insertDamage"

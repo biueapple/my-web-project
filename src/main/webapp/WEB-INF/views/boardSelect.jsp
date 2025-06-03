@@ -42,12 +42,12 @@ h2, p {
 		${boardIdDto.id}
 	</p>
 	<p>
-		<spring:message code="label.board"/>
-		${boardIdDto.board}
+		<spring:message code="label.registDate"/>
+		${boardIdDto.formattedRegistDateOne}
 	</p>
 	<p>
-		<spring:message code="label.registDate"/>
-		${boardIdDto.registDate}
+		<spring:message code="label.board"/>
+		${boardIdDto.board}
 	</p>
 <button onclick="location.href='board';"><spring:message code="label.List" /></button>
 <c:if test="${not empty notice}">

@@ -8,6 +8,21 @@ public class PlaneDto {
 	    private LocalDateTime planeTime;
 	    private String departureName;
 	    private String destinationName;
+	    private String formattedDate;
+	    private String formattedTime;
+	    
+		public String getFormattedDate() {
+			return formattedDate;
+		}
+		public void setFormattedDate(String formattedDate) {
+			this.formattedDate = formattedDate;
+		}
+		public String getFormattedTime() {
+			return formattedTime;
+		}
+		public void setFormattedTime(String formattedTime) {
+			this.formattedTime = formattedTime;
+		}
 		public int getId() {
 			return id;
 		}

@@ -1,4 +1,4 @@
-package com.example.mysite.user.mapper;
+package com.airplane.mapper;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ public interface RefundUserMapper {
 	List<RefundUser> findByUserId(int userId);
 	//int deleteUserByUserId(int userId);
 	List<String> seatName(int rid);
+	List<String> seatNameNormal(int resolved_id);
 	void insertDamage(DamageDto damageDto);
 	int updateStatus(int id);
 }

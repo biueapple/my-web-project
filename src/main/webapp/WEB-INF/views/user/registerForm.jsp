@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title><spring:message code="register.title"/></title>
 <style>
-
 * {
   margin: 0;
   padding: 0;
@@ -17,22 +16,79 @@
 
 body {
   font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
 }
 
-form {
-  margin: 0;
-  padding: 0;
+.register-container {
+  max-width: 500px;
+  margin: 60px auto;
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
-h2, p {
-  margin: 0;
-  padding: 0;
+.register-container h2 {
+  margin-bottom: 25px;
+  text-align: center;
+  color: #333;
+}
+
+form p {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="number"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+form input[type="radio"] {
+  margin-right: 8px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding-top: 5px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #FF9800;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #e68900;
 }
 
 .error {
-	color: red;
-	font-weight: bold;
-	font-size: 0.9em;
+  color: red;
+  font-weight: bold;
+  font-size: 0.85em;
+  margin-top: 5px;
 }
 </style>
 </head>
@@ -40,48 +96,52 @@ h2, p {
 
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
+<div class="register-container">
 	<h2><spring:message code="register.title"/></h2>
+
 	<form:form modelAttribute="userRegisterRequest" method="post">
 		
 		<p>
-			<spring:message code="label.id"/>
-			<form:input path="id"/>
+			<label for="id"><spring:message code="label.id"/></label>
+			<form:input path="id" id="id"/>
 			<form:errors path="id" cssClass="error"/>
 		</p>
 
 		<p>
-			<spring:message code="label.password"/>
-			<form:password path="password"/>
+			<label for="password"><spring:message code="label.password"/></label>
+			<form:password path="password" id="password"/>
 			<form:errors path="password" cssClass="error"/>
 		</p>
 
 		<p>
-			<spring:message code="label.passwordConfirm"/>
-			<form:password path="passwordConfirm"/>
+			<label for="passwordConfirm"><spring:message code="label.passwordConfirm"/></label>
+			<form:password path="passwordConfirm" id="passwordConfirm"/>
 			<form:errors path="passwordConfirm" cssClass="error"/>
 		</p>
 
 		<p>
-			<spring:message code="label.name"/>
-			<form:input path="name"/>
+			<label for="name"><spring:message code="label.name"/></label>
+			<form:input path="name" id="name"/>
 			<form:errors path="name" cssClass="error"/>
 		</p>
 
 		<p>
-			<spring:message code="label.gender"/>
-			<form:radiobuttons path="gender" items="${genderOptions}"/>
+			<label><spring:message code="label.gender"/></label>
+			<div class="radio-group">
+				<form:radiobuttons path="gender" items="${genderOptions}" />
+			</div>
 			<form:errors path="gender" cssClass="error"/>
 		</p>
 
 		<p>
-			<spring:message code="label.age"/>
-			<form:input path="age" type="number"/>
+			<label for="age"><spring:message code="label.age"/></label>
+			<form:input path="age" id="age" type="number"/>
 			<form:errors path="age" cssClass="error"/>
 		</p>
 
 		<p>
-			<spring:message code="label.phoneNumber"/>
-			<form:input path="phoneNumber"/>
+			<label for="phoneNumber"><spring:message code="label.phoneNumber"/></label>
+			<form:input path="phoneNumber" id="phoneNumber"/>
 			<form:errors path="phoneNumber" cssClass="error"/>
 		</p>
 
@@ -90,5 +150,7 @@ h2, p {
 		</button>
 
 	</form:form>
+</div>
+
 </body>
 </html>
