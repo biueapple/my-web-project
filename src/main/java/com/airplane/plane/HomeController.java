@@ -60,16 +60,6 @@ public class HomeController {
 		    dto.setDestinationName(strings.get(i * 2 + 1));
 		}
 		
-//		for (Plane p : recently) {
-//		    PlaneDto dto = new PlaneDto();
-//		    dto.setId(p.getId());
-//		    dto.setPlaneTime(p.getPlane_time());
-//		    dto.setDepartureName(airService.getAirportNameById(p.getDeparture_id()));
-//		    dto.setDestinationName(airService.getAirportNameById(p.getDestination_id()));
-//		    // 나머지 세팅
-//		    dtoList.add(dto);
-//		}
-//
 		model.addAttribute("Recently", dtoList);
 		
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
