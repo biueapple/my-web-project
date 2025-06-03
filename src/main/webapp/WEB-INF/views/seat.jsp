@@ -21,18 +21,15 @@
         display: inline-block;
         user-select: none;
     }
-    /* 사용 가능한 좌석 */
     .seat.available {
         background-color: #4CAF50;
         color: white;
     }
-    /* 이미 예약된 좌석 */
     .seat.booked {
         background-color: #ccc;
         cursor: not-allowed;
         color: #666;
     }
-    /* 선택된 좌석 */
     .seat.selected {
         background-color: #FF9800;
         color: white;
@@ -69,29 +66,33 @@
 </style>
 
 <script>
-    function selectSeat(seatId) {
-        // 이미 예약된 좌석은 선택 불가
-        var seatElem = document.getElementById("seat_" + seatId);
-        if(seatElem.classList.contains("booked")) return;
+    let selectedSeats = [];
 
-        // 기존 선택 좌석 해제
-        var prevSelected = document.querySelector(".seat.selected");
-        if(prevSelected){
-            prevSelected.classList.remove("selected");
+    function selectSeat(seatId) {
+        const seatElem = document.getElementById("seat_" + seatId);
+        if (seatElem.classList.contains("booked")) return;
+
+        const maxSeats = parseInt(document.getElementById("personCount").value);
+
+        if (seatElem.classList.contains("selected")) {
+            seatElem.classList.remove("selected");
+            selectedSeats = selectedSeats.filter(id => id !== seatId);
+        } else {
+            if (selectedSeats.length >= maxSeats) {
+                alert("최대 " + maxSeats + "개의 좌석만 선택할 수 있습니다.");
+                return;
+            }
+            seatElem.classList.add("selected");
+            selectedSeats.push(seatId);
         }
 
-        // 새 좌석 선택
-        seatElem.classList.add("selected");
-
-        // 선택된 좌석 ID를 숨은 필드에 저장
-        document.getElementById("selectedSeatId").value = seatId;
+        document.getElementById("selectedSeatIds").value = selectedSeats.join(",");
     }
 
-    // 제출 시 좌석 선택 여부 확인
     function validateForm() {
-        var selected = document.getElementById("selectedSeatId").value;
-        if(selected === "") {
-            alert("좌석을 선택해 주세요.");
+        const maxSeats = parseInt(document.getElementById("personCount").value);
+        if (selectedSeats.length !== maxSeats) {
+            alert("총 " + maxSeats + "개의 좌석을 선택해야 합니다.");
             return false;
         }
         return true;
@@ -100,80 +101,85 @@
 </head>
 <body>
     <h1 style="text-align:center;">비행기 좌석 선택</h1>
-    
-	<c:set var="reserved" value="${reservedSeats}" />
+
+    <!-- 테스트용 인원 수 고정 -->
+    <c:set var="personCount" value="3" />
+    <c:set var="reserved" value="${reservedSeats}" />
 
     <form action="/airplane/reserveSeat" method="post" onsubmit="return validateForm();">
-        <!-- 선택된 좌석 ID 저장용 -->
-        <input type="hidden" id="selectedSeatId" name="seatId" value="">
+        <input type="hidden" id="personCount" value="${personCount}" />
+        <input type="hidden" id="selectedSeatIds" name="seatIds" />
 
         <h2>First Class (총 좌석: ${original.first_seat})</h2>
-		<table>
-			<tr>
-				<c:forEach var="i" begin="1" end="${original.first_seat}">
-					<c:set var="seatId" value="first_${i}" />
-					<td><c:choose>
-							   <c:when test="${fn:contains(reserved, seatId)}">
-								<div id="seat_${seatId}" class="seat booked">F${i}</div>
-							</c:when>
-							<c:otherwise>
-								<div id="seat_${seatId}" class="seat available"
-									onclick="selectSeat('${seatId}')">F${i}</div>
-							</c:otherwise>
-						</c:choose></td>
-					<c:if test="${i % 6 == 0}">
-			</tr>
-			<tr>
-				</c:if>
-				</c:forEach>
-			</tr>
-		</table>
+        <table>
+            <tr>
+                <c:forEach var="i" begin="1" end="${original.first_seat}">
+                    <c:set var="seatId" value="first_${i}" />
+                    <td>
+                        <c:choose>
+                            <c:when test="${fn:contains(reserved, seatId)}">
+                                <div id="seat_${seatId}" class="seat booked">F${i}</div>
+                            </c:when>
+                            <c:otherwise>
+                                <div id="seat_${seatId}" class="seat available"
+                                    onclick="selectSeat('${seatId}')">F${i}</div>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <c:if test="${i % 6 == 0}">
+                        </tr><tr>
+                    </c:if>
+                </c:forEach>
+            </tr>
+        </table>
 
-		<h2>Business Class (총 좌석: ${original.business_seat})</h2>
-		<table>
-			<tr>
-				<c:forEach var="i" begin="1" end="${original.business_seat}">
-					<c:set var="seatId" value="business_${i}" />
-					<td><c:choose>
-							   <c:when test="${fn:contains(reserved, seatId)}">
-								<div id="seat_${seatId}" class="seat booked">B${i}</div>
-							</c:when>
-							<c:otherwise>
-								<div id="seat_${seatId}" class="seat available"
-									onclick="selectSeat('${seatId}')">B${i}</div>
-							</c:otherwise>
-						</c:choose></td>
-					<c:if test="${i % 6 == 0}">
-			</tr>
-			<tr>
-				</c:if>
-				</c:forEach>
-			</tr>
-		</table>
+        <h2>Business Class (총 좌석: ${original.business_seat})</h2>
+        <table>
+            <tr>
+                <c:forEach var="i" begin="1" end="${original.business_seat}">
+                    <c:set var="seatId" value="business_${i}" />
+                    <td>
+                        <c:choose>
+                            <c:when test="${fn:contains(reserved, seatId)}">
+                                <div id="seat_${seatId}" class="seat booked">B${i}</div>
+                            </c:when>
+                            <c:otherwise>
+                                <div id="seat_${seatId}" class="seat available"
+                                    onclick="selectSeat('${seatId}')">B${i}</div>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <c:if test="${i % 6 == 0}">
+                        </tr><tr>
+                    </c:if>
+                </c:forEach>
+            </tr>
+        </table>
 
-		<h2>Economy Class (총 좌석: ${original.economy_seat})</h2>
-		<table>
-			<tr>
-				<c:forEach var="i" begin="1" end="${original.economy_seat}">
-					<c:set var="seatId" value="economy_${i}" />
-					<td><c:choose>
-							   <c:when test="${fn:contains(reserved, seatId)}">
-								<div id="seat_${seatId}" class="seat booked">E${i}</div>
-							</c:when>
-							<c:otherwise>
-								<div id="seat_${seatId}" class="seat available"
-									onclick="selectSeat('${seatId}')">E${i}</div>
-							</c:otherwise>
-						</c:choose></td>
-					<c:if test="${i % 6 == 0}">
-			</tr>
-			<tr>
-				</c:if>
-				</c:forEach>
-			</tr>
-		</table>
+        <h2>Economy Class (총 좌석: ${original.economy_seat})</h2>
+        <table>
+            <tr>
+                <c:forEach var="i" begin="1" end="${original.economy_seat}">
+                    <c:set var="seatId" value="economy_${i}" />
+                    <td>
+                        <c:choose>
+                            <c:when test="${fn:contains(reserved, seatId)}">
+                                <div id="seat_${seatId}" class="seat booked">E${i}</div>
+                            </c:when>
+                            <c:otherwise>
+                                <div id="seat_${seatId}" class="seat available"
+                                    onclick="selectSeat('${seatId}')">E${i}</div>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <c:if test="${i % 6 == 0}">
+                        </tr><tr>
+                    </c:if>
+                </c:forEach>
+            </tr>
+        </table>
 
-		<button type="submit">좌석 선택 완료</button>
+        <button type="submit">좌석 선택 완료</button>
     </form>
 </body>
 </html>

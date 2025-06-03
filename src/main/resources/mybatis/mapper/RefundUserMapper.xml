@@ -25,19 +25,24 @@
 		SELECT * FROM seat WHERE user_Id= #{userId}
 	</select>
 
-	<delete id="deleteUserByUserId" parameterType="int">
+<!-- 	<delete id="deleteUserByUserId" parameterType="int">
 		DELETE FROM seat
 		WHERE user_Id = #{userId}
-	</delete>
+	</delete> -->
 
 	<select id="seatName" resultType="String" parameterType="int">
 		SELECT
 		seat FROM seat WHERE reservation_id = #{rid}
 	</select>
-	
-	<insert id="insertDamage" parameterType="com.example.mysite.user.DamageDto">
+
+	<insert id="insertDamage"
+		parameterType="com.example.mysite.user.DamageDto">
 		INSERT INTO damage (user_id, path)
 		VALUES (#{id}, #{savepath})
 	</insert>
-
+	
+	<update id="updateStatus" parameterType="int">
+		UPDATE seat SET state = 'CANCELLED' WHERE id = #{id}
+	</update>
+	
 </mapper>
