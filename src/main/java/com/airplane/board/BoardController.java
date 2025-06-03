@@ -34,17 +34,19 @@ public class BoardController {
 	//board
 	@RequestMapping("/board")
 	public String boardMain(Model model, HttpSession session){
-		List<BoardIdDto> boardList = boardService.selectIdAll();
-		List<BoardIdDto> noticeBoardList = boardService.noticeSelectIdAll();
-		model.addAttribute("boardList",boardList);
-		model.addAttribute("noticeBoardList",noticeBoardList);
+		List<BoardIdDto> boardList = boardService.selectIdAllNormal();
+		List<BoardIdDto> noticeBoardList = boardService.noticeSelectIdAllNormal();
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc!=null) {
 			User user = userService.search(lrc.getId());
 			if(userService.isAdmin(user.getUserId())) {
+				boardList = boardService.selectIdAll();
+				noticeBoardList = boardService.noticeSelectIdAll();
 				model.addAttribute("admin","admin");
 			}
 		}
+		model.addAttribute("boardList",boardList);
+		model.addAttribute("noticeBoardList",noticeBoardList);
 		return "boardMain";
 	}
 	
@@ -54,7 +56,7 @@ public class BoardController {
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc!=null) {
 			User user = userService.search(lrc.getId());
-			if(user.getUserId()==boardIdDto.getUserId()) {
+			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
 				model.addAttribute("matchUser","matchUser");
 			}
 		}
@@ -125,7 +127,7 @@ public class BoardController {
 		}else {
 			User user = userService.search(lrc.getId());
 			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
-				boardService.delete(boardId);
+				boardService.updateDelete(boardId);
 				return "redirect:/board";
 			}else {
 				return "redirect:/boardSelectOne?boardId="+boardId;
@@ -212,7 +214,7 @@ public class BoardController {
 		}else {
 			User user = userService.search(lrc.getId());
 			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
-				boardService.noticeDelete(boardId);
+				boardService.noticeUpdateDelete(boardId);
 				return "redirect:/board";
 			}else {
 				return "redirect:/noticeBoardSelectOne?boardId="+boardId;
