@@ -82,8 +82,8 @@ h3 {
 			<!-- 도착지 -->
 			<div class="mb-3">
 				<label for="destination" class="form-label"><spring:message
-						code="label.arrival" />:</label> <select name="destination"
-					id="destination" class="form-select" required>
+						code="label.arrival" />:</label> 
+						<select name="destination" id="destination" class="form-select" required>
 					<c:forEach var="airport" items="${airports}">
 						<option value="${airport.airportName}">${airport.airportName}</option>
 					</c:forEach>
@@ -94,8 +94,9 @@ h3 {
 
 			<!-- 출발 날짜 선택 -->
 			<div class="mb-3">
-				<label for="flightDate" class="form-label"><spring:message
-						code='label.DepartureDate' /></label> <input type="text" id="flightDate"
+				<label for="flightDate" class="form-label">
+				<spring:message code='label.DepartureDate' /></label> 
+				<input type="text" id="flightDate"
 					name="departureDate" class="form-control" placeholder="날짜를 선택하세요"
 					readonly required>
  				<form:errors path="departureDate" cssClass="text-danger" />
@@ -104,11 +105,11 @@ h3 {
 			<!-- 인원수 -->
 			<div class="mb-3">
 				<label for="passenger_number" class="form-label"> 
-				<spring:message
-						code="label.number" />
-				</label> <input type="number" id="passenger_number" name="passenger_number" class="form-control" 
-				 min="1" 
-					required/>
+				<spring:message code="label.number" /></label> 
+				<form:input path="passenger_number" type="number" id="passenger_number" class="form-control" 
+				min="1" max="10"/>
+			<form:errors path="passenger_number" cssClass="text-danger" />
+					
 			</div>
 
 			<!-- 버튼 -->
