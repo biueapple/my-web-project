@@ -125,41 +125,146 @@ footer {
 	color: #000000;
 	font-weight: 600;
 }
+
+.notice-board {
+	margin-top: 20px;
+}
+
+.notice-title {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	color: #1a1a1a;
+}
+
+.notice-item {
+	background: rgba(255, 255, 255, 0.92);
+	border-left: 3px solid #007bff;
+	border-radius: 4px;
+	margin-bottom: 6px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+	overflow: hidden;
+}
+
+.notice-item:hover {
+	background-color: #f0f8ff;
+}
+
+.notice-item a {
+	text-decoration: none;
+	color: #333;
+	font-weight: 600;
+	font-size: 15px;
+	display: block;
+	transition: color 0.3s;
+}
+
+.notice-item a:hover {
+	color: #007bff;
+}
+.main-content {
+	display: flex;
+	gap: 40px; /* 좌우 공간 */
+	align-items: flex-start;
+	margin-top: 20px;
+	flex-wrap: wrap;
+}
+
+.notice-board {
+	flex: 1;
+	min-width: 300px;
+}
+
+.recent-slide-container {
+	flex: 1;
+	min-width: 420px;
+}
+.notice-item {
+	background: rgba(255, 255, 255, 0.92);
+	border-left: 5px solid #007bff;
+	border-radius: 6px;
+	margin-bottom: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+	overflow: hidden;
+}
+
+.notice-header {
+	cursor: pointer;
+	padding: 12px 16px;
+	font-weight: 600;
+	font-size: 15px;
+	color: #333;
+	transition: background-color 0.3s;
+}
+
+.notice-header:hover {
+	background-color: #f0f8ff;
+}
+
+.notice-body {
+	padding: 12px 16px;
+	border-top: 1px solid #ddd;
+	display: none;
+	color: #555;
+	font-size: 14px;
+}
 </style>
 </head>
 
+<script>
+function toggleNotice(header) {
+	const body = header.nextElementSibling;
+	const isVisible = body.style.display === "block";
+	// 닫기
+	document.querySelectorAll('.notice-body').forEach(el => el.style.display = "none");
+	// 클릭한 항목만 열기
+	if (!isVisible) {
+		body.style.display = "block";
+	}
+}
+</script>
 <body>
 
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
-<div class="container">
-	<main>
-		<h3>Home</h3>
+	<div class="container">
+		<main>
+			<h3>공지사항</h3>
+			<div class="main-content">
+				<div class="notice-board">
+					<c:forEach var="boardIdDto" items="${noticeBoard}">
+						<div class="notice-item">
+							<div class="notice-header" onclick="toggleNotice(this)">
+								[공지] ${boardIdDto.boardTitle}
+							</div>
+							<div class="notice-body">${boardIdDto.board}</div>
+						</div>
+					</c:forEach>
+				</div>
 
-		<c:if test="${not empty Recently}">
-			<div class="recent-slide-container">
-				<c:forEach var="plane" items="${Recently}">
-					<div class="recent-item">
-						<div>
-							<strong>${plane.departureName}</strong>
-							<span class="arrow">→</span>
-							<strong>${plane.destinationName}</strong>
-						</div>
-						<div>
-							<span class="label-text"><spring:message code="label.DepartureDate" /></span>
-							<span class="label-text">${plane.formattedDate}</span>&nbsp;&nbsp;
-							<span class="label-text"><spring:message code="label.Flight_time" /></span>
-							<span class="label-text">${plane.formattedTime}</span>
-						</div>
+				<c:if test="${not empty Recently}">
+					<div class="recent-slide-container">
+						<c:forEach var="plane" items="${Recently}">
+							<div class="recent-item">
+								<div>
+									<strong>${plane.departureName}</strong>
+									<span class="arrow">→</span>
+									<strong>${plane.destinationName}</strong>
+								</div>
+								<div>
+									<span class="label-text"><spring:message code="label.DepartureDate" /></span> <span class="label-text">${plane.formattedDate}</span>&nbsp;&nbsp;
+									<span class="label-text"><spring:message code="label.Flight_time" /></span> <span class="label-text">${plane.formattedTime}</span>
+								</div>
+							</div>
+						</c:forEach>
 					</div>
-				</c:forEach>
+				</c:if>
 			</div>
-		</c:if>
+		</main>
 
-	</main>
-
-	<footer>&copy; 2025 Airplane Reservation. All Rights Reserved.</footer>
-</div>
+		<footer>&copy; 2025 Airplane Reservation. All Rights
+			Reserved.</footer>
+	</div>
 
 </body>
 </html>

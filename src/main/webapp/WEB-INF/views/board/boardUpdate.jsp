@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><spring:message code="board.insertTitle"/></title>
+<title><spring:message code="board.updateTitle"/></title>
 <style>
 * {
   margin: 0;
@@ -33,20 +33,23 @@ h2, p {
 
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
-<h2><spring:message code="board.insertTitle"/></h2>
+<h2><spring:message code="board.updateTitle"/></h2>
 	<form:form modelAttribute="board" method="post">
-		<form:hidden path="userId" value="${userId}"/>
+		<form:hidden path="boardId"/>
 		<p>
 			<spring:message code="label.boardTitle"/>
 			<form:input path="boardTitle"/>
-			<form:errors path="boardTitle" cssClass="error"/>
+			<form:errors path="boardTitle"/>
 		</p>
 		<p>
 			<spring:message code="label.board"/>
 			<form:input path="board"/>
 		</p>
 		<button type="submit">
-			<spring:message code="label.submit"/>
+			<spring:message code="label.update"/>
+		</button>
+		<button type="button" onclick="location.href='board';">
+			<spring:message code="label.cancellation" />
 		</button>
 	</form:form>
 </body>
