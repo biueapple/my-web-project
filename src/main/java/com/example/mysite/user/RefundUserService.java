@@ -38,6 +38,11 @@ public class RefundUserService {
 	public List<String> seatName(int rid) {
 		return userMapper.seatName(rid);
 	}
+	
+	public List<String> seatNameNormal(int resolved_id)
+	{
+		return userMapper.seatNameNormal(resolved_id);
+	}
 
 	public boolean updateStatus(int id) {
 		int update = userMapper.updateStatus(id);
