@@ -48,7 +48,6 @@ public class HomeController {
 		}
 		List<String> strings = airService.IDToSting(integer);
 		
-		//model.addAttribute("Recently", recently);
 		List<PlaneDto> dtoList = new ArrayList<>();
 
 		for(int i = 0; i < recently.size(); i++)
@@ -106,9 +105,10 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "airplaneList", method = RequestMethod.GET)
-	public String airplaneListGet(@ModelAttribute("dto") AirinfoDto dto, Model model, HttpSession session)
+	public String airplaneListGet(@ModelAttribute("dto") AirinfoDto dto,
+			Model model, HttpSession session)
 	{
-		//비행기 정보 리스트
+		//비행기 정보 리스트number_of_people
 		List<AirinfoDto> aid = airService.info();
 		int depart_id = 0;
 		int destination_id = 0;
@@ -131,17 +131,19 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "airplaneList", method = RequestMethod.POST)
-	public String airplaneListPOST(@RequestParam("id") int id, Model model, HttpSession session)
+	public String airplaneListPOST(@RequestParam("id") int reserve_id, Model model, HttpSession session)
 	{
 		System.out.println("post");
 		//비행기id
-		PlaneOriginal original = planeService.planeOriginal(id);
-		session.setAttribute("planeId", id);
+		PlaneOriginal original = planeService.planeOriginal(reserve_id);
+		session.setAttribute("planeId", reserve_id);
 		model.addAttribute("original", original);
-		//모든 예약된 좌석 불러오기
 		
-		List<String> reservedSeats = refundUserService.seatName(id);//Arrays.asList("first_1", "economy_3", "business_4");
+		//모든 예약된 좌석 불러오기
+		//reserve_id로 예약된 모든 시트중에서 '정상'인거
+		List<String> reservedSeats = refundUserService.seatNameNormal(reserve_id);//Arrays.asList("first_1", "economy_3", "business_4");
 		model.addAttribute("reservedSeats", reservedSeats);
+		model.addAttribute("number_of_people", session.getAttribute("number_of_people"));
 		return "seat";
 	}
 

@@ -103,7 +103,7 @@
     <h1 style="text-align:center;">비행기 좌석 선택</h1>
 
     <!-- 테스트용 인원 수 고정 -->
-    <c:set var="personCount" value="3" />
+    <c:set var="personCount" value="${number_of_people}" />
     <c:set var="reserved" value="${reservedSeats}" />
 
     <form action="/airplane/reserveSeat" method="post" onsubmit="return validateForm();">
