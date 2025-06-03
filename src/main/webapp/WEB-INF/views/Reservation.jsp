@@ -98,8 +98,8 @@ h3 {
 						code='label.DepartureDate' /></label> <input type="text" id="flightDate"
 					name="departureDate" class="form-control" placeholder="날짜를 선택하세요"
 					readonly required>
-				<form:errors path="departureDate" cssClass="text-danger" />
-			</div>
+ 				<form:errors path="departureDate" cssClass="text-danger" />
+ 			</div>
 
 			<!-- 인원수 -->
 			<div class="mb-3">
