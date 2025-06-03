@@ -18,13 +18,12 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/regist")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/regist", method=RequestMethod.GET)
 	public String form(Model model) {
 		UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
 		model.addAttribute("userRegisterRequest", userRegisterRequest);
@@ -35,7 +34,7 @@ public class UserController {
 		return "/user/registerForm";
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(value="/regist", method=RequestMethod.POST)
 	public String submit(
 			@Valid 
 			@ModelAttribute("userRegisterRequest") 
@@ -69,5 +68,10 @@ public class UserController {
 		return "/user/registResult";
 	}
 	
-	
+	@RequestMapping(value="myPage", method=RequestMethod.GET)
+	public String myPage(HttpSession session) {
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		
+		return "/user/myPage";
+	}
 }
