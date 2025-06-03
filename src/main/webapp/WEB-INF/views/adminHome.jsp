@@ -93,14 +93,6 @@ footer {
 	
 	<div class="container">
 		
-		<nav>
-				<a href="<c:url value='/planeAdd'/>"><spring:message code="button.Addplane" /></a>
-				<a href="<c:url value='/airplaneList'/>"><spring:message code="button.Listplane" /></a>
-				<a href="<c:url value='/planeReservation'/>"><spring:message code="label.AirReservation" /></a>
-				<a href="<c:url value='/Reservation'/>"><spring:message code="label.Reservation" /></a>
-				<a href="<c:url value='/user/regist'/>"><spring:message code="label.BookingConfirmation" /></a>
-				<a href="<c:url value='/board'/>"><spring:message code="board.title" /></a>
-		</nav>
 		<main>
 			<h3><spring:message code="label.Admin" /></h3>
 
