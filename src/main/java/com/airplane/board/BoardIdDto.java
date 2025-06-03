@@ -1,6 +1,6 @@
 package com.airplane.board;
 
-import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -72,14 +72,12 @@ public class BoardIdDto {
 	public String getFormattedRegistDate() {
 		if (registDate == null)
 			return "";
-		LocalDateTime now = LocalDateTime.now();
-		Duration duration = Duration.between(registDate, now);
+		LocalDate registLocalDate = registDate.toLocalDate();
+		LocalDate today = LocalDate.now();
 
-		if (duration.toHours() < 24) {
-			// 24시간 이내면 시간만 (예: 15:30)
+		if (registLocalDate.equals(today)) {
 			return registDate.format(DateTimeFormatter.ofPattern("HH:mm"));
 		} else {
-			// 24시간 이상이면 날짜만 (예: 2025-06-02)
 			return registDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
 		}
 	}
