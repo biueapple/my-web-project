@@ -42,7 +42,7 @@ public class BoardService {
 	}
 	
 	public List<BoardIdDto> selectIdAllNormal(){
-		return boardMapper.selectIdAll();
+		return boardMapper.selectIdAllNormal();
 	}
 	
 	public BoardIdDto selectIdOne(int boardId) {
@@ -50,7 +50,7 @@ public class BoardService {
 	}
 	
 	public BoardIdDto selectIdOneNormal(int boardId) {
-		return boardMapper.selectIdOne(boardId);
+		return boardMapper.selectIdOneNormal(boardId);
 	}
 	
 	//noticeBoard
@@ -63,7 +63,7 @@ public class BoardService {
 	}
 	
 	public List<BoardIdDto> noticeSelectIdAllNormal(){
-		return boardMapper.noticeSelectIdAll();
+		return boardMapper.noticeSelectIdAllNormal();
 	}
 	
 	public BoardIdDto noticeSelectIdOne(int boardId) {
@@ -71,7 +71,7 @@ public class BoardService {
 	}
 	
 	public BoardIdDto noticeSelectIdOneNormal(int boardId) {
-		return boardMapper.noticeSelectIdOne(boardId);
+		return boardMapper.noticeSelectIdOneNormal(boardId);
 	}
 	
 	public Board noticeSelectOne(int boardId) {
