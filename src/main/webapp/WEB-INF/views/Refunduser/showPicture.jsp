@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach var="path" items="${photopaths}">
-<img src="/${path}" alt="damage photo" style="max-width:300px;"/>
+<c:forEach var="savepath" items="${savepath}">
+<img src="/${savepath}" alt="damage photo" style="max-width:300px;"/>
 </c:forEach>
 
 </body>
