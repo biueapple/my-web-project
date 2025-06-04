@@ -17,19 +17,7 @@ public interface BoardMapper {
 	List<Board> selectAll();
 	List<BoardIdDto> selectIdAll();
 	List<BoardIdDto> selectIdAllNormal();
-	int update(Board board);
+	int update(BoardDto boardDto);
 	int delete(@Param("boardId") int boardId);
 	int updateDelete(@Param("boardId") int boardId);
-	
-	//noticeBoard
-	int noticeInsert(BoardDto boardDto);
-	Board noticeSelectOne(@Param("boardId") int boardId);
-	BoardIdDto noticeSelectIdOne(@Param("boardId") int boardId);
-	BoardIdDto noticeSelectIdOneNormal(@Param("boardId") int boardId);
-	List<BoardIdDto> noticeSelectIdAll();
-	List<BoardIdDto> noticeSelectIdAllNormal();
-	List<BoardIdDto> noticeSelectIdAllNormalImportance(@Param("importance") int importance);
-	int noticeUpdate(Board board);
-	int noticeDelete(@Param("boardId") int boardId);
-	int noticeUpdateDelete(@Param("boardId") int boardId);
 }

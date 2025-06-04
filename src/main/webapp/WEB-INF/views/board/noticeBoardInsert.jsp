@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><spring:message code="board.updateTitle"/></title>
+<title><spring:message code="board.insertTitle"/></title>
 <style>
 * {
   margin: 0;
@@ -33,20 +33,24 @@ h2, p {
 
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
-<h2><spring:message code="board.updateTitle"/></h2>
-	<form:form modelAttribute="boardDto" method="post">
-		<form:hidden path="boardId"/>
+<h2><spring:message code="board.insertTitle"/></h2>
+	<form:form modelAttribute="noticeBoardDto" method="post">
+		<form:hidden path="userId" value="${userId}"/>
 		<p>
 			<spring:message code="label.boardTitle"/>
 			<form:input path="boardTitle"/>
-			<form:errors path="boardTitle"/>
+			<form:errors path="boardTitle" cssClass="error"/>
+		</p>
+		<p>
+			중요도
+			<form:input path="importance"/>
 		</p>
 		<p>
 			<spring:message code="label.board"/>
 			<form:input path="board"/>
 		</p>
 		<button type="submit">
-			<spring:message code="label.update"/>
+			<spring:message code="label.submit"/>
 		</button>
 		<button type="button" onclick="location.href='board';">
 			<spring:message code="label.cancellation" />

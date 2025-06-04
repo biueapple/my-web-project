@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.airplane.board.BoardIdDto;
 import com.airplane.board.BoardService;
+import com.airplane.board.NoticeBoardService;
 import com.airplane.user.LoginRequestCommand;
 import com.airplane.user.User;
 import com.airplane.user.UserService;
@@ -38,7 +39,8 @@ public class HomeController
 	AirService airService;
 	@Autowired
 	BoardService boardService;
-
+	@Autowired
+	NoticeBoardService noticeBoardService;
 	// 홈 페이지
 	@RequestMapping("/")
 	public String home(Model model, Locale locale, HttpSession session)
@@ -83,7 +85,7 @@ public class HomeController
 		model.addAttribute("Recently", dtoList);
 
 		//현재 삭제상태가 아니고(정상인) 중요도가 3 이상인 공지를 모두 리턴받음
-		List<BoardIdDto> noticeBoard = boardService.noticeSelectIdAllNormalImportance(3);
+		List<BoardIdDto> noticeBoard = noticeBoardService.noticeSelectIdAllNormalImportance(3);
 		//공지 전달
 		model.addAttribute("noticeBoard", noticeBoard);
 
