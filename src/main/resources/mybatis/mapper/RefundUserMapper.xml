@@ -3,8 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.airplane.mapper.RefundUserMapper">
+<mapper namespace="com.airplane.mapper.RefundUserMapper">
 
 	<insert id="refundInsert"
 		parameterType="com.example.mysite.user.RefundUserDto"
@@ -25,29 +24,38 @@
 		SELECT * FROM seat WHERE user_Id= #{userId}
 	</select>
 
-<!-- 	<delete id="deleteUserByUserId" parameterType="int">
-		DELETE FROM seat
-		WHERE user_Id = #{userId}
-	</delete> -->
-
 	<select id="seatName" resultType="String" parameterType="int">
 		SELECT
 		seat FROM seat WHERE reservation_id = #{rid}
 	</select>
-	
-	<select id="seatNameNormal" resultType="String" parameterType="int">
+
+	<select id="seatNameNormal" resultType="String"
+		parameterType="int">
 		SELECT
-		seat FROM seat WHERE reservation_id = #{rid} AND state = '정상';
+		seat FROM seat WHERE reservation_id = #{rid} AND
+		state = '정상';
 	</select>
 
 	<insert id="insertDamage"
 		parameterType="com.example.mysite.user.DamageDto">
 		INSERT INTO damage (user_id, path)
-		VALUES (#{id}, #{savepath})
+		VALUES (#{id},
+		#{savepath})
 	</insert>
-	
+
 	<update id="updateStatus" parameterType="int">
-		UPDATE seat SET state = 'CANCELLED' WHERE id = #{id}
+		UPDATE seat SET state =
+		'CANCELLED' WHERE id = #{id}
+	</update>
+
+	<update id="insertSavepath"
+		parameterType="com.example.mysite.user.DamageDto">
+		UPDATE seat SET savepath = #{savepath} WHERE id = #{id}
 	</update>
 	
+	<update id="updateInsurance">
+		UPDATE seat SET insurance_id = #{insurance} WHERE id = #{id}
+	</update>
 </mapper>
+
+

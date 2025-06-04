@@ -30,10 +30,6 @@ public class RefundUserService {
 		userMapper.refundInsert(cmdObj);
 	}
 
-//	public boolean deleteUserByUserId(int id) {
-//		   int deletedCount = userMapper.deleteUserByUserId(id);
-//		    return deletedCount > 0;
-//	}
 
 	public List<String> seatName(int rid) {
 		return userMapper.seatName(rid);
@@ -47,5 +43,10 @@ public class RefundUserService {
 	public boolean updateStatus(int id) {
 		int update = userMapper.updateStatus(id);
 		return update > 0;
+	}
+	
+	public void updateInsurance(int seat_id, int insurance_id)
+	{
+		userMapper.updateInsurance(seat_id, insurance_id);
 	}
 }

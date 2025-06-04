@@ -138,6 +138,7 @@ button:hover {
 						<th><spring:message code="label.Info.Departure" /></th>
 						<th><spring:message code="label.Info.Destination" /></th>
 						<th><spring:message code="label.Info.SeatNumber" /></th>
+						<th><spring:message code="label.InsuranceList" /></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -151,6 +152,7 @@ button:hover {
 								<td>${RefundUser.depart}</td>
 								<td>${RefundUser.arrive}</td>
 								<td>${RefundUser.seat}</td>
+								
 							</tr>
 						</c:if>
 					</c:forEach>

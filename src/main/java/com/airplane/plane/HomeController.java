@@ -1,6 +1,5 @@
 package com.airplane.plane;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.airplane.board.BoardIdDto;
 import com.airplane.board.BoardService;
 import com.airplane.board.NoticeBoardService;
+import com.airplane.insurance.Insurance;
+import com.airplane.insurance.InsuranceService;
 import com.airplane.user.LoginRequestCommand;
 import com.airplane.user.User;
 import com.airplane.user.UserService;
@@ -41,6 +42,8 @@ public class HomeController
 	BoardService boardService;
 	@Autowired
 	NoticeBoardService noticeBoardService;
+	@Autowired
+	InsuranceService insuranceService;
 	// 홈 페이지
 	@RequestMapping("/")
 	public String home(Model model, Locale locale, HttpSession session)
@@ -61,23 +64,18 @@ public class HomeController
 		//모든 공항의 이름을 받아오기
 		List<String> strings = airService.IDToSting(integer);
 
-		//시간정보 포멧
-		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
 		//비행기정보에서 출발지 id 와 도착지 id 대신 이름으로 가지고 있는 클래스 리스트
-		List<PlaneDto> dtoList = new ArrayList<>();
+		List<PlaneListVO> dtoList = new ArrayList<>();
 
 		//비행기 정보를 토대로 변환중
 		for (int i = 0; i < recently.size(); i++)
 		{
-			PlaneDto dto = new PlaneDto();
-			dto.setId(recently.get(i).getId());
-			dto.setPlaneTime(recently.get(i).getPlane_time());
-			dto.setDepartureName(strings.get(i * 2));
-			dto.setDestinationName(strings.get(i * 2 + 1));
-			dto.setFormattedDate(dto.getPlaneTime().format(dateFormatter));
-			dto.setFormattedTime(dto.getPlaneTime().format(timeFormatter));
+			PlaneListVO dto = new PlaneListVO(
+					recently.get(i).getId(),
+					strings.get(i * 2),
+					strings.get(i * 2 + 1),
+					recently.get(i).getPlane_time(),
+					0);
 			dtoList.add(dto);
 		}
 
@@ -181,7 +179,8 @@ public class HomeController
 	public String airplaneListGet(Model model, HttpSession session)
 	{
 		// 출발지와 도착지를 airPortController 에서 넣은 session 에서 꺼내기
-		AirinfoDto dto = (AirinfoDto) session.getAttribute("airinfoDto");
+		AirinfoDto dto = (AirinfoDto) model.getAttribute("dto");
+		System.out.println("35353535" + dto);
 		
 		//모든 공항에 대한 정보를 꺼내오기
 		List<AirinfoDto> aid = airService.info();
@@ -211,9 +210,6 @@ public class HomeController
 		
 		//출발지와 도착지가 문자열로 변환된 리스트를 페이지에 넘기기
 		model.addAttribute("list", vo);
-		
-		//선택한 정보에 해당하는 비행기 리스트들은 session 에 넘기기
-		session.setAttribute("selectPlaneList", plane);
 		
 		//비행기 리스트 사이트로 이동
 		return "airplaneList";
@@ -261,15 +257,12 @@ public class HomeController
 		
 		//유저의 아이디로 유저의 정보를 받아오기
 		User user = userService.search(lrc.getId());
-		
-		//session 에 넣은 유저가 선택한 조건에 맞는 비행기 리스트 (planeService.selectAll)
-		List<Plane> planes = (List<Plane>) session.getAttribute("selectPlaneList");
 
 		//출발할 비행기의 id 받아오기
 		int planeId = (int) session.getAttribute("reserve_id");
 
 		// 조건에 맞는 비행기중에서 선택한 id 에 해당하는 비행기 정보 받아오기
-		Plane plane = planeService.FindCurrent(planes, planeId);
+		Plane plane = planeService.selectReservationToId(planeId);
 
 		// 모든 공항의 정보를 받아오기
 		List<AirinfoDto> aid = airService.info();
@@ -281,6 +274,7 @@ public class HomeController
 		{
 			if (a.getAirportId() == plane.getDeparture_id())
 				depart = a.getAirportName();
+				
 			if (a.getAirportId() == plane.getDestination_id())
 				arrive = a.getAirportName();
 		}
@@ -307,6 +301,13 @@ public class HomeController
 		return "redirect:/";
 	}
 
+	@RequestMapping(value = "insurance", method = RequestMethod.GET)
+	public String testInsuranceLink(Model model)
+	{
+		List<Insurance> insuranceList = insuranceService.selectAllInsurance(); // 예시
+	    model.addAttribute("insuranceList", insuranceList);
+	    return "insuranceList"; // /WEB-INF/views/insuranceList.jsp
+	}
 	
 	private boolean Admin(HttpSession session)
 	{

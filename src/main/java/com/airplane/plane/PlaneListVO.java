@@ -86,4 +86,16 @@ public class PlaneListVO
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
 		return plane_time.format(formatter);
 	}
+	
+	public String getFormattedDate() {
+		if (plane_time == null)
+			return "";
+		return plane_time.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+	}
+
+	public String getFormattedTime() {
+		if (plane_time == null)
+			return "";
+		return plane_time.format(DateTimeFormatter.ofPattern("HH:mm"));
+	}
 }
