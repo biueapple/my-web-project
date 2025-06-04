@@ -3,8 +3,10 @@ package com.airplane.board;
 import jakarta.validation.constraints.NotBlank;
 
 public class BoardDto {
+	//board 에 insert 또는 update 하기위한 클래스
 	private int boardId;
 	private int userId;
+	//제목은 무조건 입력받기
 	@NotBlank(message = "{NotBlank.boardDto.boardTitle}")
 	private String boardTitle;
 	private String board;

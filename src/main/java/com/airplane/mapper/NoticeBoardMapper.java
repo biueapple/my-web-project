@@ -15,7 +15,6 @@ public interface NoticeBoardMapper {
 	int noticeInsert(NoticeBoardDto noticeBoardDto);
 	NoticeBoard noticeSelectOne(@Param("boardId") int boardId);
 	BoardIdDto noticeSelectIdOne(@Param("boardId") int boardId);
-	BoardIdDto noticeSelectIdOneNormal(@Param("boardId") int boardId);
 	List<BoardIdDto> noticeSelectIdAll();
 	List<BoardIdDto> noticeSelectIdAllNormal();
 	List<BoardIdDto> noticeSelectIdAllNormalImportance(@Param("importance") int importance);

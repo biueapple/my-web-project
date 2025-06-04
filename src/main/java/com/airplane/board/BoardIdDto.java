@@ -5,12 +5,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class BoardIdDto {
+	//게시글 상세보기 및 메인페이지에서 id 보여주기 위한 클래스
+	//게시글 고유 id
 	private int boardId;
+	//유저 고유 id
 	private int userId;
+	//유저 id
 	private String id;
+	//제목
 	private String boardTitle;
+	//내용
 	private String board;
+	//작성일
 	private LocalDateTime registDate;
+	//상태(정상,삭제)
 	private String state;
 
 	public int getBoardId() {
