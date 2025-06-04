@@ -59,6 +59,7 @@ h2, p {
 	padding: 12px 16px;
 	text-align: center;
 	border-bottom: 1px solid #e0e0e0;
+	vertical-align: middle;
 }
 
 .reservation-table tbody tr:hover {
@@ -115,6 +116,12 @@ button:hover {
 	font-weight: bold;
 }
 </style>
+<script>
+	function submitInsuranceForm(userId) {
+		document.getElementById("insuranceUserId").value = userId;
+		document.getElementById("insuranceForm").submit();
+	}
+</script>
 </head>
 <body>
 
@@ -146,18 +153,17 @@ button:hover {
 					<c:forEach var="RefundUser" items="${list}">
 						<c:if test="${RefundUser.state == '정상'}">
 							<tr>
-								<td><input type="checkbox" name="ids" value="${RefundUser.id}" /></td>
+								<td><input type="checkbox" name="ids"
+									value="${RefundUser.id}" /></td>
 								<td>${RefundUser.userId}</td>
 								<td>${RefundUser.gender}</td>
 								<td>${RefundUser.depart}</td>
 								<td>${RefundUser.arrive}</td>
 								<td>${RefundUser.seat}</td>
 								<td>
-									<!-- 보험확인 버튼 - 별도의 GET 폼 -->
-									<form action="<c:url value='/insurance' />" method="get" style="margin:0;">
-										<input type="hidden" name="userId" value="${RefundUser.userId}" />
-										<button type="submit">보험 확인</button>
-									</form>
+									<button type="button" style="position: relative; left: 35px;"
+										onclick="submitInsuranceForm('${RefundUser.userId}')">
+										보험 확인</button>
 								</td>
 							</tr>
 						</c:if>
@@ -169,70 +175,42 @@ button:hover {
 
 			<div class="buttons-container">
 				<div class="left-buttons">
-					<!-- 환불 요청 버튼 -->
-					<button type="submit">
-						<spring:message code="label.Info.RefundRequest" />
-					</button>
+					<!-- 환불 요청 버튼 form -->
+					<form action="<c:url value='/user/regist/refund'/>" method="post">
+						<button type="submit">
+							<spring:message code="label.Info.RefundRequest" />
+						</button>
+					</form>
 
-				
-			
+					<!-- 손해배상 버튼 form -->
+					<form action="<c:url value='/user/damage'/>" method="get">
+						<input type="hidden" name="id" value="${user.userId}" />
+						<button type="submit">
+							<spring:message code="label.damageRequest" />
+						</button>
+					</form>
+				</div>
+
+				<div class="right-buttons">
+					<form action="<c:url value='/'/>" method="get">
+						<button type="submit">
+							<spring:message code="label.Home" />
+						</button>
+					</form>
+				</div>
 			</div>
+
 		</form>
 
-<!-- 버튼 컨테이너 (폼 외부에 위치) -->
-<div class="buttons-container">
-    <div class="left-buttons">
-  
-
-        <!-- 피해보상 요청 버튼 (JS로 ids 수집 후 POST 전송) -->
-        <button type="button" onclick="submitDamageForm()">
-            <spring:message code="label.damageRequest" />
-        </button>
-    </div>
-
-    <div class="right-buttons">
-        <form action="<c:url value='/'/>" method="get" style="margin: 0; padding: 0;">
-            <button type="submit">
-                <spring:message code="label.Home" />
-            </button>
-        </form>
-    </div>
-</div>
-
-<!-- 숨겨진 폼: JS에서 ids 전송용 -->
-<form id="damageForm" action="<c:url value='/user/damage'/>" method="post" style="display: none;">
-    <input type="hidden" name="id" value="${user.userId}" />
-</form>
-
-<script>
-function submitDamageForm() {
-    // 기존에 체크된 ids 값들을 가져옴
-    const checkedBoxes = document.querySelectorAll("input[name='ids']:checked");
-
-    if (checkedBoxes.length === 0) {
-        alert("피해보상을 신청할 예약을 선택해주세요.");
-        return;
-    }
-
-    // 기존 hidden form에 체크된 ids 추가
-    const form = document.getElementById("damageForm");
-    form.innerHTML = '<input type="hidden" name="id" value="${user.userId}" />'; // 초기화
-
-    checkedBoxes.forEach(box => {
-        const hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = "ids";
-        hiddenInput.value = box.value;
-        form.appendChild(hiddenInput);
-    });
-
-    form.submit();
-}
-</script>
 		<c:if test="${not empty message}">
 			<div class="message">${message}</div>
 		</c:if>
 	</div>
+
+	<form id="insuranceForm" action="<c:url value='/insurance' />"
+		method="get" style="display: none;">
+		<input type="hidden" name="userId" id="insuranceUserId" />
+	</form>
 
 </body>
 </html>
