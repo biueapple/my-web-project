@@ -153,16 +153,17 @@ button:hover {
 					<c:forEach var="RefundUser" items="${list}">
 						<c:if test="${RefundUser.state == '정상'}">
 							<tr>
-								<td><input type="checkbox" name="ids" value="${RefundUser.id}" /></td>
+								<td><input type="checkbox" name="ids"
+									value="${RefundUser.id}" /></td>
 								<td>${RefundUser.userId}</td>
 								<td>${RefundUser.gender}</td>
 								<td>${RefundUser.depart}</td>
 								<td>${RefundUser.arrive}</td>
 								<td>${RefundUser.seat}</td>
 								<td>
-									<button type="button" style="position: relative; left: 35px;" onclick="submitInsuranceForm('${RefundUser.userId}')">
-									보험 확인
-									</button>
+									<button type="button" style="position: relative; left: 35px;"
+										onclick="submitInsuranceForm('${RefundUser.userId}')">
+										보험 확인</button>
 								</td>
 							</tr>
 						</c:if>
@@ -174,11 +175,15 @@ button:hover {
 
 			<div class="buttons-container">
 				<div class="left-buttons">
-					<button type="submit">
-						<spring:message code="label.Info.RefundRequest" />
-					</button>
+					<!-- 환불 요청 버튼 form -->
+					<form action="<c:url value='/user/regist/refund'/>" method="post">
+						<button type="submit">
+							<spring:message code="label.Info.RefundRequest" />
+						</button>
+					</form>
 
-					<form action="<c:url value='/user/damage'/>" method="get" style="margin: 0; padding: 0;">
+					<!-- 손해배상 버튼 form -->
+					<form action="<c:url value='/user/damage'/>" method="get">
 						<input type="hidden" name="id" value="${user.userId}" />
 						<button type="submit">
 							<spring:message code="label.damageRequest" />
@@ -187,13 +192,14 @@ button:hover {
 				</div>
 
 				<div class="right-buttons">
-					<form action="<c:url value='/'/>" method="get" style="margin: 0; padding: 0;">
+					<form action="<c:url value='/'/>" method="get">
 						<button type="submit">
 							<spring:message code="label.Home" />
 						</button>
 					</form>
 				</div>
 			</div>
+
 		</form>
 
 		<c:if test="${not empty message}">
@@ -201,7 +207,8 @@ button:hover {
 		</c:if>
 	</div>
 
-	<form id="insuranceForm" action="<c:url value='/insurance' />" method="get" style="display:none;">
+	<form id="insuranceForm" action="<c:url value='/insurance' />"
+		method="get" style="display: none;">
 		<input type="hidden" name="userId" id="insuranceUserId" />
 	</form>
 
