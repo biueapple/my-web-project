@@ -64,18 +64,17 @@ public class HomeController
 		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
 		//비행기정보에서 출발지 id 와 도착지 id 대신 이름으로 가지고 있는 클래스 리스트
-		List<PlaneDto> dtoList = new ArrayList<>();
+		List<PlaneListVO> dtoList = new ArrayList<>();
 
 		//비행기 정보를 토대로 변환중
 		for (int i = 0; i < recently.size(); i++)
 		{
-			PlaneDto dto = new PlaneDto();
-			dto.setId(recently.get(i).getId());
-			dto.setPlaneTime(recently.get(i).getPlane_time());
-			dto.setDepartureName(strings.get(i * 2));
-			dto.setDestinationName(strings.get(i * 2 + 1));
-			dto.setFormattedDate(dto.getPlaneTime().format(dateFormatter));
-			dto.setFormattedTime(dto.getPlaneTime().format(timeFormatter));
+			PlaneListVO dto = new PlaneListVO(
+					recently.get(i).getId(),
+					strings.get(i * 2),
+					strings.get(i * 2 + 1),
+					recently.get(i).getPlane_time(),
+					0);
 			dtoList.add(dto);
 		}
 

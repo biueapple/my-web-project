@@ -230,8 +230,8 @@ footer {
 						<c:forEach var="plane" items="${Recently}">
 							<div class="recent-item">
 								<div>
-									<strong>${plane.departureName}</strong> <span class="arrow">→</span>
-									<strong>${plane.destinationName}</strong>
+									<strong>${plane.departure}</strong> <span class="arrow">→</span>
+									<strong>${plane.destination}</strong>
 								</div>
 								<div>
 									<span class="label-text"><spring:message
