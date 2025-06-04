@@ -17,15 +17,15 @@ public interface PlaneMapper {
 	//어떤 비행기가 언제 어디서 어디로 가는지 입력
 	int insertReservation(PlaneReservation planeReservation);
 	
-	//reservation id 로 original 검색
+	//reservation id로 original 검색
 	PlaneOriginal selectOriginalToReservationId(int reservation_id);
 	
 	//선택한 시작점과 목표자점 선택한 날과 시간부터 그날 자정까지
 	List<Plane> selectReservationToTimeLate
 	(@Param("plane_time")LocalDate plane_time, @Param("departure_id")int departure_id,@Param("destination_id") int destination_id);
 	
-	//reservation id 로 reservation 받기
-	Plane selectPlane(int id);
+	//reservation id로 reservation 받기
+	Plane selectPlaneToReservationId(int reservation_id);
 	
 	//reservation first update
 	int planeFirstSeatUpdate(PlaneSeatUpdate up);

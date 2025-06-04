@@ -210,9 +210,6 @@ public class HomeController
 		//출발지와 도착지가 문자열로 변환된 리스트를 페이지에 넘기기
 		model.addAttribute("list", vo);
 		
-		//선택한 정보에 해당하는 비행기 리스트들은 session 에 넘기기
-		session.setAttribute("selectPlaneList", plane);
-		
 		//비행기 리스트 사이트로 이동
 		return "airplaneList";
 	}
@@ -259,15 +256,12 @@ public class HomeController
 		
 		//유저의 아이디로 유저의 정보를 받아오기
 		User user = userService.search(lrc.getId());
-		
-		//session 에 넣은 유저가 선택한 조건에 맞는 비행기 리스트 (planeService.selectAll)
-		List<Plane> planes = (List<Plane>) session.getAttribute("selectPlaneList");
 
 		//출발할 비행기의 id 받아오기
 		int planeId = (int) session.getAttribute("reserve_id");
 
 		// 조건에 맞는 비행기중에서 선택한 id 에 해당하는 비행기 정보 받아오기
-		Plane plane = planeService.FindCurrent(planes, planeId);
+		Plane plane = planeService.selectReservationToId(planeId);
 
 		// 모든 공항의 정보를 받아오기
 		List<AirinfoDto> aid = airService.info();
@@ -279,6 +273,7 @@ public class HomeController
 		{
 			if (a.getAirportId() == plane.getDeparture_id())
 				depart = a.getAirportName();
+				
 			if (a.getAirportId() == plane.getDestination_id())
 				arrive = a.getAirportName();
 		}

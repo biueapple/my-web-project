@@ -37,12 +37,17 @@ public class PlaneService
 		planeMapper.insertReservation(planeReservation);
 	}
 	
+	public Plane selectReservationToId(int reservation_id)
+	{
+		return planeMapper.selectPlaneToReservationId(reservation_id);
+	}
+	
 	//원본 비행기 값을 받아오기
 	public PlaneOriginal planeOriginal(int reservation_id)
 	{
 		//id로 예약 비행기중에 원본 비행기 값 받아와서 원본 비행기값을 활용해 좌석 배치후 유저의 예약을 이용해 체크
 		//원본 받아오기
-		Plane plane = planeMapper.selectPlane(reservation_id);
+		Plane plane = selectReservationToId(reservation_id);
 		PlaneOriginal original = planeMapper.selectOriginalToReservationId(plane.getOriginal_id());
 		
 		return original;
