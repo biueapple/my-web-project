@@ -136,7 +136,7 @@
         </c:when>
         <c:otherwise>
           <a href="<c:url value='/user/logout' />"><spring:message code="label.logout" /></a>
-          <a href="<c:url value='/myPage' />">${sessionScope.loginUser.id}</a>
+          <a href="<c:url value='/myPage' />">${sessionScope.username}</a>
         </c:otherwise>
       </c:choose>
     </div>
