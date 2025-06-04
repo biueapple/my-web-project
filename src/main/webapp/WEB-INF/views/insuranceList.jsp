@@ -19,6 +19,11 @@
         text-align: center;
         color: #333;
     }
+    
+	header h1 a {
+  		color: white !important;
+	}
+    
     table {
         margin: 0 auto;
         width: 80%;
