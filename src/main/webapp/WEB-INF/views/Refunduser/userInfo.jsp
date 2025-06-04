@@ -144,8 +144,7 @@ button:hover {
 					<c:forEach var="RefundUser" items="${list}">
 						<c:if test="${RefundUser.state == '정상'}">
 							<tr>
-								<td><input type="checkbox" name="ids"
-									value="${RefundUser.id}" /></td>
+								<td><input type="checkbox" name="ids" value="${RefundUser.id}" /></td>
 								<td>${RefundUser.userId}</td>
 								<td>${RefundUser.gender}</td>
 								<td>${RefundUser.depart}</td>
@@ -156,38 +155,28 @@ button:hover {
 					</c:forEach>
 				</tbody>
 			</table>
+<form action="<c:url value='/user/regist/refund'/>" method="post">
+    <table class="reservation-table">
+        <!-- 테이블 내용 (체크박스 포함) -->
+    </table>
 
-			<input type="hidden" name="id" value="${user.userId}" />
+    <input type="hidden" name="id" value="${user.userId}" />
 
-			<div class="buttons-container">
-				<div class="left-buttons">
-					<form action="<c:url value='/user/regist/refund'/>" method="post"
-						style="margin: 0; padding: 0;">
-						<input type="hidden" name="id" value="${user.userId}" />
-						<button type="submit">
-							<spring:message code="label.Info.RefundRequest" />
-						</button>
-					</form>
-				
+    <div class="buttons-container">
+        <button type="submit" formaction="<c:url value='/user/regist/refund'/>">
+            <spring:message code="label.Info.RefundRequest" />
+        </button>
 
-				<form action="<c:url value='/user/damage'/>" method="get"
-					style="margin: 0; padding: 0;">
-					<input type="hidden" name="id" value="${user.userId}" />
-					<button type="submit">
-						<spring:message code="label.damageRequest" />
-					</button>
-				</form>
-				</div>
-				<div class="right-buttons">
-					<form action="<c:url value='/'/>" method="get"
-						style="margin: 0; padding: 0;">
-						<button type="submit">
-							<spring:message code="label.Home" />
-						</button>
-					</form>
-				</div>
-			</div>
-		</form>
+        <button type="submit" formaction="<c:url value='/user/damage'/>">
+            <spring:message code="label.damageRequest" />
+        </button>
+
+        <button type="button" onclick="location.href='/'">
+            <spring:message code="label.Home" />
+        </button>
+    </div>
+</form>
+
 
 		<c:if test="${not empty message}">
 			<div class="message">${message}</div>
