@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title><spring:message code="label.damageResultTitle" /></title>
 <style>
 * {
 	margin: 0;
@@ -40,40 +40,12 @@ h2, p {
 	margin-bottom: 20px;
 }
 
-.reservation-table {
-	margin: 0 auto 30px auto;
-	border-collapse: collapse;
-	width: 90%;
-	max-width: 1000px;
-	background-color: #ffffff;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-	border-radius: 8px;
-	overflow: hidden;
-}
-
-.reservation-table thead {
-	background-color: #FF9800;
-	color: #ffffff;
-}
-
-.reservation-table th, .reservation-table td {
-	padding: 12px 16px;
-	text-align: center;
-	border-bottom: 1px solid #e0e0e0;
-}
-
-.reservation-table tbody tr:hover {
-	background-color: #f8f9fa;
-}
-
-.buttons-container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	max-width: 1000px;
-	margin: 0 auto 20px auto;
-	padding: 0 10px;
-	box-sizing: border-box;
+img {
+	width: 200px;
+	height: auto;
+	margin: 10px;
+	border-radius: 4px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
 button {
@@ -90,6 +62,7 @@ button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin: 20px auto;
 }
 
 button:hover {
@@ -105,24 +78,25 @@ button:hover {
 </style>
 </head>
 <body>
-	<p style="color: red; font-weight: bold;">${message}</p>
-	<form action="<c:url value='/user/damage/home'/>" method="get"
-		style="display: inline-block;" style="margin: 0; padding: 0;">
-		<button type="submit">
-			<spring:message code="label.Home" />
-		</button>
-	</form>
 
-	<c:if test="${not empty savepath}">
-		<h4>사진들</h4>
-		<c:forEach var="path" items="${savePath}">
-			<img src="${path}" alt="photos"
-				style="width: 200px; height: auto; margin: 10px;" />
-		</c:forEach>
-	</c:if>
+	<div class="main-content">
+		<c:if test="${not empty message}">
+			<p class="message">${message}</p>
+		</c:if>
+
+		<form action="<c:url value='/user/damage/home'/>" method="get">
+			<button type="submit">
+				<spring:message code="label.Home" />
+			</button>
+		</form>
+
+		<c:if test="${not empty savepath}">
+			<h3><spring:message code="label.uploadedPhotos" /></h3>
+			<c:forEach var="path" items="${savepath}">
+				<img src="${path}" alt="uploaded photo" />
+			</c:forEach>
+		</c:if>
+	</div>
 
 </body>
 </html>
-
-
-

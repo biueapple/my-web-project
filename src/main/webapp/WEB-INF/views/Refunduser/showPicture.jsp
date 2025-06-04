@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %>     
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach var="savepath" items="${savepath}">
-<img src="/${savepath}" alt="damage photo" style="max-width:300px;"/>
-</c:forEach>
+<img src="<spring:url value="${savePath}"/>" alt="damage photo" style="max-width:300px;" />
+
 
 </body>
 </html>

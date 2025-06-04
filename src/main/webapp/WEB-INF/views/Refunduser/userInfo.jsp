@@ -59,6 +59,7 @@ h2, p {
 	padding: 12px 16px;
 	text-align: center;
 	border-bottom: 1px solid #e0e0e0;
+	vertical-align: middle;
 }
 
 .reservation-table tbody tr:hover {
@@ -115,6 +116,12 @@ button:hover {
 	font-weight: bold;
 }
 </style>
+<script>
+	function submitInsuranceForm(userId) {
+		document.getElementById("insuranceUserId").value = userId;
+		document.getElementById("insuranceForm").submit();
+	}
+</script>
 </head>
 <body>
 
@@ -128,6 +135,7 @@ button:hover {
 			<spring:message code="label.Info.MemberInformation" />
 		</h3>
 
+		<!-- 전체 환불 요청 form -->
 		<form action="<c:url value='/user/regist/refund'/>" method="post">
 			<table class="reservation-table">
 				<thead>
@@ -152,7 +160,11 @@ button:hover {
 								<td>${RefundUser.depart}</td>
 								<td>${RefundUser.arrive}</td>
 								<td>${RefundUser.seat}</td>
-								
+								<td>
+									<button type="button" style="position: relative; left: 35px;"
+										onclick="submitInsuranceForm('${RefundUser.userId}')">
+										보험 확인</button>
+								</td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -163,38 +175,42 @@ button:hover {
 
 			<div class="buttons-container">
 				<div class="left-buttons">
-					<form action="<c:url value='/user/regist/refund'/>" method="post"
-						style="margin: 0; padding: 0;">
-						<input type="hidden" name="id" value="${user.userId}" />
+					<!-- 환불 요청 버튼 form -->
+					<form action="<c:url value='/user/regist/refund'/>" method="post">
 						<button type="submit">
 							<spring:message code="label.Info.RefundRequest" />
 						</button>
 					</form>
-				
 
-				<form action="<c:url value='/user/damage'/>" method="get"
-					style="margin: 0; padding: 0;">
-					<input type="hidden" name="id" value="${user.userId}" />
-					<button type="submit">
-						<spring:message code="label.damageRequest" />
-					</button>
-				</form>
+					<!-- 손해배상 버튼 form -->
+					<form action="<c:url value='/user/damage'/>" method="get">
+						<input type="hidden" name="id" value="${user.userId}" />
+						<button type="submit">
+							<spring:message code="label.damageRequest" />
+						</button>
+					</form>
 				</div>
+
 				<div class="right-buttons">
-					<form action="<c:url value='/'/>" method="get"
-						style="margin: 0; padding: 0;">
+					<form action="<c:url value='/'/>" method="get">
 						<button type="submit">
 							<spring:message code="label.Home" />
 						</button>
 					</form>
 				</div>
 			</div>
+
 		</form>
 
 		<c:if test="${not empty message}">
 			<div class="message">${message}</div>
 		</c:if>
 	</div>
+
+	<form id="insuranceForm" action="<c:url value='/insurance' />"
+		method="get" style="display: none;">
+		<input type="hidden" name="userId" id="insuranceUserId" />
+	</form>
 
 </body>
 </html>
