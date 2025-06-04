@@ -8,5 +8,9 @@
 	<select id="insuranceAll" resultType="com.airplane.insurance.Insurance">
     	SELECT * FROM insurance
 	</select>
+	
+	<select id="getInsurance" resultType="com.airplane.insurance.Insurance">
+    	SELECT * FROM insurance WHERE id = #{id}
+	</select>
 </mapper>
   

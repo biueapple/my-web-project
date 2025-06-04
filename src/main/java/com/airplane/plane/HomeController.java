@@ -59,10 +59,6 @@ public class HomeController
 		//모든 공항의 이름을 받아오기
 		List<String> strings = airService.IDToSting(integer);
 
-		//시간정보 포멧
-		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
 		//비행기정보에서 출발지 id 와 도착지 id 대신 이름으로 가지고 있는 클래스 리스트
 		List<PlaneListVO> dtoList = new ArrayList<>();
 
