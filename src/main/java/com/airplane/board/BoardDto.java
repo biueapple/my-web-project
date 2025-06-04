@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 public class BoardDto {
 	private int boardId;
 	private int userId;
-	@NotBlank(message = "{NotBlank.board.boardTitle}")
+	@NotBlank(message = "{NotBlank.boardDto.boardTitle}")
 	private String boardTitle;
 	private String board;
 	

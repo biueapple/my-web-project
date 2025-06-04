@@ -150,7 +150,7 @@ public class BoardController {
 			@ModelAttribute
 			NoticeBoardDto noticeboardDto, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
-			return "board/boardInsert";
+			return "board/noticeBoardInsert";
 		}
 		noticeBoardService.insertNoticeBoard(noticeboardDto);
 		return "redirect:/board";
