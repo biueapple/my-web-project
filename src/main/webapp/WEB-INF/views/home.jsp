@@ -216,8 +216,11 @@ footer {
 					<c:forEach var="boardIdDto" items="${noticeBoard}">
 						<div class="notice-item">
 							<div class="notice-header" onclick="toggleNotice(this)">
-								[공지] ${boardIdDto.boardTitle}</div>
-							<div class="notice-body">${boardIdDto.board}</div>
+								${boardIdDto.boardTitle}
+							</div>
+							<div class="notice-body">
+								${boardIdDto.board}
+							</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -250,14 +253,10 @@ footer {
 	</div>
 
 	<script>
-function toggleNotice(header) {
-    const body = header.nextElementSibling;
-    const isVisible = body.style.display === "block";
-    document.querySelectorAll('.notice-body').forEach(el => el.style.display = "none");
-    if (!isVisible) {
-        body.style.display = "block";
-    }
-}
+	function toggleNotice(header) {
+	    const body = header.nextElementSibling;
+	    body.style.display = (body.style.display === "block") ? "none" : "block";
+	}
 /* 지도 */
 window.onload = function () {
 	const bounds = [
