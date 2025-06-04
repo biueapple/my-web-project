@@ -15,9 +15,9 @@ public interface RefundUserMapper {
 			@Param("userId")String u);
 
 	List<RefundUser> findByUserId(int userId);
-	//int deleteUserByUserId(int userId);
 	List<String> seatName(int rid);
 	List<String> seatNameNormal(int resolved_id);
 	void insertDamage(DamageDto damageDto);
 	int updateStatus(int id);
+	void insertSavepath(DamageDto damageDto);
 }

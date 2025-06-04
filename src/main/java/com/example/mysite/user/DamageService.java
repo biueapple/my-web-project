@@ -15,4 +15,7 @@ public class DamageService {
 	public void registerRequest(DamageDto damageDto) {
 		refundUserMapper.insertDamage(damageDto);
 	}
+	public void insertSavepath(DamageDto damageDto) {
+		refundUserMapper.insertSavepath(damageDto);
+	}
 }
