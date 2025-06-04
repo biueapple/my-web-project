@@ -33,7 +33,7 @@ public class DamageController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String damageClaim(HttpSession httpSession, Model model) {
+	public String damageClaim(@RequestParam("id") String userId, HttpSession httpSession, Model model) {
 
 		model.addAttribute("damageRequest", new DamageDto());
 		return "Refunduser/damageUpload";
@@ -53,8 +53,10 @@ public class DamageController {
 		// 파일업로드
 		
 		for (int id : ids) {
-
+System.out.println("123");
 			boolean update = refundUserService.updateStatus(id);
+			System.out.println("123");
+
 			if (update) {
 				for (MultipartFile f : damagePhotos) {
 					if (!f.isEmpty()) {
