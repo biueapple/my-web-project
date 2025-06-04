@@ -104,6 +104,20 @@ footer {
 .notice-board {
 	flex: 1;
 	min-width: 300px;
+	max-height: 256px;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.notice-board::-webkit-scrollbar {
+	width: 6px;
+	background: transparent;
+}
+
+.notice-board::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
 }
 
 .recent-slide-container {
@@ -196,7 +210,7 @@ footer {
 
 	<div class="container">
 		<main>
-			<h3>공지사항</h3>
+			<h3><spring:message code="label.Notice" /></h3>
 			<div class="main-content">
 				<div class="notice-board">
 					<c:forEach var="boardIdDto" items="${noticeBoard}">
@@ -244,7 +258,7 @@ function toggleNotice(header) {
         body.style.display = "block";
     }
 }
-
+/* 지도 */
 window.onload = function () {
 	const bounds = [
 	    [-90, -180],
