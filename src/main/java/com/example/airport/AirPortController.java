@@ -47,9 +47,7 @@ public class AirPortController {
 		}
 		redirectAttributes.addFlashAttribute("dto", airinfoDto); // 리다이렉트 시 dto 전달
 		session.setAttribute("number_of_people", number_of_people);
-
-		// redirectAttributes.addFlashAttribute("number_of_people", number_of_people);
-		// //
+		
 		return "redirect:/airplaneList";
 	}
 }
