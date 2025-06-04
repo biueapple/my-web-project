@@ -1,6 +1,8 @@
 package com.airplane.plane;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Plane
 {
@@ -86,5 +88,29 @@ public class Plane
 	public void setPrice(int price)
 	{
 		this.price = price;
+	}
+	
+	public String getFormattedRegistDate()
+	{
+		if (plane_time == null)
+			return "";
+		LocalDate registLocalDate = plane_time.toLocalDate();
+		LocalDate today = LocalDate.now();
+
+		if (registLocalDate.equals(today))
+		{
+			return plane_time.format(DateTimeFormatter.ofPattern("HH:mm"));
+		} else
+		{
+			return plane_time.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+		}
+	}
+
+	public String getFormattedRegistDateOne()
+	{
+		if (plane_time == null)
+			return "";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
+		return plane_time.format(formatter);
 	}
 }

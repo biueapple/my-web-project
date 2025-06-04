@@ -85,7 +85,7 @@
                         </td>
                         <td>${plane.departure}</td>
                         <td>${plane.destination}</td>
-                        <td>${plane.plane_time}</td>
+                        <td>${plane.formattedRegistDate}</td>
                         <td>${plane.price}</td>
                     </tr>
                 </c:forEach>
