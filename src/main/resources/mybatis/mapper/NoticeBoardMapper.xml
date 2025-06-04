@@ -31,7 +31,7 @@
 			VALUES (#{userId}, #{boardTitle}, #{board}, #{importance});
 	</insert>
 	
-	<select id="noticeSelectAll" resultMap="boardMap">
+	<select id="noticeSelectAll" resultMap="noticeBoardMap">
 		SELECT * From notice_board;
 	</select>
 	
