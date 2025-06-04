@@ -1,6 +1,5 @@
 package com.example.mysite.user;
 
-
 public class DamageDto {
 	private Integer id;
 	private String savepath;
@@ -9,8 +8,8 @@ public class DamageDto {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer ids) {
+		this.id = ids;
 	}
 
 	public String getSavepath() {

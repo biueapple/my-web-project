@@ -23,6 +23,8 @@ public class DamageController {
 	UploadService uploadService;
 	@Autowired
 	Upload upload;
+	@Autowired
+	RefundUserService refundUserService;
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String damageResult() {
@@ -31,7 +33,7 @@ public class DamageController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String damageClaim(HttpSession httpSession, Model model) {
+	public String damageClaim(@RequestParam("id") String userId, HttpSession httpSession, Model model) {
 
 		model.addAttribute("damageRequest", new DamageDto());
 		return "Refunduser/damageUpload";
@@ -39,7 +41,8 @@ public class DamageController {
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String damageSubmit(@RequestParam("damagePhotos") List<MultipartFile> damagePhotos,
-			@ModelAttribute DamageDto damageDto, HttpSession httpSession, Model model) {
+			@RequestParam(value = "ids") List<Integer> ids, @ModelAttribute DamageDto damageDto,
+			HttpSession httpSession, Model model) {
 
 		LoginRequestCommand lrc = (LoginRequestCommand) httpSession.getAttribute("loginUser");
 		if (lrc == null) {
@@ -48,20 +51,33 @@ public class DamageController {
 
 		List<String> savedPath = new ArrayList<>();
 		// 파일업로드
-		for (MultipartFile f : damagePhotos) {
-			if (!f.isEmpty()) {
-				String path = upload.fileUpload("D:/my-web-project/upload/", f);
-				uploadService.service(lrc, path);
-				savedPath.add("/upload/" + f.getOriginalFilename());
+		
+		for (int id : ids) {
+System.out.println("123");
+			boolean update = refundUserService.updateStatus(id);
+			System.out.println("123");
+
+			if (update) {
+				for (MultipartFile f : damagePhotos) {
+					if (!f.isEmpty()) {
+						String path = upload.fileUpload("D:/my-web-project/upload/", f);
+						uploadService.service(ids, path);
+						savedPath.add("/upload/" + f.getOriginalFilename());
+					}
+				}
+				if (savedPath.isEmpty()) {
+					model.addAttribute("message", "파일을 선택하세요");
+					return "Refunduser/damageUpload";
+				} else {
+					model.addAttribute("message", "보상신청이 완료되었습니다");
+					model.addAttribute("savepath", savedPath);
+				}
+
+			} else {
+				model.addAttribute("message", "오류가 생겼습니다.");
 			}
 		}
-		if (savedPath.isEmpty()) {
-			model.addAttribute("message", "파일을 선택하세요");
-			return "Refunduser/damageUpload";
-		} else {
-			model.addAttribute("message", "보상신청이 완료되었습니다");
-			model.addAttribute("savepath", savedPath);
-			return "Refunduser/damageResult";
-		}
+		return "Refunduser/damageResult";
+
 	}
 }

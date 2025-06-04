@@ -43,7 +43,7 @@
 		#{savepath})
 	</insert>
 
-	<update id="updateStatus" parameterType="int">
+	<update id="updateStatus">
 		UPDATE seat SET state =
 		'CANCELLED' WHERE id = #{id}
 	</update>
