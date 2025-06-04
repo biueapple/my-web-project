@@ -52,6 +52,10 @@
 		parameterType="com.example.mysite.user.DamageDto">
 		UPDATE seat SET savepath = #{savepath} WHERE id = #{id}
 	</update>
+	
+	<update id="updateInsurance">
+		UPDATE seat SET insurance_id = #{insurance} WHERE id = #{id}
+	</update>
 </mapper>
 
 

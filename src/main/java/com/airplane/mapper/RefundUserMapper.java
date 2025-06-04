@@ -20,4 +20,7 @@ public interface RefundUserMapper {
 	void insertDamage(DamageDto damageDto);
 	int updateStatus(int id);
 	void insertSavepath(DamageDto damageDto);
+	
+	//id 를 받아서 insurance_id 를 update
+	public void updateInsurance(@Param("id") int id, @Param("insurance") int insurance_id);
 }
