@@ -91,6 +91,11 @@
 			FROM notice_board b JOIN users u ON b.user_id = u.user_id WHERE b.state = '정상' ORDER BY b.regist_date DESC;
 	</select>
 	
+	<select id="noticeSelectIdAllNormalImportance" resultMap="boardUserIdMap">
+		SELECT b.board_id, b.user_id, u.id, b.board_title, b.board, b.regist_date, b.state 
+			FROM notice_board b JOIN users u ON b.user_id = u.user_id WHERE b.state = '정상' AND b.board_importance >= #{importance}  ORDER BY b.regist_date DESC;
+	</select>
+	
 	<select id="noticeSelectOne" resultMap="boardMap">
 		SELECT * FROM notice_board WHERE board_id = #{boardId};
 	</select>
