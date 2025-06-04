@@ -83,7 +83,7 @@ public class HomeController
 		model.addAttribute("Recently", dtoList);
 
 		//현재 삭제상태가 아닌(정상 상태인) 공지를 모두 리턴받음
-		List<BoardIdDto> noticeBoard = boardService.noticeSelectIdAllNormal();
+		List<BoardIdDto> noticeBoard = boardService.noticeSelectIdAllNormalImportance(3);
 		//공지 전달
 		model.addAttribute("noticeBoard", noticeBoard);
 
