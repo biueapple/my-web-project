@@ -7,10 +7,10 @@ import jakarta.validation.constraints.NotNull;
 
 // 커맨드 객체 정의
 public class UserRegisterRequest {
-	@NotBlank(message = "{NotBlank.userRegisterRequest.id}")
+	@NotBlank(message = "{NotBlank.id}")
 	private String id;
 	
-	@NotBlank(message = "{NotBlank.userRegisterRequest.password}")
+	@NotBlank(message = "{NotBlank.password}")
 	private String password;
 	private String passwordConfirm;
 	

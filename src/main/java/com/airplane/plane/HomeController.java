@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.airplane.board.BoardIdDto;
+import com.airplane.board.BoardService;
 import com.airplane.user.LoginRequestCommand;
 import com.airplane.user.User;
 import com.airplane.user.UserService;
@@ -34,12 +36,11 @@ public class HomeController {
 	RefundUserService refundUserService;
 	@Autowired
 	AirService airService;
+	@Autowired
+	BoardService boardService;
 	
 	@RequestMapping("/")
 	public String home(Model model, Locale locale, HttpSession session) {
-		LocalDateTime now = LocalDateTime.now();
-		model.addAttribute("now", now);
-		
 		List<Plane> recently = planeService.selectRecently();
 		List<Integer> integer = new ArrayList<>();
 		for(Plane p : recently)
@@ -68,6 +69,9 @@ public class HomeController {
 		
 		model.addAttribute("Recently", dtoList);
 		
+		List<BoardIdDto> noticeBoard = boardService.noticeSelectIdAllNormal();
+		model.addAttribute("noticeBoard",noticeBoard);
+		
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc!=null) {
 			User user = userService.search(lrc.getId());
@@ -86,14 +90,21 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "planeAdd", method = RequestMethod.GET)
-	public String airplaneAddGET()
+	public String airplaneAddGET(HttpSession session)
 	{
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc == null)
+			return "home";
 		return "airplaneAdd";
 	}
 	
 	@RequestMapping(value = "planeAdd", method = RequestMethod.POST)
-	public String airplaneAddPOST(@ModelAttribute PlaneOriginal planeOri)
+	public String airplaneAddPOST(@ModelAttribute PlaneOriginal planeOri, HttpSession session)
 	{
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc == null)
+			return "home";
+		
 		planeService.insertOriginal(planeOri.getEconomy_seat(), planeOri.getBusiness_seat(), planeOri.getFirst_seat());
 		return "airplaneAdd";
 	}
