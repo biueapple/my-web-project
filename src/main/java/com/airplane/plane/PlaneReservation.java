@@ -2,6 +2,7 @@ package com.airplane.plane;
 
 import java.time.LocalDateTime;
 
+//reservation insert
 public class PlaneReservation
 {
 	private int original_id;

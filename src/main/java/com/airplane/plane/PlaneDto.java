@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+//비행기가 어디서 어디로
 public class PlaneDto
 {
 	private int id;
