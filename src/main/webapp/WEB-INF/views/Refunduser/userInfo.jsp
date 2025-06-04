@@ -59,6 +59,7 @@ h2, p {
 	padding: 12px 16px;
 	text-align: center;
 	border-bottom: 1px solid #e0e0e0;
+	vertical-align: middle;
 }
 
 .reservation-table tbody tr:hover {
@@ -88,6 +89,8 @@ h2, p {
 	padding: 0;
 }
 
+
+
 button {
 	background-color: #2980b9;
 	color: #ffffff;
@@ -115,6 +118,12 @@ button:hover {
 	font-weight: bold;
 }
 </style>
+<script>
+	function submitInsuranceForm(userId) {
+		document.getElementById("insuranceUserId").value = userId;
+		document.getElementById("insuranceForm").submit();
+	}
+</script>
 </head>
 <body>
 
@@ -153,11 +162,9 @@ button:hover {
 								<td>${RefundUser.arrive}</td>
 								<td>${RefundUser.seat}</td>
 								<td>
-									<!-- 보험확인 버튼 - 별도의 GET 폼 -->
-									<form action="<c:url value='/insurance' />" method="get" style="margin:0;">
-										<input type="hidden" name="userId" value="${RefundUser.userId}" />
-										<button type="submit">보험 확인</button>
-									</form>
+									<button type="button" onclick="submitInsuranceForm('${RefundUser.userId}')">
+										보험 확인
+									</button>
 								</td>
 							</tr>
 						</c:if>
@@ -169,12 +176,10 @@ button:hover {
 
 			<div class="buttons-container">
 				<div class="left-buttons">
-					<!-- 환불 요청 버튼 -->
 					<button type="submit">
 						<spring:message code="label.Info.RefundRequest" />
 					</button>
 
-					<!-- 피해보상 요청 버튼 -->
 					<form action="<c:url value='/user/damage'/>" method="get" style="margin: 0; padding: 0;">
 						<input type="hidden" name="id" value="${user.userId}" />
 						<button type="submit">
@@ -197,6 +202,10 @@ button:hover {
 			<div class="message">${message}</div>
 		</c:if>
 	</div>
+
+	<form id="insuranceForm" action="<c:url value='/insurance' />" method="get" style="display:none;">
+		<input type="hidden" name="userId" id="insuranceUserId" />
+	</form>
 
 </body>
 </html>
