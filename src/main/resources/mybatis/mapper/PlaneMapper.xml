@@ -49,8 +49,8 @@
 		SELECT * FROM plane_reservation WHERE id = #{id}
 	</select>
 	
-	<select id="selectOriginal" resultType="com.airplane.plane.PlaneOriginal" resultMap="planeOriginalMap">
-		SELECT * FROM plane_original WHERE id = #{id}
+	<select id="selectOriginalToReservationId" resultType="com.airplane.plane.PlaneOriginal" resultMap="planeOriginalMap">
+		SELECT * FROM plane_original WHERE id = #{reservation_id}
 	</select>
 	
 	<update id="planeFirstSeatUpdate" parameterType="com.airplane.plane.PlaneSeatUpdate" useGeneratedKeys="true" keyProperty="id">

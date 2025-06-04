@@ -1,11 +1,17 @@
 package com.airplane.insurance;
 
+//보험 db 데이터
 public class Insurance
 {
+	//고유 id
 	private int id;
+	//보험 이름
 	private String name;
+	//보험 가격
 	private int price;
+	//보험 배상 비율
 	private int compensation;
+	//보험 내용
 	private String content;
 	public int getId()
 	{
