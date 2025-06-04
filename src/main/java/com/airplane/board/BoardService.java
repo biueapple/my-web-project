@@ -25,8 +25,8 @@ public class BoardService {
 		return boardMapper.selectOne(boardId);
 	}
 	
-	public int update(Board board) {
-		return boardMapper.update(board);
+	public int update(BoardDto boardDto) {
+		return boardMapper.update(boardDto);
 	}
 	
 	public int updateDelete(int boardId) {
@@ -51,46 +51,5 @@ public class BoardService {
 	
 	public BoardIdDto selectIdOneNormal(int boardId) {
 		return boardMapper.selectIdOneNormal(boardId);
-	}
-	
-	//noticeBoard
-	public int insertNoticeBoard(BoardDto boardDto) {
-		return boardMapper.noticeInsert(boardDto);
-	}
-	
-	public List<BoardIdDto> noticeSelectIdAll(){
-		return boardMapper.noticeSelectIdAll();
-	}
-	
-	public List<BoardIdDto> noticeSelectIdAllNormal(){
-		return boardMapper.noticeSelectIdAllNormal();
-	}
-	
-	public List<BoardIdDto> noticeSelectIdAllNormalImportance(int importance) {
-		return boardMapper.noticeSelectIdAllNormalImportance(importance);
-	}
-	
-	public BoardIdDto noticeSelectIdOne(int boardId) {
-		return boardMapper.noticeSelectIdOne(boardId);
-	}
-	
-	public BoardIdDto noticeSelectIdOneNormal(int boardId) {
-		return boardMapper.noticeSelectIdOneNormal(boardId);
-	}
-	
-	public Board noticeSelectOne(int boardId) {
-		return boardMapper.noticeSelectOne(boardId);
-	}
-	
-	public int noticeUpdate(Board board) {
-		return boardMapper.noticeUpdate(board);
-	}
-	
-	public int noticeUpdateDelete(int boardId) {
-		return boardMapper.noticeUpdateDelete(boardId);
-	}
-	
-	public int noticeDelete(int boardId) {
-		return boardMapper.noticeDelete(boardId);
 	}
 }

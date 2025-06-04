@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airplane.user.LoginRequestCommand;
 import com.airplane.user.User;
@@ -24,24 +23,21 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	@Autowired
+	private NoticeBoardService noticeBoardService;
+	@Autowired
 	private UserService userService;
-	
-//	@RequestMapping("/")
-//	public String home() {
-//		return "home";
-//	}
 	
 	//board
 	@RequestMapping("/board")
 	public String boardMain(Model model, HttpSession session){
 		List<BoardIdDto> boardList = boardService.selectIdAllNormal();
-		List<BoardIdDto> noticeBoardList = boardService.noticeSelectIdAllNormalImportance(2);
+		List<BoardIdDto> noticeBoardList = noticeBoardService.noticeSelectIdAllNormalImportance(2);
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc!=null) {
 			User user = userService.search(lrc.getId());
 			if(userService.isAdmin(user.getUserId())) {
 				boardList = boardService.selectIdAll();
-				noticeBoardList = boardService.noticeSelectIdAll();
+				noticeBoardList = noticeBoardService.noticeSelectIdAll();
 				model.addAttribute("admin","admin");
 			}
 		}
@@ -66,8 +62,8 @@ public class BoardController {
 	
 	@RequestMapping(value="/boardInsert", method=RequestMethod.GET)
 	public String boardInsertForm(Model model,HttpSession session) {
-		Board board = new Board();
-		model.addAttribute(board);
+		BoardDto boardDto = new BoardDto();
+		model.addAttribute(boardDto);
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc==null) {
 			return "redirect:/login";
@@ -81,11 +77,10 @@ public class BoardController {
 	public String boardInsertSubmit(
 			@Valid
 			@ModelAttribute
-			Board board, BindingResult bindingResult, Model model) {
+			BoardDto boardDto, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
 			return "board/boardInsert";
 		}
-		BoardDto boardDto = new BoardDto(board);
 		boardService.insertBoard(boardDto);
 		return "redirect:/board";
 	}
@@ -99,7 +94,7 @@ public class BoardController {
 		}else {
 			User user = userService.search(lrc.getId());
 			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
-				model.addAttribute("board",boardService.selectOne(boardId));
+				model.addAttribute("boardDto",new BoardDto(boardService.selectOne(boardId)));
 				return "board/boardUpdate";
 			}else {
 				return "redirect:/boardSelectOne?boardId="+boardId;
@@ -110,12 +105,12 @@ public class BoardController {
 	@RequestMapping(value="/boardUpdate", method=RequestMethod.POST)
 	public String boardUpdateSubmit(
 			@Valid
-			Board board, BindingResult bindingResult,Model model) {
+			BoardDto boardDto, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) {
 			return "board/boardUpdate";
 		}
-		boardService.update(board);
-		return "redirect:/boardSelectOne?boardId="+board.getBoardId();
+		boardService.update(boardDto);
+		return "redirect:/boardSelectOne?boardId="+boardDto.getBoardId();
 	}
 	
 	@RequestMapping("/boardDelete")
@@ -131,93 +126,6 @@ public class BoardController {
 				return "redirect:/board";
 			}else {
 				return "redirect:/boardSelectOne?boardId="+boardId;
-			}
-		}
-	}
-	
-	//noticeBaord
-	@RequestMapping(value="/noticeBoardInsert", method=RequestMethod.GET)
-	public String noticeBoardInsertForm(Model model,HttpSession session) {
-		Board board = new Board();
-		model.addAttribute(board);
-		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
-		if(lrc==null) {
-			return "redirect:/login";
-		}
-		User user = userService.search(lrc.getId());
-		model.addAttribute("userId", user.getUserId());
-		return "board/boardInsert";
-	}
-	
-	@RequestMapping(value="/noticeBoardInsert", method=RequestMethod.POST)
-	public String noticeBoardInsertSubmit(
-			@Valid
-			@ModelAttribute
-			Board board, BindingResult bindingResult, Model model) {
-		if(bindingResult.hasErrors()) {
-			return "board/boardInsert";
-		}
-		BoardDto boardDto = new BoardDto(board);
-		boardService.insertNoticeBoard(boardDto);
-		return "redirect:/board";
-	}
-	
-	@RequestMapping("/noticeBoardSelectOne")
-	public String noticeBoardSelectIdOne(@RequestParam("boardId") int boardId, Model model,HttpSession session) {
-		BoardIdDto boardIdDto = boardService.noticeSelectIdOne(boardId);
-		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
-		if(lrc!=null) {
-			User user = userService.search(lrc.getId());
-			if(userService.isAdmin(user.getUserId())) {
-				model.addAttribute("admin","admin");
-			}
-		}
-		model.addAttribute("notice","notice");
-		model.addAttribute("boardIdDto",boardIdDto);
-		return "board/boardSelect";
-	}
-	
-	@RequestMapping(value="/noticeBoardUpdate", method=RequestMethod.GET)
-	public String noticeBoardUpdateForm(@RequestParam("boardId")int boardId, Model model, HttpSession session) {
-		BoardIdDto boardIdDto = boardService.noticeSelectIdOne(boardId);
-		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
-		if(lrc==null) {
-			return "redirect:/noticeBoardSelectOne?boardId="+boardId;
-		}else {
-			User user = userService.search(lrc.getId());
-			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
-				model.addAttribute("board",boardService.noticeSelectOne(boardId));
-				return "board/boardUpdate";
-			}else {
-				return "redirect:/noticeBoardSelectOne?boardId="+boardId;
-			}
-		}
-	}
-	
-	@RequestMapping(value="/noticeBoardUpdate", method=RequestMethod.POST)
-	public String noticeBoardUpdateSubmit(
-			@Valid
-			Board board, BindingResult bindingResult,Model model) {
-		if(bindingResult.hasErrors()) {
-			return "board/boardUpdate";
-		}
-		boardService.noticeUpdate(board);
-		return "redirect:/noticeBoardSelectOne?boardId="+board.getBoardId();
-	}
-	
-	@RequestMapping("/noticeBoardDelete")
-	public String noticeBoardDelete(@RequestParam("boardId")int boardId,Model model, HttpSession session) {
-		BoardIdDto boardIdDto = boardService.noticeSelectIdOne(boardId);
-		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
-		if(lrc==null) {
-			return "redirect:/noticeBoardSelectOne?boardId="+boardId;
-		}else {
-			User user = userService.search(lrc.getId());
-			if(user.getUserId()==boardIdDto.getUserId()||userService.isAdmin(user.getUserId())) {
-				boardService.noticeUpdateDelete(boardId);
-				return "redirect:/board";
-			}else {
-				return "redirect:/noticeBoardSelectOne?boardId="+boardId;
 			}
 		}
 	}

@@ -18,4 +18,9 @@ public class InsuranceService
 	{
 		return insuranceMapper.insuranceAll();
 	}
+	
+	public Insurance getInsurance(int id)
+	{
+		return insuranceMapper.getInsurace(id);
+	}
 }

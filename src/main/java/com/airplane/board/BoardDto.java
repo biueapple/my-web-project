@@ -1,16 +1,27 @@
 package com.airplane.board;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class BoardDto {
+	private int boardId;
 	private int userId;
+	@NotBlank(message = "{NotBlank.boardDto.boardTitle}")
 	private String boardTitle;
 	private String board;
 	
+	public BoardDto() {}
 	public BoardDto(Board board) {
-		this.userId = board.getUserId();
-		this.boardTitle = board.getBoardTitle();
-		this.board = board.getBoard();
+		this.boardId=board.getBoardId();
+		this.userId=board.getUserId();
+		this.boardTitle=board.getBoardTitle();
+		this.board=board.getBoard();
 	}
-	
+	public int getBoardId() {
+		return boardId;
+	}
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
+	}
 	public int getUserId() {
 		return userId;
 	}

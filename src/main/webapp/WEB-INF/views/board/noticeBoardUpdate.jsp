@@ -34,12 +34,16 @@ h2, p {
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
 <h2><spring:message code="board.updateTitle"/></h2>
-	<form:form modelAttribute="boardDto" method="post">
+	<form:form modelAttribute="noticeBoardDto" method="post">
 		<form:hidden path="boardId"/>
 		<p>
 			<spring:message code="label.boardTitle"/>
 			<form:input path="boardTitle"/>
 			<form:errors path="boardTitle"/>
+		</p>
+		<p>
+			중요도
+			<form:input path="importance"/>
 		</p>
 		<p>
 			<spring:message code="label.board"/>

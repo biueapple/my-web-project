@@ -128,6 +128,7 @@ button:hover {
 			<spring:message code="label.Info.MemberInformation" />
 		</h3>
 
+		<!-- 전체 환불 요청 form -->
 		<form action="<c:url value='/user/regist/refund'/>" method="post">
 			<table class="reservation-table">
 				<thead>
@@ -138,6 +139,7 @@ button:hover {
 						<th><spring:message code="label.Info.Departure" /></th>
 						<th><spring:message code="label.Info.Destination" /></th>
 						<th><spring:message code="label.Info.SeatNumber" /></th>
+						<th><spring:message code="label.InsuranceList" /></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -150,22 +152,18 @@ button:hover {
 								<td>${RefundUser.depart}</td>
 								<td>${RefundUser.arrive}</td>
 								<td>${RefundUser.seat}</td>
+								<td>
+									<!-- 보험확인 버튼 - 별도의 GET 폼 -->
+									<form action="<c:url value='/insurance' />" method="get" style="margin:0;">
+										<input type="hidden" name="userId" value="${RefundUser.userId}" />
+										<button type="submit">보험 확인</button>
+									</form>
+								</td>
 							</tr>
 						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
-<form action="<c:url value='/user/regist/refund'/>" method="post">
-    <table class="reservation-table">
-        <!-- 테이블 내용 (체크박스 포함) -->
-    </table>
-
-    <input type="hidden" name="id" value="${user.userId}" />
-
-    <div class="buttons-container">
-        <button type="submit" formaction="<c:url value='/user/regist/refund'/>">
-            <spring:message code="label.Info.RefundRequest" />
-        </button>
 
         <button type="submit" formaction="<c:url value='/user/damage'/>">
             <spring:message code="label.damageRequest" />

@@ -34,7 +34,7 @@ h2, p {
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
 <h2><spring:message code="board.insertTitle"/></h2>
-	<form:form modelAttribute="board" method="post">
+	<form:form modelAttribute="boardDto" method="post">
 		<form:hidden path="userId" value="${userId}"/>
 		<p>
 			<spring:message code="label.boardTitle"/>

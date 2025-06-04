@@ -1,6 +1,5 @@
 package com.airplane.plane;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -15,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.airplane.board.BoardIdDto;
 import com.airplane.board.BoardService;
+import com.airplane.board.NoticeBoardService;
+import com.airplane.insurance.Insurance;
+import com.airplane.insurance.InsuranceService;
 import com.airplane.user.LoginRequestCommand;
 import com.airplane.user.User;
 import com.airplane.user.UserService;
@@ -38,7 +40,10 @@ public class HomeController
 	AirService airService;
 	@Autowired
 	BoardService boardService;
-
+	@Autowired
+	NoticeBoardService noticeBoardService;
+	@Autowired
+	InsuranceService insuranceService;
 	// 홈 페이지
 	@RequestMapping("/")
 	public String home(Model model, Locale locale, HttpSession session)
@@ -59,10 +64,6 @@ public class HomeController
 		//모든 공항의 이름을 받아오기
 		List<String> strings = airService.IDToSting(integer);
 
-		//시간정보 포멧
-		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-
 		//비행기정보에서 출발지 id 와 도착지 id 대신 이름으로 가지고 있는 클래스 리스트
 		List<PlaneListVO> dtoList = new ArrayList<>();
 
@@ -82,7 +83,7 @@ public class HomeController
 		model.addAttribute("Recently", dtoList);
 
 		//현재 삭제상태가 아니고(정상인) 중요도가 3 이상인 공지를 모두 리턴받음
-		List<BoardIdDto> noticeBoard = boardService.noticeSelectIdAllNormalImportance(3);
+		List<BoardIdDto> noticeBoard = noticeBoardService.noticeSelectIdAllNormalImportance(3);
 		//공지 전달
 		model.addAttribute("noticeBoard", noticeBoard);
 
@@ -178,7 +179,8 @@ public class HomeController
 	public String airplaneListGet(Model model, HttpSession session)
 	{
 		// 출발지와 도착지를 airPortController 에서 넣은 session 에서 꺼내기
-		AirinfoDto dto = (AirinfoDto) session.getAttribute("airinfoDto");
+		AirinfoDto dto = (AirinfoDto) model.getAttribute("dto");
+		System.out.println("35353535" + dto);
 		
 		//모든 공항에 대한 정보를 꺼내오기
 		List<AirinfoDto> aid = airService.info();
@@ -299,6 +301,13 @@ public class HomeController
 		return "redirect:/";
 	}
 
+	@RequestMapping(value = "insurance", method = RequestMethod.GET)
+	public String testInsuranceLink(Model model)
+	{
+		List<Insurance> insuranceList = insuranceService.selectAllInsurance(); // 예시
+	    model.addAttribute("insuranceList", insuranceList);
+	    return "insuranceList"; // /WEB-INF/views/insuranceList.jsp
+	}
 	
 	private boolean Admin(HttpSession session)
 	{

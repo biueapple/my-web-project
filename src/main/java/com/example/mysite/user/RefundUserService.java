@@ -45,5 +45,8 @@ public class RefundUserService {
 		return update > 0;
 	}
 	
-
+	public void updateInsurance(int seat_id, int insurance_id)
+	{
+		userMapper.updateInsurance(seat_id, insurance_id);
+	}
 }

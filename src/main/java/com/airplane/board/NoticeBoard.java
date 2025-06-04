@@ -2,12 +2,16 @@ package com.airplane.board;
 
 import java.time.LocalDateTime;
 
-public class Board {
+import jakarta.validation.constraints.NotBlank;
+
+public class NoticeBoard {
 	private int boardId;
 	private int userId;
+	@NotBlank(message = "{NotBlank.board.boardTitle}")
 	private String boardTitle;
 	private String board;
 	private LocalDateTime registDate;
+	private int importance=2;
 	private String state;
 	
 	public int getBoardId() {
@@ -39,6 +43,12 @@ public class Board {
 	}
 	public void setRegistDate(LocalDateTime registDate) {
 		this.registDate = registDate;
+	}
+	public int getImportance() {
+		return importance;
+	}
+	public void setImportance(int importance) {
+		this.importance = importance;
 	}
 	public String getState() {
 		return state;

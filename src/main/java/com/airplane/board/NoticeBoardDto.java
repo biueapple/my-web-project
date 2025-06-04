@@ -1,15 +1,23 @@
 package com.airplane.board;
 
-import java.time.LocalDateTime;
+import jakarta.validation.constraints.NotBlank;
 
-public class Board {
+public class NoticeBoardDto {
 	private int boardId;
 	private int userId;
+	@NotBlank(message = "{NotBlank.noticeBoardDto.boardTitle}")
 	private String boardTitle;
 	private String board;
-	private LocalDateTime registDate;
-	private String state;
+	private int importance=2;
 	
+	public NoticeBoardDto() {}
+	public NoticeBoardDto(NoticeBoard noticeBoard) {
+		this.boardId=noticeBoard.getBoardId();
+		this.userId=noticeBoard.getUserId();
+		this.boardTitle=noticeBoard.getBoardTitle();
+		this.board=noticeBoard.getBoard();
+		this.importance=noticeBoard.getImportance();
+	}
 	public int getBoardId() {
 		return boardId;
 	}
@@ -34,22 +42,12 @@ public class Board {
 	public void setBoard(String board) {
 		this.board = board;
 	}
-	public LocalDateTime getRegistDate() {
-		return registDate;
+	public int getImportance() {
+		return importance;
 	}
-	public void setRegistDate(LocalDateTime registDate) {
-		this.registDate = registDate;
+	public void setImportance(int importance) {
+		this.importance = importance;
 	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	@Override
-	public String toString() {
-		return "Board [boardId=" + boardId + ", userId=" + userId + ", userManager=" + ", boardTitle="
-				+ boardTitle + ", board=" + board + ", registerDate=" + registDate + "]";
-	}
+	
 	
 }
