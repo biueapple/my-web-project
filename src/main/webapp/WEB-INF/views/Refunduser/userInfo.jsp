@@ -128,6 +128,7 @@ button:hover {
 			<spring:message code="label.Info.MemberInformation" />
 		</h3>
 
+		<!-- 전체 환불 요청 form -->
 		<form action="<c:url value='/user/regist/refund'/>" method="post">
 			<table class="reservation-table">
 				<thead>
@@ -145,14 +146,19 @@ button:hover {
 					<c:forEach var="RefundUser" items="${list}">
 						<c:if test="${RefundUser.state == '정상'}">
 							<tr>
-								<td><input type="checkbox" name="ids"
-									value="${RefundUser.id}" /></td>
+								<td><input type="checkbox" name="ids" value="${RefundUser.id}" /></td>
 								<td>${RefundUser.userId}</td>
 								<td>${RefundUser.gender}</td>
 								<td>${RefundUser.depart}</td>
 								<td>${RefundUser.arrive}</td>
 								<td>${RefundUser.seat}</td>
-								
+								<td>
+									<!-- 보험확인 버튼 - 별도의 GET 폼 -->
+									<form action="<c:url value='/insurance' />" method="get" style="margin:0;">
+										<input type="hidden" name="userId" value="${RefundUser.userId}" />
+										<button type="submit">보험 확인</button>
+									</form>
+								</td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -163,26 +169,22 @@ button:hover {
 
 			<div class="buttons-container">
 				<div class="left-buttons">
-					<form action="<c:url value='/user/regist/refund'/>" method="post"
-						style="margin: 0; padding: 0;">
+					<!-- 환불 요청 버튼 -->
+					<button type="submit">
+						<spring:message code="label.Info.RefundRequest" />
+					</button>
+
+					<!-- 피해보상 요청 버튼 -->
+					<form action="<c:url value='/user/damage'/>" method="get" style="margin: 0; padding: 0;">
 						<input type="hidden" name="id" value="${user.userId}" />
 						<button type="submit">
-							<spring:message code="label.Info.RefundRequest" />
+							<spring:message code="label.damageRequest" />
 						</button>
 					</form>
-				
-
-				<form action="<c:url value='/user/damage'/>" method="get"
-					style="margin: 0; padding: 0;">
-					<input type="hidden" name="id" value="${user.userId}" />
-					<button type="submit">
-						<spring:message code="label.damageRequest" />
-					</button>
-				</form>
 				</div>
+
 				<div class="right-buttons">
-					<form action="<c:url value='/'/>" method="get"
-						style="margin: 0; padding: 0;">
+					<form action="<c:url value='/'/>" method="get" style="margin: 0; padding: 0;">
 						<button type="submit">
 							<spring:message code="label.Home" />
 						</button>
