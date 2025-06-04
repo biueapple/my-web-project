@@ -174,25 +174,61 @@ button:hover {
 						<spring:message code="label.Info.RefundRequest" />
 					</button>
 
-					<!-- 피해보상 요청 버튼 -->
-					<form action="<c:url value='/user/damage'/>" method="get" style="margin: 0; padding: 0;">
-						<input type="hidden" name="id" value="${user.userId}" />
-						<button type="submit">
-							<spring:message code="label.damageRequest" />
-						</button>
-					</form>
-				</div>
-
-				<div class="right-buttons">
-					<form action="<c:url value='/'/>" method="get" style="margin: 0; padding: 0;">
-						<button type="submit">
-							<spring:message code="label.Home" />
-						</button>
-					</form>
-				</div>
+				
+			
 			</div>
 		</form>
 
+<!-- 버튼 컨테이너 (폼 외부에 위치) -->
+<div class="buttons-container">
+    <div class="left-buttons">
+  
+
+        <!-- 피해보상 요청 버튼 (JS로 ids 수집 후 POST 전송) -->
+        <button type="button" onclick="submitDamageForm()">
+            <spring:message code="label.damageRequest" />
+        </button>
+    </div>
+
+    <div class="right-buttons">
+        <form action="<c:url value='/'/>" method="get" style="margin: 0; padding: 0;">
+            <button type="submit">
+                <spring:message code="label.Home" />
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- 숨겨진 폼: JS에서 ids 전송용 -->
+<form id="damageForm" action="<c:url value='/user/damage'/>" method="post" style="display: none;">
+    <input type="hidden" name="id" value="${user.userId}" />
+</form>
+
+<script>
+function submitDamageForm() {
+    // 기존에 체크된 ids 값들을 가져옴
+    const checkedBoxes = document.querySelectorAll("input[name='ids']:checked");
+
+    if (checkedBoxes.length === 0) {
+        alert("피해보상을 신청할 예약을 선택해주세요.");
+        return;
+    }
+
+    // 기존 hidden form에 체크된 ids 추가
+    const form = document.getElementById("damageForm");
+    form.innerHTML = '<input type="hidden" name="id" value="${user.userId}" />'; // 초기화
+
+    checkedBoxes.forEach(box => {
+        const hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "ids";
+        hiddenInput.value = box.value;
+        form.appendChild(hiddenInput);
+    });
+
+    form.submit();
+}
+</script>
 		<c:if test="${not empty message}">
 			<div class="message">${message}</div>
 		</c:if>

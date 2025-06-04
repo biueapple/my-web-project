@@ -19,7 +19,7 @@ public class Upload {
 			String savedFilename = uuid + "_" + originalFilename;
 			File uploadDir = new File(savePath);
 
-			path = savePath + savedFilename;
+			path = savedFilename;
 			if (!uploadDir.exists()) {
 				uploadDir.mkdirs(); // 폴더가 없으면 자동 생성
 			}

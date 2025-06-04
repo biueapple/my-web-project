@@ -17,6 +17,8 @@
 	<mvc:annotation-driven />
 
 	<mvc:resources mapping="/images/**" location="classpath:/static/images/" />
+	<!-- static resource handler -->
+	<mvc:resources mapping="/upload/**" location="file:/D:/my-web-project/upload/" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
