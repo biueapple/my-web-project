@@ -2,14 +2,14 @@ package com.example.mysite.user;
 
 
 public class DamageDto {
-	private int id;
+	private Integer id;
 	private String savepath;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

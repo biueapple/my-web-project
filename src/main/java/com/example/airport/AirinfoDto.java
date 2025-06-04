@@ -18,8 +18,18 @@ public class AirinfoDto {
     @NotNull(message = "{NotBlank.departureDate}")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate departureDate;
+    @NotNull(message = "{NotNull.passenger_number}")
+    private Integer passenger_number;
     
-    public String getDeparture() {
+    public Integer getPassenger_number() {
+		return passenger_number;
+	}
+
+	public void setPassenger_number(Integer passenger_number) {
+		this.passenger_number = passenger_number;
+	}
+
+	public String getDeparture() {
 		return departure;
 	}
 

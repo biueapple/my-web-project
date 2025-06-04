@@ -4,17 +4,24 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-//reservation select
+//DB 에서 reservation select 할때 사용하는 클래스
 public class Plane
 {
+	//고유 id
 	private int id;
+	//원본 비행기의 id
 	private int original_id;
+	//출발 시간
 	private LocalDateTime plane_time;
-	private int departure_id;//출발지
-	private int destination_id;//목적지
+	//출발지
+	private int departure_id;
+	//목적지
+	private int destination_id;
+	//좌석 수
 	private int economy_seat;
 	private int business_seat;
 	private int first_seat;
+	//가격
 	private int price;
 	
 	public int getId()
