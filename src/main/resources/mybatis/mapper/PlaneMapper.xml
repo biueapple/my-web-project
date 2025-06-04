@@ -45,8 +45,8 @@
   		AND destination_id = #{destination_id}
 	</select>
 	
-	<select id="selectPlane" resultType="com.airplane.plane.Plane" resultMap="planeMap">
-		SELECT * FROM plane_reservation WHERE id = #{id}
+	<select id="selectPlaneToReservationId" resultType="com.airplane.plane.Plane" resultMap="planeMap">
+		SELECT * FROM plane_reservation WHERE id = #{reservation_id}
 	</select>
 	
 	<select id="selectOriginalToReservationId" resultType="com.airplane.plane.PlaneOriginal" resultMap="planeOriginalMap">

@@ -2,13 +2,18 @@ package com.airplane.plane;
 
 import java.time.LocalDateTime;
 
-//reservation insert
+//reservation insert 할때 사용하는 클래스
 public class PlaneReservation
 {
+	//원본 비행기 id
 	private int original_id;
+	//출발 시간
 	private LocalDateTime plane_time;
+	//출발지 id
 	private int departure_id;
+	//목적지 id
 	private int destination_id;
+	//가격
 	private int price;
 
 	

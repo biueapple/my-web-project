@@ -1,6 +1,6 @@
 package com.airplane.insurance;
 
-//보험 db 데이터
+//보험 DB 데이터
 public class Insurance
 {
 	//고유 id
@@ -13,6 +13,8 @@ public class Insurance
 	private int compensation;
 	//보험 내용
 	private String content;
+	
+	
 	public int getId()
 	{
 		return id;
