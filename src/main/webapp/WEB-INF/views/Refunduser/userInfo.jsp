@@ -89,8 +89,6 @@ h2, p {
 	padding: 0;
 }
 
-
-
 button {
 	background-color: #2980b9;
 	color: #ffffff;
@@ -162,8 +160,8 @@ button:hover {
 								<td>${RefundUser.arrive}</td>
 								<td>${RefundUser.seat}</td>
 								<td>
-									<button type="button" onclick="submitInsuranceForm('${RefundUser.userId}')">
-										보험 확인
+									<button type="button" style="position: relative; left: 35px;" onclick="submitInsuranceForm('${RefundUser.userId}')">
+									보험 확인
 									</button>
 								</td>
 							</tr>
