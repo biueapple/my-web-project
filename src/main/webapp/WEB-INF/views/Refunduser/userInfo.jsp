@@ -165,16 +165,33 @@ button:hover {
 				</tbody>
 			</table>
 
-        <button type="submit" formaction="<c:url value='/user/damage'/>">
-            <spring:message code="label.damageRequest" />
-        </button>
+			<input type="hidden" name="id" value="${user.userId}" />
 
-        <button type="button" onclick="location.href='/'">
-            <spring:message code="label.Home" />
-        </button>
-    </div>
-</form>
+			<div class="buttons-container">
+				<div class="left-buttons">
+					<!-- 환불 요청 버튼 -->
+					<button type="submit">
+						<spring:message code="label.Info.RefundRequest" />
+					</button>
 
+					<!-- 피해보상 요청 버튼 -->
+					<form action="<c:url value='/user/damage'/>" method="get" style="margin: 0; padding: 0;">
+						<input type="hidden" name="id" value="${user.userId}" />
+						<button type="submit">
+							<spring:message code="label.damageRequest" />
+						</button>
+					</form>
+				</div>
+
+				<div class="right-buttons">
+					<form action="<c:url value='/'/>" method="get" style="margin: 0; padding: 0;">
+						<button type="submit">
+							<spring:message code="label.Home" />
+						</button>
+					</form>
+				</div>
+			</div>
+		</form>
 
 		<c:if test="${not empty message}">
 			<div class="message">${message}</div>
