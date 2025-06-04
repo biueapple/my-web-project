@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +76,6 @@ h2, p {
 	box-sizing: border-box;
 }
 
-
 button {
 	background-color: #2980b9;
 	color: #ffffff;
@@ -106,12 +105,24 @@ button:hover {
 </style>
 </head>
 <body>
-
-
 	<p style="color: red; font-weight: bold;">${message}</p>
 	<form action="<c:url value='/user/damage/home'/>" method="get"
-		style="display: inline-block;"style="margin: 0; padding: 0;">
-		<button type="submit"><spring:message code="label.Home" /></button>
+		style="display: inline-block;" style="margin: 0; padding: 0;">
+		<button type="submit">
+			<spring:message code="label.Home" />
+		</button>
 	</form>
+
+	<c:if test="${not empty savepath}">
+		<h4>사진들</h4>
+		<c:forEach var="path" items="${savePath}">
+			<img src="${path}" alt="photos"
+				style="width: 200px; height: auto; margin: 10px;" />
+		</c:forEach>
+	</c:if>
+
 </body>
 </html>
+
+
+

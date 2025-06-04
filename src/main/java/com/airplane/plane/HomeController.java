@@ -82,8 +82,8 @@ public class HomeController
 		//그렇게 변환된 비행기 출발 정보를 전달
 		model.addAttribute("Recently", dtoList);
 
-		//현재 삭제상태가 아닌(정상 상태인) 공지를 모두 리턴받음
-		List<BoardIdDto> noticeBoard = boardService.noticeSelectIdAllNormal();
+		//현재 삭제상태가 아니고(정상인) 중요도가 3 이상인 공지를 모두 리턴받음
+		List<BoardIdDto> noticeBoard = boardService.noticeSelectIdAllNormalImportance(3);
 		//공지 전달
 		model.addAttribute("noticeBoard", noticeBoard);
 

@@ -66,6 +66,10 @@ public class BoardService {
 		return boardMapper.noticeSelectIdAllNormal();
 	}
 	
+	public List<BoardIdDto> noticeSelectIdAllNormalImportance(int importance) {
+		return boardMapper.noticeSelectIdAllNormalImportance(importance);
+	}
+	
 	public BoardIdDto noticeSelectIdOne(int boardId) {
 		return boardMapper.noticeSelectIdOne(boardId);
 	}

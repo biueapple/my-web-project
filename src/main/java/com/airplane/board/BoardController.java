@@ -35,7 +35,7 @@ public class BoardController {
 	@RequestMapping("/board")
 	public String boardMain(Model model, HttpSession session){
 		List<BoardIdDto> boardList = boardService.selectIdAllNormal();
-		List<BoardIdDto> noticeBoardList = boardService.noticeSelectIdAllNormal();
+		List<BoardIdDto> noticeBoardList = boardService.noticeSelectIdAllNormalImportance(2);
 		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 		if(lrc!=null) {
 			User user = userService.search(lrc.getId());

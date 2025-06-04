@@ -104,6 +104,20 @@ footer {
 .notice-board {
 	flex: 1;
 	min-width: 300px;
+	max-height: 256px;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.notice-board::-webkit-scrollbar {
+	width: 6px;
+	background: transparent;
+}
+
+.notice-board::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
 }
 
 .recent-slide-container {
@@ -196,14 +210,17 @@ footer {
 
 	<div class="container">
 		<main>
-			<h3>공지사항</h3>
+			<h3><spring:message code="label.Notice" /></h3>
 			<div class="main-content">
 				<div class="notice-board">
 					<c:forEach var="boardIdDto" items="${noticeBoard}">
 						<div class="notice-item">
 							<div class="notice-header" onclick="toggleNotice(this)">
-								[공지] ${boardIdDto.boardTitle}</div>
-							<div class="notice-body">${boardIdDto.board}</div>
+								${boardIdDto.boardTitle}
+							</div>
+							<div class="notice-body">
+								${boardIdDto.board}
+							</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -236,15 +253,11 @@ footer {
 	</div>
 
 	<script>
-function toggleNotice(header) {
-    const body = header.nextElementSibling;
-    const isVisible = body.style.display === "block";
-    document.querySelectorAll('.notice-body').forEach(el => el.style.display = "none");
-    if (!isVisible) {
-        body.style.display = "block";
-    }
-}
-
+	function toggleNotice(header) {
+	    const body = header.nextElementSibling;
+	    body.style.display = (body.style.display === "block") ? "none" : "block";
+	}
+/* 지도 */
 window.onload = function () {
 	const bounds = [
 	    [-90, -180],
