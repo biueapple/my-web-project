@@ -3,11 +3,18 @@ package com.airplane.board;
 import java.time.LocalDateTime;
 
 public class Board {
+	//board 에서 select 하기위한 class
+	//게시글 고유 id
 	private int boardId;
+	//유저 고유 id
 	private int userId;
+	//제목
 	private String boardTitle;
+	//내용
 	private String board;
+	//작성일
 	private LocalDateTime registDate;
+	//상태(정상,삭제)
 	private String state;
 	
 	public int getBoardId() {

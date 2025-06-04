@@ -39,11 +39,6 @@
 			FROM board b JOIN users u ON b.user_id = u.user_id WHERE b.board_id = #{boardId};
 	</select>
 	
-	<select id="selectIdOneNormal" resultMap="boardUserIdMap">
-		SELECT b.board_id, b.user_id, u.id, b.board_title, b.board, b.regist_date, b.state 
-			FROM board b JOIN users u ON b.user_id = u.user_id WHERE b.board_id = #{boardId} AND b.state = '정상';
-	</select>
-	
 	<select id="selectAll" resultMap="boardMap">
 		SELECT * From board;
 	</select>

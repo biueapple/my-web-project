@@ -59,11 +59,6 @@
 			FROM notice_board b JOIN users u ON b.user_id = u.user_id WHERE b.board_id = #{boardId};
 	</select>
 	
-	<select id="noticeSelectIdOneNormal" resultMap="boardUserIdMap">
-		SELECT b.board_id, b.user_id, u.id, b.board_title, b.board, b.regist_date, b.state 
-			FROM notice_board b JOIN users u ON b.user_id = u.user_id WHERE b.board_id = #{boardId} AND b.state = '정상';
-	</select>
-	
 	<update id="noticeUpdate" parameterType="com.airplane.board.NoticeBoardDto">
 		UPDATE notice_board set board_title=#{boardTitle},board=#{board},board_importance=#{importance} WHERE board_id=#{boardId};
 	</update>
