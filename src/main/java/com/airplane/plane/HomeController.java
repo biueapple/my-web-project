@@ -1,6 +1,5 @@
 package com.airplane.plane;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.airplane.board.BoardIdDto;
 import com.airplane.board.BoardService;
+import com.airplane.insurance.Insurance;
+import com.airplane.insurance.InsuranceService;
 import com.airplane.user.LoginRequestCommand;
 import com.airplane.user.User;
 import com.airplane.user.UserService;
@@ -38,6 +39,8 @@ public class HomeController
 	AirService airService;
 	@Autowired
 	BoardService boardService;
+	@Autowired
+	InsuranceService insuranceService;
 
 	// 홈 페이지
 	@RequestMapping("/")
@@ -174,7 +177,8 @@ public class HomeController
 	public String airplaneListGet(Model model, HttpSession session)
 	{
 		// 출발지와 도착지를 airPortController 에서 넣은 session 에서 꺼내기
-		AirinfoDto dto = (AirinfoDto) session.getAttribute("airinfoDto");
+		AirinfoDto dto = (AirinfoDto) model.getAttribute("dto");
+		System.out.println("35353535" + dto);
 		
 		//모든 공항에 대한 정보를 꺼내오기
 		List<AirinfoDto> aid = airService.info();
@@ -295,6 +299,13 @@ public class HomeController
 		return "redirect:/";
 	}
 
+	@RequestMapping(value = "insurance", method = RequestMethod.GET)
+	public String testInsuranceLink(Model model)
+	{
+		List<Insurance> insuranceList = insuranceService.selectAllInsurance(); // 예시
+	    model.addAttribute("insuranceList", insuranceList);
+	    return "insuranceList"; // /WEB-INF/views/insuranceList.jsp
+	}
 	
 	private boolean Admin(HttpSession session)
 	{
