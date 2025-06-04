@@ -20,12 +20,12 @@ public class UploadService {
 	public void service(LoginRequestCommand lrc, String path) {
 		String id = lrc.getId();
 		User user = userService.search(id);
+		
 		DamageDto damageDto = new DamageDto();
 		damageDto.setId(user.getUserId());
 		damageDto.setSavepath(path);
-		damageService.registerRequest(damageDto);
-	}
-	public void insertSavepath(DamageDto damageDto) {
+		
 		refundUserMapper.insertSavepath(damageDto);
+
 	}
 }
