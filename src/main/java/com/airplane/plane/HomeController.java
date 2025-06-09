@@ -180,7 +180,6 @@ public class HomeController
 	{
 		// 출발지와 도착지를 airPortController 에서 넣은 session 에서 꺼내기
 		AirinfoDto dto = (AirinfoDto) model.getAttribute("dto");
-		System.out.println("35353535" + dto);
 		
 		//모든 공항에 대한 정보를 꺼내오기
 		List<AirinfoDto> aid = airService.info();
@@ -197,7 +196,8 @@ public class HomeController
 		}
 		
 		//나온 출발지 도착지 id 값을 이용해서 출발지 도착지 선택한 시간값으로 출발할 예정인 비행기 리스트를 받아오기
-		List<Plane> plane = planeService.selectAll(dto.getDepartureDate(), depart_id, destination_id);
+		//List<Plane> plane = planeService.selectAll(dto.getDepartureDate(), depart_id, destination_id);
+		List<Plane> plane = planeService.selectEnough(dto.getDepartureDate(), depart_id, destination_id, dto.getPassenger_number());
 		
 		//받아온 plane 리스트는 출발지와 도착지가 id 값이니 문자열로 변환하여 전달하기 위한 리스트 생성
 		List<PlaneListVO> vo = new ArrayList<>();
@@ -307,6 +307,12 @@ public class HomeController
 		List<Insurance> insuranceList = insuranceService.selectAllInsurance(); // 예시
 	    model.addAttribute("insuranceList", insuranceList);
 	    return "insuranceList"; // /WEB-INF/views/insuranceList.jsp
+	}
+	@RequestMapping(value = "/insurance/select", method = RequestMethod.POST)
+	public String testInsurancePOST(Model model)
+	{
+		//선택한 보험을 적용
+	    return "redirect:/"; // /WEB-INF/views/insuranceList.jsp
 	}
 	
 	private boolean Admin(HttpSession session)

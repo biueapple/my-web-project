@@ -22,8 +22,7 @@
 
 <!-- 회원 탈퇴 폼 -->
 <form:form modelAttribute="userDeleteCommand"
-           action="${pageContext.request.contextPath}/delete"
-           method="post">
+           action="${pageContext.request.contextPath}/delete" method="post">
     비밀번호: <form:password path="password"/>
     <form:errors path="password" cssClass="error" />
     <br/>

@@ -38,4 +38,8 @@ public class PlaneOriginal
 	{
 		this.first_seat = first_seat;
 	}
+	public int getSeat()
+	{
+		return economy_seat + business_seat + first_seat;
+	}
 }
