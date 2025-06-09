@@ -6,13 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -68,10 +64,54 @@ public class UserController {
 		return "/user/registResult";
 	}
 	
-	@RequestMapping(value="myPage", method=RequestMethod.GET)
-	public String myPage(HttpSession session) {
-		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
-		
-		return "/user/myPage";
+	// 마이페이지 조회 (GET)
+	// UserController - showMypage 메서드 예시
+	@RequestMapping(value="/myPage", method=RequestMethod.GET)
+	public String showMypage(HttpSession session, Model model) {
+	    Object loginObj = session.getAttribute("loginUser");
+	    if (loginObj == null) {
+	    	return "redirect:/login";
+	    }
+
+	    // 세션에 저장된 객체 타입에 따라 처리
+	    User user = null;
+	    if (loginObj instanceof User) {
+	        user = (User) loginObj;
+	    } else if (loginObj instanceof LoginRequestCommand) {
+	        LoginRequestCommand loginCmd = (LoginRequestCommand) loginObj;
+	        user = userService.search(loginCmd.getId());  // DB에서 User 조회
+	    } else {
+	        // 알 수 없는 타입이면 로그인 페이지로
+	    	return "redirect:/login";
+	    }
+
+	    model.addAttribute("user", user);
+	    return "user/myPage";
+	}
+
+	@RequestMapping(value="/myPage", method=RequestMethod.POST)
+	public String updateMypage(@ModelAttribute("user") UserDto userDto, HttpSession session) {
+	    Object loginObj = session.getAttribute("loginUser");
+	    if (loginObj == null) {
+	    	return "redirect:/login";
+	    }
+
+	    User user = null;
+	    if (loginObj instanceof User) {
+	        user = (User) loginObj;
+	    } else if (loginObj instanceof LoginRequestCommand) {
+	        LoginRequestCommand loginCmd = (LoginRequestCommand) loginObj;
+	        user = userService.search(loginCmd.getId());
+	    } else {
+	    	return "redirect:/login";
+	    }
+
+	    userDto.setUserId(user.getUserId());
+	    userService.updateUserInfo(userDto);
+
+	    User updatedUser = userService.findUserById(user.getUserId());
+	    session.setAttribute("loginUser", updatedUser);
+
+	    return "user/myPage";
 	}
 }
