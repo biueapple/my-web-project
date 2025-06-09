@@ -308,6 +308,12 @@ public class HomeController
 	    model.addAttribute("insuranceList", insuranceList);
 	    return "insuranceList"; // /WEB-INF/views/insuranceList.jsp
 	}
+	@RequestMapping(value = "/insurance/select", method = RequestMethod.POST)
+	public String testInsurancePOST(Model model)
+	{
+		//선택한 보험을 적용
+	    return "redirect:/"; // /WEB-INF/views/insuranceList.jsp
+	}
 	
 	private boolean Admin(HttpSession session)
 	{
