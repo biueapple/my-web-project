@@ -28,7 +28,7 @@
     <hr>
 
     <!-- 회원 탈퇴 버튼 -->
-    <form action="${pageContext.request.contextPath}/deleteConfirm" method="get">
+    <form action="${pageContext.request.contextPath}/userDelete" method="get">
         <input type="submit" value="회원 탈퇴" />
     </form>
 </body>
