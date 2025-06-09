@@ -88,7 +88,6 @@ public class Plane
 	{
 		this.first_seat = first_seat;
 	}
-	
 	public int getPrice()
 	{
 		return price;
@@ -98,6 +97,10 @@ public class Plane
 		this.price = price;
 	}
 	
+	public int getSeat()
+	{
+		return economy_seat + business_seat + first_seat;
+	}
 	public String getFormattedRegistDate()
 	{
 		if (plane_time == null)

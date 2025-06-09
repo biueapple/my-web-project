@@ -115,7 +115,24 @@ public class PlaneService
 		return planeMapper.selectReservationToTimeLateNow();
 	}
 	
-	//id값에 해당하는 비행기를 찾아서 리턴
+	//선택한 시작점과 목표자점 선택한 날과 시간부터 그날 자정까지 리턴 좌석이 충분한 비행기만
+	public List<Plane> selectEnough(LocalDate time, int departure_id, int destination_id, int count)
+	{
+		List<Plane> planeList = null;
+		
+		planeList = planeMapper.selectReservationToTimeLate(time, departure_id, destination_id);
+		PlaneOriginal original;
+		for(int i = planeList.size() - 1; i >= 0; i--)
+		{
+			original = planeMapper.selectOriginalToReservationId(planeList.get(i).getOriginal_id());
+			if(planeList.get(i).getSeat() + count > original.getSeat())
+				planeList.remove(i);
+		}
+		
+		return planeList;
+	}
+	
+	//id 값에 해당하는 비행기를 찾아서 리턴
 	public Plane FindCurrent(List<Plane> list, int id)
 	{
 		for(Plane plane : list) 
