@@ -94,6 +94,7 @@ button:hover {
 	color: #d32f2f;
 	font-weight: bold;
 }
+
 </style>
 <script>
 	function submitInsuranceForm(userId) {

@@ -36,6 +36,7 @@
 		resultMap="userMap">
 		SELECT * FROM users WHERE id = #{id}
 	</select>
+<<<<<<< HEAD
 
 	<select id="selectAdminByUserId" parameterType="int"
 		resultType="int">
@@ -69,6 +70,11 @@
 		SELECT * FROM users WHERE user_id = #{userId}
 	</select>
 
+=======
+	
+	
+	
+>>>>>>> 9c7915ca815e8dce8ea619198fa5357b61307bbc
 </mapper>
   
   

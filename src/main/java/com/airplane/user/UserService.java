@@ -39,7 +39,10 @@ public class UserService {
 		return (user != null) ? true : false;
 	}
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9c7915ca815e8dce8ea619198fa5357b61307bbc
 	public User search(String id) {
 		System.out.println("회원 정보 검색");
 		User user = userMapper.idsearch(id); //회원 정보 검색
