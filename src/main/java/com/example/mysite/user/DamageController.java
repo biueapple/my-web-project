@@ -33,11 +33,10 @@ public class DamageController {
     public String damageResult() {
         return "home";
     }
-
+    
     @RequestMapping(method = RequestMethod.POST)
     public String damageClaim(@RequestParam(value = "ids", required = false) List<Integer> ids,
                               HttpSession httpSession, Model model) {
-
         if (ids == null || ids.isEmpty()) {
             model.addAttribute("message", "선택된 예약이 없습니다.");
             return "redirect:/"; // 또는 에러페이지
