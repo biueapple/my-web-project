@@ -54,12 +54,13 @@
 		UPDATE users SET deleted = 1 WHERE user_id =
 		#{userId}
 	</update>
-	
+
 	<!-- 마이페이지 기능 -->
 	<!-- 유저 정보 업데이트 -->
 	<update id="updateUserInfo"
 		parameterType="com.airplane.user.UserDto">
-		UPDATE users SET name = #{name}, age = #{age}, phoneNumber		= #{phoneNumber}
+		UPDATE users SET name = #{name}, age = #{age},
+		phoneNumber = #{phoneNumber}
 		WHERE user_id = #{userId}
 	</update>
 
@@ -68,6 +69,13 @@
 		resultMap="userMap">
 		SELECT * FROM users WHERE user_id = #{userId}
 	</select>
+
+	<select id="checkById" parameterType="String"
+		resultType="boolean">
+		SELECT EXISTS (SELECT 1 FROM users WHERE id = #{id})
+	</select>
+
+
 </mapper>
   
   

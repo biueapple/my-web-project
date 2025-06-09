@@ -45,7 +45,10 @@ public class UserController {
 					, "비밀번호가 일치하지 않습니다.");
 		}
 		
-		
+		System.out.println("회원 중복 아이디 가입 검증");
+		if (userService.isDuplicatedId(cmdObj.getId())) {
+	        bindingResult.rejectValue("id", "error.id", "이미 존재하는 아이디입니다.");
+	    }
 		
 		if(bindingResult.hasErrors()) {
 			LinkedHashMap<String, String> genderMap = new LinkedHashMap<>();

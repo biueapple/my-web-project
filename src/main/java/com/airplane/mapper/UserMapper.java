@@ -33,4 +33,6 @@ public interface UserMapper {
 	
 	User selectUserById(int userId);
 	
+	//회원 중복 아이디 가입 제한
+	boolean checkById(String id);
 }

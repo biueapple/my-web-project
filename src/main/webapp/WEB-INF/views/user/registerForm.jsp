@@ -144,11 +144,12 @@ button[type="submit"]:hover {
 			<form:input path="phoneNumber" id="phoneNumber"/>
 			<form:errors path="phoneNumber" cssClass="error"/>
 		</p>
-	</form:form>
-	</div>
+
 			<button type="submit">
 				<spring:message code="button.submit" />
 			</button>
-	</div>
+	
+	</form:form>
+	
 </body>
 </html>

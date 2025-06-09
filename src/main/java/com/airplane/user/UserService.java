@@ -79,6 +79,11 @@ public class UserService {
         return userMapper.selectUserById(userId);
     }
 	
+    //회원 중복가입 제한
+    public boolean isDuplicatedId(String id) {
+        return userMapper.checkById(id);
+    }
+    
 }
 
 
