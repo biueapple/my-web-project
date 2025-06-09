@@ -2,7 +2,6 @@ package com.airplane.user;
 
 public class UserDto {
     private int userId;  // 변경
-
     private String id;
     private String password;
     private String name;

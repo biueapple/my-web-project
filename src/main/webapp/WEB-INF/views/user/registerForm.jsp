@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title><spring:message code="register.title"/></title>
+<title><spring:message code="register.title" /></title>
 <style>
 * {
   margin: 0;
@@ -144,13 +144,11 @@ button[type="submit"]:hover {
 			<form:input path="phoneNumber" id="phoneNumber"/>
 			<form:errors path="phoneNumber" cssClass="error"/>
 		</p>
-
-		<button type="submit">
-			<spring:message code="button.submit"/>
-		</button>
-
 	</form:form>
-</div>
-
+	</div>
+			<button type="submit">
+				<spring:message code="button.submit" />
+			</button>
+	</div>
 </body>
 </html>

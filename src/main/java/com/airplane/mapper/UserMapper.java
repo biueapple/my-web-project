@@ -26,4 +26,11 @@ public interface UserMapper {
 	//회원 탈퇴
 	int logicalDeleteUser(int userId);
 	
+	//마이페이지 기능
+	int updateUserInfo(UserDto userDto);
+	
+	int findUserById(UserDto userDto);
+	
+	User selectUserById(int userId);
+	
 }
