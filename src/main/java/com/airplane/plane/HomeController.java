@@ -304,10 +304,12 @@ public class HomeController
 	@RequestMapping(value = "insurance", method = RequestMethod.GET)
 	public String testInsuranceLink(Model model)
 	{
+		
 		List<Insurance> insuranceList = insuranceService.selectAllInsurance(); // 예시
 	    model.addAttribute("insuranceList", insuranceList);
 	    return "insuranceList"; // /WEB-INF/views/insuranceList.jsp
 	}
+	
 	@RequestMapping(value = "/insurance/select", method = RequestMethod.POST)
 	public String testInsurancePOST(Model model)
 	{

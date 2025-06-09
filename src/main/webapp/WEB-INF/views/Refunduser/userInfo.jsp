@@ -158,7 +158,7 @@ button:hover {
 								<td>${RefundUser.seat}</td>
 								<td>
 									<button type="button" style="position: relative; left: 35px;"
-										onclick="submitInsuranceForm('${RefundUser.userId}')">
+										onclick="submitInsuranceForm('${RefundUser.id}')">
 										보험 확인</button>
 								</td>
 							</tr>
@@ -198,7 +198,7 @@ button:hover {
 
 	<!-- 보험 확인용 숨은 form -->
 	<form id="insuranceForm" action="<c:url value='/insurance'/>" method="get" style="display: none;">
-		<input type="hidden" id="insuranceUserId" name="userId" />
+		<input type="hidden" id="insuranceUserId" name="Id" />
 	</form>
 
 	<!-- 피해보상 요청용 숨은 form -->
