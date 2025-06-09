@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/delete")
+@RequestMapping({"/delete", "/userDelete"})
 public class UserDeleteController {
 
     @Autowired
@@ -53,7 +53,7 @@ public class UserDeleteController {
             return "redirect:/";
         } else {
             redirectAttributes.addFlashAttribute("error", "비밀번호 불일치");
-            return "redirect:/user/delete";
+            return "redirect:/user/userDelete";
         }
     }
 }

@@ -117,4 +117,35 @@ public class UserController {
 
 	    return "user/myPage";
 	}
+	
+	// 회원정보 수정 폼 페이지
+	@RequestMapping(value = "/editForm", method = RequestMethod.GET)
+	public String showEditForm(HttpSession session, Model model) {
+	    Object loginObj = session.getAttribute("loginUser");
+	    if (loginObj == null) {
+	        return "redirect:/login";
+	    }
+
+	    User user;
+	    if (loginObj instanceof User) {
+	        user = (User) loginObj;
+	    } else if (loginObj instanceof LoginRequestCommand) {
+	        user = userService.search(((LoginRequestCommand) loginObj).getId());
+	    } else {
+	        return "redirect:/login";
+	    }
+
+	    // UserDto에 맞게 변환
+	    UserDto userDto = new UserDto();
+	    userDto.setUserId(user.getUserId());
+	    userDto.setId(user.getId());
+	    userDto.setName(user.getName());
+	    userDto.setGender(user.getGender());
+	    userDto.setPhoneNumber(user.getPhoneNumber());
+	    userDto.setAge(user.getAge());
+
+	    model.addAttribute("user", userDto);
+	    return "user/editForm"; // 회원정보 수정 폼으로 이동
+	}
+	
 }
