@@ -197,7 +197,7 @@ button:hover {
 	</div>
 
 	<!-- 보험 확인용 숨은 form -->
-	<form id="insuranceForm" action="<c:url value='/user/insurance'/>" method="post" style="display: none;">
+	<form id="insuranceForm" action="<c:url value='/insurance'/>" method="get" style="display: none;">
 		<input type="hidden" id="insuranceUserId" name="userId" />
 	</form>
 
