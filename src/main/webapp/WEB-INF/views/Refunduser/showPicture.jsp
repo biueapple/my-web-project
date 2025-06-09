@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib  prefix="spring" uri="http://www.springframework.org/tags" %>     
-    
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-<img src="<spring:url value="${savePath}"/>" alt="damage photo" style="max-width:300px;" />
 
+	<c:if test="${admin}">
+		<img src="<spring:url value="${savePath}"/>" alt="damage photo"
+			style="max-width: 300px;" />
+	</c:if>
+
+
+    <c:if test="${not admin}">
+        <div style="color: red;">
+            ${message}
+        </div>
+    </c:if>
 
 </body>
 </html>

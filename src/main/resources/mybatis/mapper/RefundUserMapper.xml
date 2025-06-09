@@ -36,6 +36,14 @@
 		state = '정상';
 	</select>
 
+	<select id="selectAll" resultType="com.example.mysite.user.Join">
+		SELECT
+		s.*,
+		u.id AS userName
+		FROM `seat` s
+		JOIN `users` u ON s.user_id = u.user_id
+	</select>
+
 	<insert id="insertDamage"
 		parameterType="com.example.mysite.user.DamageDto">
 		INSERT INTO damage (user_id, path)
@@ -52,9 +60,10 @@
 		parameterType="com.example.mysite.user.DamageDto">
 		UPDATE seat SET savepath = #{savepath} WHERE id = #{id}
 	</update>
-	
+
 	<update id="updateInsurance">
-		UPDATE seat SET insurance_id = #{insurance} WHERE id = #{id}
+		UPDATE seat SET insurance_id = #{insurance} WHERE id
+		= #{id}
 	</update>
 </mapper>
 

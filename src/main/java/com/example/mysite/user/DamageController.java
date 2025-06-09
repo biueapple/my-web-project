@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.airplane.user.LoginRequestCommand;
+import com.airplane.user.User;
+import com.airplane.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,72 +22,79 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/user/damage")
 public class DamageController {
 
-    @Autowired
-    UploadService uploadService;
+	@Autowired
+	UploadService uploadService;
 
-    @Autowired
-    Upload upload;
+	@Autowired
+	Upload upload;
 
-    @Autowired
-    RefundUserService refundUserService;
+	@Autowired
+	RefundUserService refundUserService;
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String damageResult() {
-        return "home";
-    }
-    
-    @RequestMapping(method = RequestMethod.POST)
-    public String damageClaim(@RequestParam(value = "ids", required = false) List<Integer> ids,
-                              HttpSession httpSession, Model model) {
-        if (ids == null || ids.isEmpty()) {
-            model.addAttribute("message", "선택된 예약이 없습니다.");
-            return "redirect:/"; // 또는 에러페이지
-        }
+	@Autowired
+	UserService userService;
 
-        httpSession.setAttribute("ticketId", ids);
-        model.addAttribute("damageRequest", new DamageDto());
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String damageResult() {
+		return "home";
+	}
 
-        return "Refunduser/damageUpload";
-    }
+	@RequestMapping(method = RequestMethod.POST)
+	public String damageClaim(@RequestParam(value = "ids", required = false) List<Integer> ids, HttpSession httpSession,
+			Model model) {
+		if (ids == null || ids.isEmpty()) {
+			model.addAttribute("message", "선택된 예약이 없습니다.");
+			return "redirect:/"; // 또는 에러페이지
+		}
 
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public String damageSubmit(@RequestParam("damagePhotos") List<MultipartFile> damagePhotos,
-                                @ModelAttribute DamageDto damageDto,
-                                HttpSession httpSession,
-                                Model model) {
+		httpSession.setAttribute("ticketId", ids);
+		model.addAttribute("damageRequest", new DamageDto());
 
-        LoginRequestCommand lrc = (LoginRequestCommand) httpSession.getAttribute("loginUser");
-        if (lrc == null) {
-            return "redirect:/login";
-        }
+		return "Refunduser/damageUpload";
+	}
 
-        List<Integer> ids = (List<Integer>) httpSession.getAttribute("ticketId");
-        List<String> savePath = new ArrayList<>();
-        String realPath = null;
-        for (int id : ids) {
-            boolean updated = true;//refundUserService.updateStatus(id);
-            if (updated) {
-                for (MultipartFile f : damagePhotos) {
-                    if (!f.isEmpty()) {
-                         realPath = upload.fileUpload("D:/my-web-project/upload/", f);
-                        uploadService.service(ids, realPath);
-                        savePath.add("/upload/" + f.getName());
-                    }
-                }
-            } else {
-                model.addAttribute("message", "예약 상태 업데이트 실패 (id: " + id + ")");
-                return "Refunduser/damageUpload";
-            }
-        }
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public String damageSubmit(@RequestParam("damagePhotos") List<MultipartFile> damagePhotos,
+			@ModelAttribute DamageDto damageDto, HttpSession httpSession, Model model) {
 
-        if (savePath.isEmpty()) {
-            model.addAttribute("message", "파일을 선택해주세요.");
-            return "Refunduser/damageUpload";
-        }
+		LoginRequestCommand lrc = (LoginRequestCommand) httpSession.getAttribute("loginUser");
+		if (lrc == null) {
+			return "redirect:/login";
+		}
 
-        model.addAttribute("message", "보상 신청이 완료되었습니다.");
-        model.addAttribute("savePath", "/upload/" + realPath);
+		List<Integer> ids = (List<Integer>) httpSession.getAttribute("ticketId");
+		List<String> savePath = new ArrayList<>();
+		String realPath = null;
+		for (int id : ids) {
+			boolean updated = true;// refundUserService.updateStatus(id);
+			if (updated) {
+				for (MultipartFile f : damagePhotos) {
+					if (!f.isEmpty()) {
+						realPath = upload.fileUpload("D:/my-web-project/upload/", f);
+						uploadService.service(ids, realPath);
+						savePath.add("/upload/" + f.getName());
+					}
+				}
+			} else {
+				model.addAttribute("message", "예약 상태 업데이트 실패 (id: " + id + ")");
+				return "Refunduser/damageUpload";
+			}
+		}
 
-        return "Refunduser/showPicture";
-    }
+		if (savePath.isEmpty()) {
+			model.addAttribute("message", "파일을 선택해주세요.");
+			return "Refunduser/damageUpload";
+		}
+		model.addAttribute("savePath", "/upload/" + realPath);
+
+		User user = userService.search(lrc.getId());
+		boolean admin=userService.isAdmin(user.getUserId());
+		model.addAttribute("admin", admin);
+		if (!admin) {
+			
+			model.addAttribute("message", "보상 신청이 완료되었습니다.");
+		}
+
+		return "Refunduser/showPicture";
+	}
 }
