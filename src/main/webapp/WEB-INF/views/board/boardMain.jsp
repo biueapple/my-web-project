@@ -57,11 +57,6 @@ tr:hover {
   background-color: #e6f0ff;
 }
 
-.deleted-post {
-  color: #999;
-  font-style: italic;
-}
-
 .link-button {
   background: none;
   border: none;
@@ -130,6 +125,7 @@ td:first-child {
   width: 80px;
   text-align: center;
 }
+
 th:nth-child(3),
 td:nth-child(3) {
   width: 100px;
@@ -142,6 +138,11 @@ td:nth-child(4) {
   width: 130px;
   white-space: nowrap;
   text-align: center;
+}
+
+.deleted-post {
+  color: #999;
+  font-style: italic;
 }
 </style>
 </head>
