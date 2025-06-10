@@ -8,6 +8,7 @@ public class RefundUser {
 	private String seat;
 	private String gender;
 	private String state;
+	private String savepath;
 	
 	public String getUserId() {
 		return userId;
@@ -52,6 +53,13 @@ public class RefundUser {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	
+	public String getSavepath() {
+		return savepath;
+	}
+	public void setSavepath(String savePath) {
+		this.savepath = savePath;
 	}
 
 }
