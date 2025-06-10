@@ -1,5 +1,7 @@
 package com.airplane.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.airplane.user.User;
@@ -35,4 +37,8 @@ public interface UserMapper {
 	
 	//회원 중복 아이디 가입 제한
 	boolean checkById(String id);
+	
+	//비밀번호 변경 기능
+	String getPasswordByUserId(int userId);
+	int updatePassword(@Param("newPassword")String password, @Param("userId")int userId);
 }

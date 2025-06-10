@@ -17,7 +17,7 @@
 
     <hr>
 <!-- 회원정보 수정 -->
-<form action="<c:url value='/editForm' />" method="get">
+<form action="<c:url value='/changePassword' />" method="get">
     <button type="submit">회원정보 수정</button>
 </form>
 
