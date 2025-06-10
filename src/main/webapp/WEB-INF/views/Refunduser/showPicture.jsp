@@ -29,7 +29,6 @@ h2, p {
 	padding: 0;
 }
 
-/* 새로 추가한 스타일 */
 .center-container {
 	display: flex;
 	flex-direction: column;
