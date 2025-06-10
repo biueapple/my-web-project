@@ -76,14 +76,10 @@ button:hover {
     <hr>
 
     <!-- 회원정보 수정 -->
-    <form action="<c:url value='/changePassword' />" method="get">
-        <button type="submit"><spring:message code="label.EditMember" /></button>
-    </form>
+    <button onclick="location.href='changePassword';"><spring:message code="label.EditMember" /></button>
 
     <!-- 회원 탈퇴 -->
-    <form action="<c:url value='/userDelete' />" method="get">
-        <button type="submit"><spring:message code="label.userDelete" /></button>
-    </form>
+    <button onclick="location.href='userDelete';"><spring:message code="label.userDelete" /></button>
 </div>
 
 </body>
