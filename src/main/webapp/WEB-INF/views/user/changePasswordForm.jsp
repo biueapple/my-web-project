@@ -88,6 +88,8 @@ input[type="submit"]:hover {
 
 <%@ include file="/WEB-INF/views/header.jsp"%>
 
+<spring:message code="Pattern.userRegisterRequest.password" var="placeholderText" />
+
 <div class="container">
 	<h2 class="title"><spring:message code="label.ChangePassword" /></h2>
 
@@ -99,7 +101,7 @@ input[type="submit"]:hover {
 	    </div>
 	    <div>
 	        <label><spring:message code="label.NewPassword"/></label>
-	        <form:password path="newPassword" required="required"   placeholder="비밀번호는 8자 이상, 문자/숫자/특수문자를 포함해야 합니다." />
+	        <form:password path="newPassword" required="required"   placeholder="${placeholderText}" />
 	    </div>
 	    <div>
 	        <label><spring:message code="label.NewPasswordCheck" /></label>
