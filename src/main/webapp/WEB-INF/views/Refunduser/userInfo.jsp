@@ -170,15 +170,9 @@ button:hover {
 						<c:if test="${item.state == '정상'}">
 							<tr>
 								<td><input type="checkbox" name="ids" value="${item.id}" /></td>
-								<td><c:choose>
-										<c:when test="${admin}">
-								${item.userName}
-								</c:when>
-										<c:otherwise>
-								${item.userId}
-								
-								</c:otherwise>
-									</c:choose></td>
+							
+								<td>${item.userName}</td>
+							
 								<td>${item.gender}</td>
 								<td>${item.depart}</td>
 								<td>${item.arrive}</td>
@@ -193,7 +187,7 @@ button:hover {
 				</tbody>
 			</table>
 
-			<input type="hidden" name="id" value="${user.userId}" />
+			
 		</form>
 
 		<!-- 버튼 영역 -->

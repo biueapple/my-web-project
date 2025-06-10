@@ -13,9 +13,9 @@ public class RefundUserService {
 	// private UserDao userDao;
 	private RefundUserMapper userMapper;
 
-	public List<RefundUser> findByName(int userId) {
-		return userMapper.findByUserId(userId);
-	}
+//	public List<RefundUser> findByName(int userId) {
+//		return userMapper.findByUserId(userId);
+//	}
 
 	public void regist(RefundUserDto cmdObj) {
 		// dao를 이용하여 데이터베이스에 저장
@@ -37,7 +37,9 @@ public class RefundUserService {
 	public List<Join> selectAll() {
 		return userMapper.selectAll();
 	}
-	
+	public List<Join> selectNormal(int userId) {
+		return userMapper.selectNormal(userId);
+	}
 	public boolean updateStatus(int id) {
 		int update = userMapper.updateStatus(id);
 		return update > 0;

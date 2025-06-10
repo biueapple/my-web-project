@@ -44,6 +44,14 @@
 		LEFT JOIN users u ON s.user_id = u.user_id
 	</select>
 
+	<select id="selectNormal" resultType="com.example.mysite.user.Join">
+		SELECT
+		s.*,
+		u.id AS userName
+		FROM seat s
+		LEFT JOIN users u ON s.user_id = u.user_id WHERE s.user_Id= #{userId}
+	</select>
+
 	<insert id="insertDamage"
 		parameterType="com.example.mysite.user.DamageDto">
 		INSERT INTO damage (user_id, path)
