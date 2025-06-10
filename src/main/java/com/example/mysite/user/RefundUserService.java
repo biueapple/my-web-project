@@ -37,6 +37,7 @@ public class RefundUserService {
 	public List<Join> selectAll() {
 		return userMapper.selectAll();
 	}
+	
 	public boolean updateStatus(int id) {
 		int update = userMapper.updateStatus(id);
 		return update > 0;

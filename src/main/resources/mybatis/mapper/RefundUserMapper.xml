@@ -40,8 +40,8 @@
 		SELECT
 		s.*,
 		u.id AS userName
-		FROM `seat` s
-		JOIN `users` u ON s.user_id = u.user_id
+		FROM seat s
+		LEFT JOIN users u ON s.user_id = u.user_id
 	</select>
 
 	<insert id="insertDamage"
