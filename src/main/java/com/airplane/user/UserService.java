@@ -1,5 +1,8 @@
 package com.airplane.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +30,6 @@ public class UserService {
 
 		System.out.println("회원가입 완료. 자동 생성된 키: " + userDto.getUserId());
 	}
-	
-	
-	
 	
 	public boolean login(LoginRequestCommand cmd) {
 		System.out.println("로그인 서비스 동작");
@@ -81,8 +81,31 @@ public class UserService {
 	
     //회원 중복가입 제한
     public boolean isDuplicatedId(String id) {
+    	System.out.println("회원 아이디 중복 확인");
         return userMapper.checkById(id);
     }
+    
+    //회원정보수정 비밀번호 변경
+    public boolean changePassword(int userId, String currentPw, String newPw, String newPwConfirm) {
+    	String storePw = userMapper.getPasswordByUserId(userId);
+    	
+    	if(!storePw.equals(currentPw)) {
+    		return false; //현재 비밀번호 불일치
+    	}
+    	
+    	if(!newPw.equals(newPwConfirm)) {
+    		return false;
+    	}
+    	
+    	//새 비밀번호 유효성 검사 (길이 8자 이상, 대소문자, 숫자, 특수문자 포함)
+        if (!newPw.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$")) {
+            return false;
+        }
+    		
+    	userMapper.updatePassword(newPw, userId);
+    	return true;
+    }
+    
     
 }
 
