@@ -49,4 +49,8 @@ public class RefundUserService {
 	{
 		userMapper.updateInsurance(seat_id, insurance_id);
 	}
+	
+	public List<RefundUser> findSavepath(List<Integer> ids){
+		return userMapper.findSavepath(ids);
+	}
 }

@@ -46,11 +46,22 @@ public class DamageController {
 			model.addAttribute("message", "선택된 예약이 없습니다.");
 			return "redirect:/"; // 또는 에러페이지
 		}
-
+		LoginRequestCommand lrc = (LoginRequestCommand) httpSession.getAttribute("loginUser");
+		if (lrc == null) {
+			return "redirect:/login";
+		}
 		httpSession.setAttribute("ticketId", ids);
 		model.addAttribute("damageRequest", new DamageDto());
 
-		return "Refunduser/damageUpload";
+		User user = userService.search(lrc.getId());
+		boolean admin = userService.isAdmin(user.getUserId());
+		if (!admin)
+			return "Refunduser/damageUpload";
+		else {
+			List<RefundUser> path = refundUserService.findSavepath(ids);
+			model.addAttribute("path", path);
+			return "Refunduser/adminPicture";
+		}
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -63,10 +74,11 @@ public class DamageController {
 		}
 
 		List<Integer> ids = (List<Integer>) httpSession.getAttribute("ticketId");
+
 		List<String> savePath = new ArrayList<>();
 		String realPath = null;
 		for (int id : ids) {
-			boolean updated = true;// refundUserService.updateStatus(id);
+			boolean updated = true;
 			if (updated) {
 				for (MultipartFile f : damagePhotos) {
 					if (!f.isEmpty()) {
@@ -75,9 +87,6 @@ public class DamageController {
 						savePath.add("/upload/" + f.getName());
 					}
 				}
-			} else {
-				model.addAttribute("message", "예약 상태 업데이트 실패 (id: " + id + ")");
-				return "Refunduser/damageUpload";
 			}
 		}
 
@@ -88,13 +97,15 @@ public class DamageController {
 		model.addAttribute("savePath", "/upload/" + realPath);
 
 		User user = userService.search(lrc.getId());
-		boolean admin=userService.isAdmin(user.getUserId());
-		model.addAttribute("admin", admin);
-		if (!admin) {
-			
-			model.addAttribute("message", "보상 신청이 완료되었습니다.");
-		}
+		boolean admin = userService.isAdmin(user.getUserId());
 
-		return "Refunduser/showPicture";
+		if (admin) {
+			List<RefundUser> path = refundUserService.findSavepath(ids);
+			model.addAttribute("path", path);
+			return "Refunduser/adminPicture";
+		} else {
+			model.addAttribute("message", "보상 신청이 완료되었습니다.");
+			return "Refunduser/showPicture";
+		}
 	}
 }

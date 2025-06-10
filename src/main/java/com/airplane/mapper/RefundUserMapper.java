@@ -26,4 +26,5 @@ public interface RefundUserMapper {
 	List<Join> selectNormal(int userId);
 	//id 를 받아서 insurance_id 를 update
 	public void updateInsurance(@Param("id") int id, @Param("insurance") int insurance_id);
+	List<RefundUser> findSavepath(List<Integer> ids);
 }
