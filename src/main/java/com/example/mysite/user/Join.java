@@ -1,7 +1,7 @@
 package com.example.mysite.user;
 
 public class Join {
-	public class RefundUser {
+	
 		private int id;
 		private String userId;
 		private String depart;
@@ -63,6 +63,6 @@ public class Join {
 			this.userName = userName;
 		}
 
-	}
+	
 
 }

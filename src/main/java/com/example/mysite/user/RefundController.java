@@ -30,7 +30,7 @@ public class RefundController {
 	public String findUserByUserId(
 			@Valid @ModelAttribute("userRegisterRequest") RefundUserRegisterRequest userRegisterRequest,
 			HttpSession httpSession, Model model) {
-		// Integer userId = userRegisterRequest.getUserId();
+		
 		LoginRequestCommand lrc = (LoginRequestCommand) httpSession.getAttribute("loginUser");
 
 		if (lrc == null) {
@@ -39,26 +39,29 @@ public class RefundController {
 		String id = lrc.getId();
 		User user = userService.search(id);
 
+		
+//	
+//		else {
+//			// userId로 환불 사용자 정보 조회
+//			List<RefundUser> findUsers = refundUserService.findByName(user.getUserId());
+//			if (findUsers == null || findUsers.isEmpty()) {
+//				model.addAttribute("message", "조회된 회원 정보가 없습니다.");
+//				return "/Refunduser/userInfo";
+//			}
+//			for (RefundUser f : findUsers) {
+//				f.setUserId(id);
+//			}
+//			model.addAttribute("list", findUsers);
+//		}
+//		model.addAttribute("user", user);
+		List<Join> allList;
 		boolean admin = userService.isAdmin(user.getUserId());
-		model.addAttribute("admin", admin);
-		if (admin) {
-			List<Join> allList = refundUserService.selectAll();
-			model.addAttribute("list", allList);
-		}
-
-		else {
-			// userId로 환불 사용자 정보 조회
-			List<RefundUser> findUsers = refundUserService.findByName(user.getUserId());
-			if (findUsers == null || findUsers.isEmpty()) {
-				model.addAttribute("message", "조회된 회원 정보가 없습니다.");
-				return "/Refunduser/userInfo";
-			}
-			for (RefundUser f : findUsers) {
-				f.setUserId(id);
-			}
-			model.addAttribute("list", findUsers);
-		}
-		model.addAttribute("user", user);
+		if (admin)
+			allList = refundUserService.selectAll();
+		else 
+			allList = refundUserService.selectNormal(user.getUserId());
+		
+		model.addAttribute("list", allList);
 		return "/Refunduser/userInfo";
 
 	}
