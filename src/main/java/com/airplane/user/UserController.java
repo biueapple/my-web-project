@@ -138,7 +138,7 @@ public class UserController {
 		
 		if (!userService.changePassword(userId, form.getCurrentPassword(), form.getNewPassword(),
 				form.getNewPasswordConfirm())) {
-			result.reject("error.changePw", "비밀번호 변경 실패: 입력값을 확인하세요.");
+			result.reject("error.changePw");
 			return "user/changePasswordForm";
 		}
 

@@ -32,7 +32,7 @@ h2, p {
     padding: 30px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    text-align: center;
+    text-align: left;
     background-color: #f9f9f9;
 }
 
@@ -53,7 +53,16 @@ button {
 }
 
 button:hover {
-    background-color: #007BFF;
+    background-color: #004488;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
 }
 </style>
 </head>
@@ -61,7 +70,6 @@ button:hover {
 
 <%@ include file="/WEB-INF/views/header.jsp"%>
 
-<hr>
 
 <div class="container">
     <!-- 회원 정보 출력 -->
@@ -76,10 +84,10 @@ button:hover {
     <hr>
 
     <!-- 회원정보 수정 -->
-    <button onclick="location.href='changePassword';"><spring:message code="label.EditMember" /></button>
+    <button onclick="location.href='changePassword';" ><spring:message code="label.ChangePassword" /></button>
 
     <!-- 회원 탈퇴 -->
-    <button onclick="location.href='userDelete';"><spring:message code="label.userDelete" /></button>
+    <button class="delete-button" onclick="location.href='userDelete';"><spring:message code="label.userDelete" /></button>
 </div>
 
 </body>
