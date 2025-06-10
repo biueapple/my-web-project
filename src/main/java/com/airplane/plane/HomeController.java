@@ -301,19 +301,27 @@ public class HomeController
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "insurance", method = RequestMethod.GET)
-	public String testInsuranceLink(Model model)
+	@RequestMapping(value = "insurance", method = RequestMethod.POST)
+	public String testInsuranceLink(
+			@RequestParam("id") int id,
+			Model model)
 	{
 		
 		List<Insurance> insuranceList = insuranceService.selectAllInsurance(); // 예시
 	    model.addAttribute("insuranceList", insuranceList);
+	    model.addAttribute("id", id);
 	    return "insuranceList"; // /WEB-INF/views/insuranceList.jsp
 	}
 	
-	@RequestMapping(value = "/insurance/select", method = RequestMethod.POST)
-	public String testInsurancePOST(Model model)
+	@RequestMapping(value = "/insuranceSubmit", method = RequestMethod.POST)
+	public String testInsurancePOST(
+			@RequestParam("id") int id,
+			@RequestParam("insuranceId") int insuranceId,
+			Model model)
 	{
+		System.out.println(id);
 		//선택한 보험을 적용
+		refundUserService.updateInsurance(id, insuranceId);
 	    return "redirect:/"; // /WEB-INF/views/insuranceList.jsp
 	}
 	

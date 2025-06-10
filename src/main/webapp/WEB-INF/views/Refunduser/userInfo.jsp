@@ -110,8 +110,8 @@ button:hover {
 }
 </style>
 <script>
-	function submitInsuranceForm(userId) {
-		document.getElementById("insuranceUserId").value = userId;
+	function submitInsuranceForm(id) {
+		document.getElementById("insuranceId").value = id;
 		document.getElementById("insuranceForm").submit();
 	}
 
@@ -179,7 +179,7 @@ button:hover {
 								<td>${item.seat}</td>
 								<td>
 									<button type="button" style="position: relative; left: 35px;"
-										onclick="submitInsuranceForm('${item.userId}')">보험 확인</button>
+										onclick="submitInsuranceForm('${item.id}')">보험 확인</button>
 								</td>
 							</tr>
 						</c:if>
@@ -218,8 +218,8 @@ button:hover {
 
 	<!-- 보험 확인용 숨은 form -->
 	<form id="insuranceForm" action="<c:url value='/insurance'/>"
-		method="get" style="display: none;">
-		<input type="hidden" id="insuranceUserId" name="userId" />
+		method="post" style="display: none;">
+		<input type="hidden" id="insuranceId" name="id" />
 	</form>
 
 	<!-- 피해보상 요청용 숨은 form -->

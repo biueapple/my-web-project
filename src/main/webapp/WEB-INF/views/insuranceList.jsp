@@ -61,7 +61,7 @@
 
 <h1><spring:message code="label.InsuranceList" /></h1>
 
-<form id="insuranceForm" action="/insurance/select" method="post">
+<form id="insuranceForm" action=<c:url value='/insuranceSubmit'/> method="post">
     <table>
         <thead>
             <tr>
@@ -85,6 +85,8 @@
         </tbody>
     </table>
     <input type="submit" id="submitButton" value="<spring:message code='button.Next' />" disabled class="submit-btn">
+    
+    <input type="hidden" name= "id" value="${id}">
 </form>
 
 <script>
