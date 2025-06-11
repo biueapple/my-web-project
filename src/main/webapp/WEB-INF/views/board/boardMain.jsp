@@ -228,9 +228,9 @@ td.title-cell, th.title-cell {
   <h1><spring:message code="board.title"/></h1>
   <form action="<c:url value='/searchBoard'/>" method="post" class="search-form">
     <select name="searchType" class="search-select">
-      <option value="boardTitle">제목</option>
-      <option value="board">내용</option>
-      <option value="id">작성자</option>
+      <option value="boardTitle"><spring:message code="label.boardTitle"/></option>
+      <option value="board"><spring:message code="label.board"/></option>
+      <option value="id"><spring:message code="label.userId"/></option>
     </select>
     <input type="search" name="keyword" placeholder="검색어 입력" class="search-input">
     <button type="submit" class="button-search">검색</button>
