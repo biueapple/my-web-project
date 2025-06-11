@@ -197,6 +197,7 @@ public class HomeController
 		
 		//나온 출발지 도착지 id 값을 이용해서 출발지 도착지 선택한 시간값으로 출발할 예정인 비행기 리스트를 받아오기
 		//List<Plane> plane = planeService.selectAll(dto.getDepartureDate(), depart_id, destination_id);
+		System.out.println(dto.getDepartureDate());
 		List<Plane> plane = planeService.selectEnough(dto.getDepartureDate(), depart_id, destination_id, dto.getPassenger_number());
 		
 		//받아온 plane 리스트는 출발지와 도착지가 id 값이니 문자열로 변환하여 전달하기 위한 리스트 생성
