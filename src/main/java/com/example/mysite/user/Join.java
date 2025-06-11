@@ -3,18 +3,19 @@ package com.example.mysite.user;
 public class Join {
 	
 		private int id;
-		private String userId;
+		private int userId;
 		private String depart;
 		private String arrive;
 		private String seat;
 		private String gender;
 		private String state;
 		private String userName;
+		private String insuranceName;
 		
-		public String getUserId() {
+		public int getUserId() {
 			return userId;
 		}
-		public void setUserId(String userId) {
+		public void setUserId(int userId) {
 			this.userId = userId;
 		}
 		public int getId() {
@@ -61,6 +62,12 @@ public class Join {
 		}
 		public void setUserName(String userName) {
 			this.userName = userName;
+		}
+		public String getInsuranceName() {
+			return insuranceName;
+		}
+		public void setInsuranceName(String insuranceName) {
+			this.insuranceName = insuranceName;
 		}
 
 	

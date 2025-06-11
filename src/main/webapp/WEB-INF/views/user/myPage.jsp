@@ -70,6 +70,11 @@ button:hover {
 
 <%@ include file="/WEB-INF/views/header.jsp"%>
 
+<c:if test="${not empty message}">
+    <div style="padding: 10px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 20px;">
+        ${message}"
+    </div>
+</c:if>
 
 <div class="container">
     <!-- 회원 정보 출력 -->

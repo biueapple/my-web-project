@@ -6,7 +6,7 @@ public class Insurance
 	//고유 id
 	private int id;
 	//보험 이름
-	private String name;
+	private String insuranceName;
 	//보험 가격
 	private int price;
 	//보험 배상 비율
@@ -23,13 +23,13 @@ public class Insurance
 	{
 		this.id = id;
 	}
-	public String getName()
+	public String getInsuranceName()
 	{
-		return name;
+		return insuranceName;
 	}
-	public void setName(String name)
+	public void setInsuranceName(String name)
 	{
-		this.name = name;
+		this.insuranceName = name;
 	}
 	public int getPrice()
 	{
