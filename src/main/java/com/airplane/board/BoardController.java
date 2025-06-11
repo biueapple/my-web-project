@@ -54,7 +54,9 @@ public class BoardController {
 	//상세보기 페이지
 	@RequestMapping("/boardSelectOne")
 	public String boardSelectIdOne(@RequestParam("boardId") int boardId, Model model,HttpSession session) {
+		//게시글하나 가져오기
 		BoardIdDto boardIdDto = boardService.selectIdOne(boardId);
+		//get 방식으로 받기 때문에 주소로 삭제된 게시글이나 비정상적이 접근 막기위해 검증
 		if(boardIdDto!=null) {
 			LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
 			if(lrc!=null) {
@@ -178,15 +180,20 @@ public class BoardController {
 		}
 	}
 	
+	//게시글 검색기능
 	@RequestMapping(value="/searchBoard", method=RequestMethod.POST)
 	public String searchBoard(
+			//검색타입 받아오기
 			@RequestParam("searchType")String searchType,
+			//검색어 받아오기
 			@RequestParam("keyword")String keyword,
 			Model model
 			) {
-		System.out.println(keyword);
+		//공지는 항상띄우기 위해 리스트 받아오기
 		List<BoardIdDto> noticeBoardList = noticeBoardService.noticeSelectIdAllNormalImportance(2);
+		//검색된 게시글 리스트 받아오기
 		List<BoardIdDto> searchBoardList = boardService.searchBoard(keyword, searchType);
+		//리스트 두개 넣어주기
 		model.addAttribute("noticeList", noticeBoardList);
 		model.addAttribute("list", searchBoardList);
 		return "board/boardSearch";
