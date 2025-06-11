@@ -233,7 +233,7 @@ td.title-cell, th.title-cell {
       <option value="id"><spring:message code="label.userId"/></option>
     </select>
     <input type="search" name="keyword" placeholder="검색어 입력" class="search-input">
-    <button type="submit" class="button-search">검색</button>
+    <button type="submit" class="button-search"><spring:message code="label.Search"/></button>
   </form>
 </div>
 <table>
