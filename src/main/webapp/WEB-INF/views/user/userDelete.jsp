@@ -76,7 +76,13 @@ input[type="submit"]:hover {
 
 <div class="container">
     <h2><spring:message code="label.userDelete" /></h2>
-    <br/>
+    
+    <c:if test="${not empty error}">
+   		<div style="color:red; margin-bottom:10px;">
+     	   탈퇴 실패
+    	</div>
+	</c:if>
+
     <form:form modelAttribute="userDeleteCommand"
                action="${pageContext.request.contextPath}/delete" method="post">
         <label for="password"><spring:message code="label.CurrentPassword" /></label>
