@@ -6,7 +6,7 @@
 <mapper namespace="com.airplane.mapper.InsuranceMapper">
 
 	<select id="insuranceAll" resultType="com.airplane.insurance.Insurance">
-    	SELECT * FROM insurance WHERE id != 0
+    	SELECT * FROM insurance
 	</select>
 	
 	<select id="getInsurance" resultType="com.airplane.insurance.Insurance">
