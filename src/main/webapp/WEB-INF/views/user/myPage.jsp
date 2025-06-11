@@ -134,7 +134,7 @@ table button:hover {
 </c:if>
 
 <div class="container">
-	<h2>내정보</h2>
+	<h2><spring:message code="label.MyInformation" /></h2>
 	<hr>
     <!-- 회원 정보 출력 -->
     <div class="user-info">
@@ -147,10 +147,10 @@ table button:hover {
 
     <hr>
 	
-	<h2>내가 쓴 게시글</h2>
+	<h2><spring:message code="label.PostIWrote" /></h2>
     <hr>
     <c:if test="${empty boardList}">
-    	작성한 글이 없습니다
+    	<spring:message code="label.ThereAreNoPostsWritten" />
     </c:if>
     <c:if test="${not empty boardList}">
     <table>
