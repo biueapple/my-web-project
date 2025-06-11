@@ -142,7 +142,7 @@ public class UserController {
 			return "user/changePasswordForm";
 		}
 
-		redirectAttrs.addFlashAttribute("message", "비밀번호가 성공적으로 변경되었습니다.");
+		redirectAttrs.addFlashAttribute("submit","submit");
 		return "redirect:/myPage";
 	}
 

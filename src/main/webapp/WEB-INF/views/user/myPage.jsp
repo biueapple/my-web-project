@@ -70,9 +70,9 @@ button:hover {
 
 <%@ include file="/WEB-INF/views/header.jsp"%>
 
-<c:if test="${not empty message}">
+<c:if test="${not empty submit}">
     <div style="padding: 10px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 20px;">
-        ${message}"
+        <spring:message code="label.changePwSubmit" />
     </div>
 </c:if>
 
