@@ -246,7 +246,7 @@ td.title-cell, th.title-cell {
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="boardIdDto" items="${noticeBoardList}">
+     <c:forEach var="boardIdDto" items="${noticeList}">
         <tr>
             <td>${boardIdDto.boardId}</td>
             <td class="title-cell">
@@ -261,13 +261,13 @@ td.title-cell, th.title-cell {
             <td>${boardIdDto.formattedRegistDate}</td>
         </tr>
     </c:forEach>
-    <c:forEach var="boardIdDto" items="${boardList}">
+    <c:forEach var="boardIdDto" items="${list}">
         <tr>
             <td>${boardIdDto.boardId}</td>
             <td class="title-cell">
               <form method="get" action="boardSelectOne" style="display:inline;">
                 <input type="hidden" name="boardId" value="${boardIdDto.boardId}" />
-                <button type="submit" class="link-button ${boardIdDto.state == '삭제' ? 'deleted-post' : ''}" title="${boardIdDto.boardTitle}">
+                <button type="submit" class="link-button" title="${boardIdDto.boardTitle}">
                   ${boardIdDto.boardTitle}
                 </button>
               </form>

@@ -59,6 +59,11 @@ public class BoardService {
 		return boardMapper.selectIdAllNormalId(userId);
 	}
 	
+	//select 검색하기
+	public List<BoardIdDto> searchBoard(String keyword, String searchType){
+		return boardMapper.searchBoard(keyword,searchType);
+	}
+	
 	//select 유저의 id와 같이 하나만
 	public BoardIdDto selectIdOne(int boardId) {
 		return boardMapper.selectIdOne(boardId);

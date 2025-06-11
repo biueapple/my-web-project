@@ -177,4 +177,18 @@ public class BoardController {
 			}
 		}
 	}
+	
+	@RequestMapping(value="/searchBoard", method=RequestMethod.POST)
+	public String searchBoard(
+			@RequestParam("searchType")String searchType,
+			@RequestParam("keyword")String keyword,
+			Model model
+			) {
+		System.out.println(keyword);
+		List<BoardIdDto> noticeBoardList = noticeBoardService.noticeSelectIdAllNormalImportance(2);
+		List<BoardIdDto> searchBoardList = boardService.searchBoard(keyword, searchType);
+		model.addAttribute("noticeList", noticeBoardList);
+		model.addAttribute("list", searchBoardList);
+		return "board/boardSearch";
+	}
 }

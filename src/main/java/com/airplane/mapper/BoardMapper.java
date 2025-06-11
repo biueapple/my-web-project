@@ -17,6 +17,7 @@ public interface BoardMapper {
 	List<BoardIdDto> selectIdAll();
 	List<BoardIdDto> selectIdAllNormal();
 	List<BoardIdDto> selectIdAllNormalId(@Param("userId")int userId);
+	List<BoardIdDto> searchBoard(@Param("keyword")String keyword, @Param("searchType")String searchType);
 	int update(BoardDto boardDto);
 	int delete(@Param("boardId") int boardId);
 	int updateDelete(@Param("boardId") int boardId);
