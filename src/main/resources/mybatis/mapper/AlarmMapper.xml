@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.airplane.mapper.AlarmMapper">
+  
+<select id="AlarmJoin">
+		SELECT 
+		u.phoneNumber
+		FROM
+		plane_reservation pr
+		JOIN
+		seat s ON s.reservation_id = pr.id
+		JOIN
+		users u
+		ON u.user_id = s.user_id
+		WHERE
+		pr.plane_time BETWEEN (NOW())
+		AND (NOW() + INTERVAL 1 HOUR + INTERVAL 5 MINUTE);
+	</select>
+	</mapper>

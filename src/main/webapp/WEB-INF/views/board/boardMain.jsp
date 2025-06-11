@@ -144,6 +144,22 @@ td:nth-child(4) {
   color: #999;
   font-style: italic;
 }
+
+td.title-cell, th.title-cell {
+  width: 300px;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title-cell button {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+}
 </style>
 </head>
 <body>
@@ -155,7 +171,7 @@ td:nth-child(4) {
     <thead>
     <tr>
         <th><spring:message code="label.boardId"/></th>
-        <th><spring:message code="label.boardTitle"/></th>
+        <th class="title-cell"><spring:message code="label.boardTitle"/></th>
         <th><spring:message code="label.userId"/></th>
         <th><spring:message code="label.registDate"/></th>
     </tr>
@@ -164,11 +180,11 @@ td:nth-child(4) {
     <c:forEach var="boardIdDto" items="${noticeBoardList}">
         <tr>
             <td>${boardIdDto.boardId}</td>
-            <td>
+            <td class="title-cell">
               <form method="get" action="noticeBoardSelectOne" style="display:inline;">
                 <input type="hidden" name="boardId" value="${boardIdDto.boardId}" />
-                <button type="submit" class="link-button ${boardIdDto.state == '삭제' ? 'deleted-post' : ''}">
-                  [공지] ${boardIdDto.boardTitle}
+                <button type="submit" class="link-button ${boardIdDto.state == '삭제' ? 'deleted-post' : ''}" title="${boardIdDto.boardTitle}">
+                  <spring:message code="board.notification"/> ${boardIdDto.boardTitle}
                 </button>
               </form>
             </td>
@@ -179,10 +195,10 @@ td:nth-child(4) {
     <c:forEach var="boardIdDto" items="${boardList}">
         <tr>
             <td>${boardIdDto.boardId}</td>
-            <td>
+            <td class="title-cell">
               <form method="get" action="boardSelectOne" style="display:inline;">
                 <input type="hidden" name="boardId" value="${boardIdDto.boardId}" />
-                <button type="submit" class="link-button ${boardIdDto.state == '삭제' ? 'deleted-post' : ''}">
+                <button type="submit" class="link-button ${boardIdDto.state == '삭제' ? 'deleted-post' : ''}" title="${boardIdDto.boardTitle}">
                   ${boardIdDto.boardTitle}
                 </button>
               </form>
@@ -195,7 +211,7 @@ td:nth-child(4) {
 </table>
 
 <c:if test="${not empty admin}">
-	<button onclick="location.href='noticeBoardInsert';">공지작성</button>
+	<button onclick="location.href='noticeBoardInsert';"><spring:message code="board.CreateNotice"/></button>
 </c:if>
 <button onclick="location.href='boardInsert';"><spring:message code="label.Writing" /></button>
 <button onclick="location.href='/airplane';"><spring:message code="label.board.Home" /></button>

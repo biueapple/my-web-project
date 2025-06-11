@@ -1,6 +1,7 @@
 package com.airplane.user;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.airplane.board.BoardIdDto;
+import com.airplane.board.BoardService;
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -21,6 +25,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private BoardService boardService;
+
 
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
 	public String form(Model model) {
@@ -83,34 +90,11 @@ public class UserController {
 			// 알 수 없는 타입이면 로그인 페이지로
 			return "redirect:/login";
 		}
-
+		
+		List<BoardIdDto> boardList = boardService.selectIdAllNormalId(user.getUserId());
+		
+		model.addAttribute("boardList", boardList);
 		model.addAttribute("user", user);
-		return "user/myPage";
-	}
-
-	@RequestMapping(value = "/myPage", method = RequestMethod.POST)
-	public String updateMypage(@ModelAttribute("user") UserDto userDto, HttpSession session) {
-		Object loginObj = session.getAttribute("loginUser");
-		if (loginObj == null) {
-			return "redirect:/login";
-		}
-
-		User user = null;
-		if (loginObj instanceof User) {
-			user = (User) loginObj;
-		} else if (loginObj instanceof LoginRequestCommand) {
-			LoginRequestCommand loginCmd = (LoginRequestCommand) loginObj;
-			user = userService.search(loginCmd.getId());
-		} else {
-			return "redirect:/login";
-		}
-
-		userDto.setUserId(user.getUserId());
-		userService.updateUserInfo(userDto);
-
-		User updatedUser = userService.findUserById(user.getUserId());
-		session.setAttribute("loginUser", updatedUser);
-
 		return "user/myPage";
 	}
 

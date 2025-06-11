@@ -142,6 +142,13 @@ body {
   margin-top: 30px;
   text-align: left;
 }
+
+.detail-value {
+  flex: 1;
+  color: #222;
+  word-break: break-word;
+  white-space: normal;
+}
 </style>
 </head>
 <body>

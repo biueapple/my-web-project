@@ -22,6 +22,9 @@ import com.airplane.user.User;
 import com.airplane.user.UserService;
 import com.example.airport.AirService;
 import com.example.airport.AirinfoDto;
+import com.example.mysite.user.AirplaneAlarm;
+import com.example.mysite.user.AlarmService;
+import com.example.mysite.user.PresentTime;
 import com.example.mysite.user.RefundUserDto;
 import com.example.mysite.user.RefundUserService;
 
@@ -44,10 +47,18 @@ public class HomeController
 	NoticeBoardService noticeBoardService;
 	@Autowired
 	InsuranceService insuranceService;
+	@Autowired
+	AlarmService alarmService;
+	
 	// 홈 페이지
 	@RequestMapping("/")
 	public String home(Model model, Locale locale, HttpSession session)
 	{
+		alarmService.myMap.put("time", new PresentTime());
+		AirplaneAlarm alarm = new AirplaneAlarm(alarmService.alarmMapper);
+		alarmService.myMap.put("user", alarm);
+		alarmService.myMap2.put("user2", () -> alarm.function());
+
 		//비행기가 출발하는 순서로 받아오기
 		List<Plane> recently = planeService.selectRecently();
 		
