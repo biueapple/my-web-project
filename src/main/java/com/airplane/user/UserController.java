@@ -27,9 +27,9 @@ public class UserController {
 		UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
 		model.addAttribute("userRegisterRequest", userRegisterRequest);
 		LinkedHashMap<String, String> genderMap = new LinkedHashMap<>();
-		genderMap.put("male", "남자"); // 사용자 눈에는 "남자"
-		genderMap.put("female", "여자"); // 사용자 눈에는 "여자"
-		model.addAttribute("genderOptions", genderMap); // 서버에는 "male"/"female" 전송
+		genderMap.put("male", "male"); 
+		genderMap.put("female", "female"); 
+		model.addAttribute("genderOptions", genderMap); 
 		return "/user/registerForm";
 	}
 
@@ -50,8 +50,8 @@ public class UserController {
 
 		if (bindingResult.hasErrors()) {
 			LinkedHashMap<String, String> genderMap = new LinkedHashMap<>();
-			genderMap.put("male", "남자"); // 사용자 눈에는 "남자"
-			genderMap.put("female", "여자"); // 사용자 눈에는 "여자"
+			genderMap.put("male", "male"); // 사용자 눈에는 "남자"
+			genderMap.put("female", "female"); // 사용자 눈에는 "여자"
 			model.addAttribute("genderOptions", genderMap); // 서버에는 "male"/"female" 전송
 			return "/user/registerForm";
 		}
@@ -60,7 +60,7 @@ public class UserController {
 		userService.regist(cmdObj);
 
 		System.out.println("결과 모델에 담기");
-		model.addAttribute("result", "회원가입 성공");
+		model.addAttribute("result", "Welcome!");
 
 		return "/user/registResult";
 	}

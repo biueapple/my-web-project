@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>가입완료</title>
+<title><spring:message code="label.registResult1" /></title>
 <style>
 * {
   margin: 0;
@@ -57,9 +59,9 @@ h2, p {
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
 <div class="center-container">
-  <h2>회원 가입</h2>
-  <p>[${result}] 가입이 완료되었습니다.</p>
-  <a href="/airplane" class="btn">홈으로 이동</a>
+  <h2>[${result}]</h2>
+  <p> <spring:message code="label.registResult" /></p>
+  <a href="/airplane" class="btn"><spring:message code="button.Home" /></a>
 </div>
 
 </body>
