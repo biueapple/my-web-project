@@ -156,7 +156,7 @@ button:hover {
 			<table class="reservation-table">
 				<thead>
 					<tr>
-						<th>선택</th>
+						<th><spring:message code="label.select" /></th>
 						<th><spring:message code="label.Info.username" /></th>
 						<th><spring:message code="label.Info.gender" /></th>
 						<th><spring:message code="label.Info.Departure" /></th>
@@ -204,7 +204,7 @@ button:hover {
 				<button type="button" onclick="submitDamageForm()">
 				
 					<c:if test="${admin}">
-						<spring:message code="label.damageConfirm" />		<!-- 수정 -->
+						<spring:message code="label.checkDamageRequest" />		
 					</c:if test="${not admin}">
 					<spring:message code="label.damageRequest" />
 				</button>
