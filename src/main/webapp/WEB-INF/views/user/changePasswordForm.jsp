@@ -88,24 +88,24 @@ input[type="submit"]:hover {
 
 <%@ include file="/WEB-INF/views/header.jsp"%>
 
+<spring:message code="Pattern.userRegisterRequest.password" var="placeholderText" />
+
 <div class="container">
 	<h2 class="title"><spring:message code="label.ChangePassword" /></h2>
 
 	<form:form modelAttribute="passwordChangeForm" method="post" action="${pageContext.request.contextPath}/changePassword">
+		<form:errors path="*" cssClass="error" element="div"/>
 	    <div>
 	        <label><spring:message code="label.CurrentPassword" /></label>
 	        <form:password path="currentPassword" required="required"/>
-	        <form:errors path="currentPassword" cssClass="error"/>
 	    </div>
 	    <div>
-	        <label><spring:message code="label.NewPassword" /></label>
-	        <form:password path="newPassword" required="required"/>
-	        <form:errors path="newPassword" cssClass="error"/>
+	        <label><spring:message code="label.NewPassword"/></label>
+	        <form:password path="newPassword" required="required"   placeholder="${placeholderText}" />
 	    </div>
 	    <div>
 	        <label><spring:message code="label.NewPasswordCheck" /></label>
 	        <form:password path="newPasswordConfirm" required="required"/>
-	        <form:errors path="newPasswordConfirm" cssClass="error"/>
 	    </div>
 	    <input type="submit" value="<spring:message code='label.ChangePassword' />"/>
 	</form:form>

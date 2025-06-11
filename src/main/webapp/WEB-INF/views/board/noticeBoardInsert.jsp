@@ -139,7 +139,7 @@ body {
 			<form:errors path="boardTitle" cssClass="error"/>
 		</p>
 		<p>
-			중요도
+			<spring:message code="label.importance"/>
 			<form:input path="importance"/>
 		</p>
 		<p>

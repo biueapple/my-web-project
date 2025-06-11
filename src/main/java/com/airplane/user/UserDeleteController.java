@@ -48,12 +48,12 @@ public class UserDeleteController {
 
         boolean success = userService.deleteUser(userId, cmd.getPassword());
 
-        if (success) {
+        if (!success) {
             session.invalidate();
             return "redirect:/";
         } else {
-            redirectAttributes.addFlashAttribute("error", "비밀번호 불일치");
-            return "redirect:/user/userDelete";
+        	redirectAttributes.addFlashAttribute("error", "error");
+            return "redirect:/userDelete";
         }
     }
 }

@@ -24,7 +24,7 @@
 	</insert>
 
 	<select id="selectUser" resultMap="userMap">
-		SELECT * FROM users WHERE id = #{id} AND password = #{password}
+		SELECT * FROM users WHERE id = #{id} AND password = #{password} AND deleted = 0
 	</select>
 	
 	
