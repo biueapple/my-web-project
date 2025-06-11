@@ -204,9 +204,11 @@ button:hover {
 				<button type="button" onclick="submitDamageForm()">
 				
 					<c:if test="${admin}">
-						<spring:message code="label.checkDamageRequest" />		
-					</c:if test="${not admin}">
+						<spring:message code="label.checkDamageRequest" />	
+						</c:if>
+					<c:if test="${not admin}">
 					<spring:message code="label.damageRequest" />
+					</c:if>
 				</button>
 
 			</div>
