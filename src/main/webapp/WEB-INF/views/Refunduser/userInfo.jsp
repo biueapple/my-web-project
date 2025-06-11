@@ -214,6 +214,7 @@ button:hover {
 			</div>
 
 			<div class="right-buttons">
+		
 				<!-- 홈으로 이동 -->
 				<form action="<c:url value='/'/>" method="get">
 					<button type="submit">
