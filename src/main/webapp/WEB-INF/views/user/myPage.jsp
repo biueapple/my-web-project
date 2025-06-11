@@ -113,12 +113,64 @@ table button {
     font: inherit;
     color: #007bff;
     cursor: pointer;
-    text-decoration: underline;
 }
 
 table button:hover {
     color: #0056b3;
     font-weight: 600;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: #000000;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  transition: color 0.3s ease;
+  outline: none;
+}
+
+.link-button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: #ff6600;
+  transition: width 0.3s ease;
+}
+
+.link-button:hover,
+.link-button:focus {
+  color: #ff6600;
+  font-weight: 600;
+  background: none;
+}
+
+.link-button:hover::after,
+.link-button:focus::after {
+  width: 100%;
+}
+
+td.title-cell, th.title-cell {
+  width: 250px;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title-cell button {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
 }
 </style>
 
@@ -157,7 +209,7 @@ table button:hover {
     	<thead>
     		<tr>
        		 <th><spring:message code="label.boardId"/></th>
-       		 <th><spring:message code="label.boardTitle"/></th>
+       		 <th class="title-cell"><spring:message code="label.boardTitle"/></th>
        		 <th><spring:message code="label.userId"/></th>
        		 <th><spring:message code="label.registDate"/></th>
     		</tr>
@@ -166,10 +218,10 @@ table button:hover {
     	<c:forEach var="boardIdDto" items="${boardList}">
         <tr>
             <td>${boardIdDto.boardId}</td>
-            <td>
+            <td class="title-cell">
               <form method="get" action="boardSelectOne" style="display:inline;">
                 <input type="hidden" name="boardId" value="${boardIdDto.boardId}" />
-                <button type="submit" >
+                <button type="submit"  class="link-button" title="${boardIdDto.boardTitle}">
                   ${boardIdDto.boardTitle}
                 </button>
               </form>
