@@ -177,9 +177,9 @@ td.title-cell, th.title-cell {
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: transparent;  /* 큰 테두리 없애기 */
+  background-color: transparent;
   padding: 0;
-  border: none;  /* 큰 테두리 제거 */
+  border: none;
   box-shadow: none;
 }
 
@@ -187,7 +187,7 @@ td.title-cell, th.title-cell {
 .search-input {
   padding: 6px 12px;
   font-size: 14px;
-  border: 1px solid #ccc;  /* 테두리 살리기 */
+  border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
   transition: border-color 0.3s ease;
@@ -195,7 +195,7 @@ td.title-cell, th.title-cell {
 
 .search-select:focus,
 .search-input:focus {
-  border-color: #0d6efd;  /* 포커스 시 파란색 테두리 */
+  border-color: #0d6efd;
   box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
 }
 
