@@ -181,7 +181,7 @@ button:hover {
 								<td>${item.insuranceName}</td>
 								<td>
 									<button type="button" style="position: relative; left: 35px;"
-										onclick="submitInsuranceForm('${item.id}')">보험 가입</button>
+										onclick="submitInsuranceForm('${item.id}')"><spring:message code="label.Info.InsuranceSubscription" /></button>
 								</td>
 							</tr>
 						</c:if>
