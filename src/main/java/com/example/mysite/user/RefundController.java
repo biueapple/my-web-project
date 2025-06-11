@@ -41,8 +41,10 @@ public class RefundController {
 
 		List<Join> allList;
 		boolean admin = userService.isAdmin(user.getUserId());
-		if (admin)
+		if (admin) {
+			model.addAttribute("admin", admin);
 			allList = refundUserService.selectAll();
+		}
 		else 
 			allList = refundUserService.selectNormal(user.getUserId());
 		

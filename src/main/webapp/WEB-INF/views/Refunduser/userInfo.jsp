@@ -171,9 +171,9 @@ button:hover {
 						<c:if test="${item.state == '정상'}">
 							<tr>
 								<td><input type="checkbox" name="ids" value="${item.id}" /></td>
-							
+
 								<td>${item.userName}</td>
-							
+
 								<td>${item.gender}</td>
 								<td>${item.depart}</td>
 								<td>${item.arrive}</td>
@@ -189,7 +189,7 @@ button:hover {
 				</tbody>
 			</table>
 
-			
+
 		</form>
 
 		<!-- 버튼 영역 -->
@@ -202,8 +202,13 @@ button:hover {
 
 				<!-- 피해보상 요청 버튼 -->
 				<button type="button" onclick="submitDamageForm()">
+				
+					<c:if test="${admin}">
+						<spring:message code="label.damageConfirm" />		<!-- 수정 -->
+					</c:if test="${not admin}">
 					<spring:message code="label.damageRequest" />
 				</button>
+
 			</div>
 
 			<div class="right-buttons">
