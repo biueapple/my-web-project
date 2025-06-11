@@ -54,6 +54,11 @@ public class BoardService {
 		return boardMapper.selectIdAllNormal();
 	}
 	
+	//select 유저의 int id 값으로 삭제 안된 것 가져오기
+	public List<BoardIdDto> selectIdAllNormalId(int userId){
+		return boardMapper.selectIdAllNormalId(userId);
+	}
+	
 	//select 유저의 id와 같이 하나만
 	public BoardIdDto selectIdOne(int boardId) {
 		return boardMapper.selectIdOne(boardId);
