@@ -62,23 +62,22 @@ h2, p {
 </head>
 <body>
 
-<%@ include file="/WEB-INF/views/header.jsp" %>
+	<%@ include file="/WEB-INF/views/header.jsp"%>
 
-<c:if test="${admin}">
-	<img src="<spring:url value='${savePath}'/>" alt="damage photo"
-		style="max-width: 300px;" />
-</c:if>
 
-<c:if test="${not admin}">
+
 	<div class="center-container">
-		<div class="message-box">
-			${message}
-		</div>
+		<div class="message-box">${message}</div>
+		
 		<button class="styled-button" onclick="location.href='/airplane';">
 			<spring:message code="label.board.Home" />
 		</button>
-	</div>
-</c:if>
+<br/>
 
+
+		<!-- 이전 -->
+		<button class="styled-button"
+			onclick="location.href='/airplane/user/regist';">목록</button>
+	</div>
 </body>
 </html>
