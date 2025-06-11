@@ -109,11 +109,9 @@ button:hover {
 			</div>
 		</form>
 
-		<form action="<c:url value='/'/>" method="get">
-			<div class="buttons-container">
-				<button type="submit"><spring:message code="button.return"/></button>
-			</div>
-		</form>
+		</br>
+		<button class="styled-button"
+			onclick="location.href='/airplane/user/regist';">목록</button>
 	</div>
 </div>
 
