@@ -77,7 +77,7 @@ h2, p {
 
 		<!-- 이전 -->
 		<button class="styled-button"
-			onclick="location.href='/airplane/user/regist';">목록</button>
+			onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
 	</div>
 </body>
 </html>
