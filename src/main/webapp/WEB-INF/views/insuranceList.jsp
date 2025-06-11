@@ -76,7 +76,7 @@
             <c:forEach var="insurance" items="${insuranceList}">
                 <tr>
                     <td><input type="radio" name="insuranceId" value="${insurance.id}" onclick="enableSubmitButton()"></td>
-                    <td>${insurance.name}</td>
+                    <td>${insurance.insuranceName}</td>
                     <td>${insurance.price}</td>
                     <td>${insurance.compensation}%</td>
                     <td>${insurance.content}</td>
