@@ -183,8 +183,8 @@ td.title-cell, th.title-cell {
             <td class="title-cell">
               <form method="get" action="noticeBoardSelectOne" style="display:inline;">
                 <input type="hidden" name="boardId" value="${boardIdDto.boardId}" />
-                <button type="submit" class="link-button ${boardIdDto.state == '삭제' ? 'deleted-post' : ''}" title="[공지] ${boardIdDto.boardTitle}">
-                  [공지] ${boardIdDto.boardTitle}
+                <button type="submit" class="link-button ${boardIdDto.state == '삭제' ? 'deleted-post' : ''}" title="${boardIdDto.boardTitle}">
+                  <spring:message code="board.notification"/> ${boardIdDto.boardTitle}
                 </button>
               </form>
             </td>
@@ -211,7 +211,7 @@ td.title-cell, th.title-cell {
 </table>
 
 <c:if test="${not empty admin}">
-	<button onclick="location.href='noticeBoardInsert';">공지작성</button>
+	<button onclick="location.href='noticeBoardInsert';"><spring:message code="board.CreateNotice"/></button>
 </c:if>
 <button onclick="location.href='boardInsert';"><spring:message code="label.Writing" /></button>
 <button onclick="location.href='/airplane';"><spring:message code="label.board.Home" /></button>
