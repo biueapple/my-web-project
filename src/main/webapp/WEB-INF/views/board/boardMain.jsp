@@ -218,6 +218,16 @@ td.title-cell, th.title-cell {
 .button-search:hover {
   background-color: #004488;
 }
+
+.board-header h1 a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+.board-header h1 a:hover {
+  color: #0d6efd;
+}
 </style>
 </head>
 <body>
@@ -225,7 +235,7 @@ td.title-cell, th.title-cell {
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <div class="board-container">
 <div class="board-header">
-  <h1><spring:message code="board.title"/></h1>
+  <h1><a href="<c:url value='/board' />"><spring:message code="board.title"/></a></h1>
   <form action="<c:url value='/searchBoard'/>" method="post" class="search-form">
     <select name="searchType" class="search-select">
       <option value="boardTitle"><spring:message code="label.boardTitle"/></option>
