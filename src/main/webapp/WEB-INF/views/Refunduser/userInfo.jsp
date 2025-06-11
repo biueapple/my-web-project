@@ -162,8 +162,8 @@ button:hover {
 						<th><spring:message code="label.Info.Departure" /></th>
 						<th><spring:message code="label.Info.Destination" /></th>
 						<th><spring:message code="label.Info.SeatNumber" /></th>
-						<th>확인</th>
 						<th><spring:message code="label.InsuranceList" /></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -181,7 +181,7 @@ button:hover {
 								<td>${item.insuranceName}</td>
 								<td>
 									<button type="button" style="position: relative; left: 35px;"
-										onclick="submitInsuranceForm('${item.id}')">보험 확인</button>
+										onclick="submitInsuranceForm('${item.id}')">보험 가입</button>
 								</td>
 							</tr>
 						</c:if>
