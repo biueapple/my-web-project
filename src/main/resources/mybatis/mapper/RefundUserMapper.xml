@@ -39,17 +39,21 @@
 	<select id="selectAll" resultType="com.example.mysite.user.Join">
 		SELECT
 		s.*,
-		u.id AS userName
+		u.id AS userName,
+		i.insuranceName
 		FROM seat s
-		LEFT JOIN users u ON s.user_id = u.user_id
+		JOIN users u ON s.user_id = u.user_id
+		JOIN insurance i ON s.insurance_id = i.id;
 	</select>
 
 	<select id="selectNormal" resultType="com.example.mysite.user.Join">
-		SELECT
-		s.*,
-		u.id AS userName
+		SELECT s.*,
+		u.id AS userName,
+		i.insuranceName
 		FROM seat s
-		LEFT JOIN users u ON s.user_id = u.user_id WHERE s.user_Id= #{userId}
+		JOIN users u ON s.user_id = u.user_id 
+		JOIN insurance i ON s.insurance_id = i.id
+		WHERE s.user_Id = #{userId}
 	</select>
 
 	<insert id="insertDamage"
