@@ -39,9 +39,10 @@ public class UserService {
 		return (user != null) ? true : false;
 	}
 	
+	//회원 정보 검색
 	public User search(String id) {
 		System.out.println("회원 정보 검색");
-		User user = userMapper.idsearch(id); //회원 정보 검색
+		User user = userMapper.idsearch(id); 
 		return user;
 	}
 	
@@ -74,7 +75,8 @@ public class UserService {
     	System.out.println("회원 정보 수정");
         userMapper.updateUserInfo(userDto);
     }
-
+    
+    
     public User findUserById(int userId) {
         return userMapper.selectUserById(userId);
     }
@@ -89,10 +91,12 @@ public class UserService {
     public boolean changePassword(int userId, String currentPw, String newPw, String newPwConfirm) {
     	String storePw = userMapper.getPasswordByUserId(userId);
     	
+    	//현재 비밀번호 확인
     	if(!storePw.equals(currentPw)) {
-    		return false; //현재 비밀번호 불일치
+    		return false; 
     	}
     	
+    	//새비밀번호 확인
     	if(!newPw.equals(newPwConfirm)) {
     		return false;
     	}

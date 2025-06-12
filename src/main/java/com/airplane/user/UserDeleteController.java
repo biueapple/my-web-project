@@ -19,13 +19,15 @@ public class UserDeleteController {
 
     @Autowired
     private UserService userService;
-
+    
+    //유저 회원탈퇴 폼
     @GetMapping  
     public String showDeleteForm(Model model) {
         model.addAttribute("userDeleteCommand", new UserDeleteCommand());
         return "user/userDelete";  
     }
-
+    
+    //유저 회원탈퇴 기능
     @PostMapping
     public String deleteUser(
             HttpSession session,

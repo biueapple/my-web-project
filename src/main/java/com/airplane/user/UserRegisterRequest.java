@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 
-// 커맨드 객체 정의
+// 회원 가입 정보
 public class UserRegisterRequest {
 	@NotBlank(message = "{NotBlank.userRegisterRequest.id}")
 	@Size(min = 4, max = 20, message = "{Size.userRegisterRequest.id}")

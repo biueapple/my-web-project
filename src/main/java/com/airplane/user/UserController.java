@@ -28,7 +28,7 @@ public class UserController {
 	@Autowired
 	private BoardService boardService;
 
-
+	//회원가입 폼
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
 	public String form(Model model) {
 		UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
@@ -39,7 +39,8 @@ public class UserController {
 		model.addAttribute("genderOptions", genderMap); 
 		return "/user/registerForm";
 	}
-
+	
+	//회원 가입 검증
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String submit(@Valid @ModelAttribute("userRegisterRequest") UserRegisterRequest cmdObj,
 			BindingResult bindingResult, // 검증 대상 객체 바로 다음에 위치해야 함
@@ -54,12 +55,13 @@ public class UserController {
 		if (userService.isDuplicatedId(cmdObj.getId())) {
 			bindingResult.rejectValue("id", "error.id", "이미 존재하는 아이디입니다.");
 		}
-
+		
+		//성별 선택
 		if (bindingResult.hasErrors()) {
 			LinkedHashMap<String, String> genderMap = new LinkedHashMap<>();
-			genderMap.put("male", "male"); // 사용자 눈에는 "남자"
-			genderMap.put("female", "female"); // 사용자 눈에는 "여자"
-			model.addAttribute("genderOptions", genderMap); // 서버에는 "male"/"female" 전송
+			genderMap.put("male", "male"); 
+			genderMap.put("female", "female"); 
+			model.addAttribute("genderOptions", genderMap); 
 			return "/user/registerForm";
 		}
 
@@ -76,6 +78,7 @@ public class UserController {
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String showMypage(HttpSession session, Model model) {
 		Object loginObj = session.getAttribute("loginUser");
+		
 		if (loginObj == null) {
 			return "redirect:/login";
 		}
@@ -108,7 +111,8 @@ public class UserController {
 	@PostMapping("/changePassword")
 	public String changePassword(@Valid @ModelAttribute("passwordChangeForm") PasswordChangeForm form,
 			BindingResult result, HttpSession session, RedirectAttributes redirectAttrs) {
-
+		
+		//로그인 회원 검증
 		LoginRequestCommand loginObj = (LoginRequestCommand)session.getAttribute("loginUser");
 		if (loginObj == null) {
 		    return "redirect:/login";
@@ -120,6 +124,7 @@ public class UserController {
 			
 		int userId = user.getUserId();		
 		
+		//변경 비밀번호 검증
 		if (!userService.changePassword(userId, form.getCurrentPassword(), form.getNewPassword(),
 				form.getNewPasswordConfirm())) {
 			result.reject("error.changePw");
