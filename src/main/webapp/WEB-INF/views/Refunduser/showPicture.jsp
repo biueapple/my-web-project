@@ -10,69 +10,71 @@
 <title><spring:message code="label.Main" /></title>
 <style>
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-	font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content-wrapper {
+  max-width: 480px;
+  margin: 60px auto;
+  padding: 30px 25px;
+  text-align: center;
+}
+
+/* 메시지 박스 */
+.message {
+  font-size: 1rem;
+  background-color: #fafafa;
+  color: #333;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* 버튼 스타일 */
+button {
+  background-color: #1976d2;
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 8px;
+}
+
+button:hover {
+  background-color: #1565c0;
 }
 
 form {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 h2, p {
-	margin: 0;
-	padding: 0;
-}
-
-.center-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin-top: 50px;
-	text-align: center;
-}
-
-.message-box {
-	color: red;
-	font-size: 18px;
-	margin-bottom: 20px;
-}
-
-.styled-button {
-	background-color: #007BFF;
-	color: white;
-	border: none;
-	padding: 10px 20px;
-	font-size: 16px;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s;
-}
-
-.styled-button:hover {
-	background-color: #0056b3;
+  margin: 0;
+  padding: 0;
 }
 </style>
 </head>
 <body>
 
-	<%@ include file="/WEB-INF/views/header.jsp"%>
+<%@ include file="/WEB-INF/views/header.jsp"%>
 
-
-
-	<div class="center-container">
-		<div class="message-box">${message}</div>
-		
-		<button class="styled-button" onclick="location.href='/airplane';"><spring:message code="label.board.Home" /></button>
-		<br>
-		<!-- 이전 -->
-		<button class="styled-button" onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
-	</div>
+<div class="content-wrapper">
+	<p class="message">${message}</p>
+	<button class="styled-button" onclick="location.href='/airplane';"><spring:message code="label.Home" /></button>
+	<button class="styled-button" onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
+</div>
 </body>
 </html>

@@ -27,15 +27,16 @@ body {
   text-align: center;
 }
 
-/* 에러 메시지 */
-.error-message {
+/* 메시지 박스 */
+.message {
+  font-size: 1rem;
+  background-color: #fafafa;
   color: #b00020;
-  font-weight: 700;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  border-radius: 6px;
-  padding: 15px 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
   margin-bottom: 30px;
+  line-height: 1.5;
 }
 
 /* 버튼 스타일 */
@@ -71,14 +72,9 @@ h2, p {
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
 <div class="content-wrapper">
-  <c:if test="${empty userId}">
-      <p class="error-message">
-          ${refund}
-      </p>
-  </c:if>
-
-  <button onclick="location.href='/airplane';"><spring:message code="label.Home" /></button>
-  <button onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
+	<p class="message">${refund}</p>
+	<button onclick="location.href='/airplane';"><spring:message code="label.Home" /></button>
+	<button onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
 </div>
 
 </body>
