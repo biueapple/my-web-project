@@ -48,7 +48,7 @@ public class UserDeleteController {
 
         boolean success = userService.deleteUser(userId, cmd.getPassword());
 
-        if (!success) {
+        if (success) {
             session.invalidate();
             return "redirect:/";
         } else {
