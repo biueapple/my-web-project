@@ -110,11 +110,12 @@ button:hover {
 }
 </style>
 <script>
+	//
 	function submitInsuranceForm(id) {
 		document.getElementById("insuranceId").value = id;
 		document.getElementById("insuranceForm").submit();
 	}
-
+	
 	function submitDamageForm() {
 		const checkedBoxes = document.querySelectorAll("input[name='ids']:checked");
 
@@ -136,7 +137,20 @@ button:hover {
 
 		form.submit();
 	}
+	
+	function submitRefundForm(){
+		const checkedBoxes = document.querySelectorAll("input[name='ids']:checked");
+		if (checkedBoxes.length === 0) {
+			alert("환불할 예약을 선택해주세요.");
+			return;
+		}
+		document.getElementById("refundForm").submit();
+	}
+
+
 </script>
+
+
 </head>
 <body>
 
@@ -196,7 +210,7 @@ button:hover {
 		<div class="buttons-container">
 			<div class="left-buttons">
 				<!-- 환불 요청 버튼 -->
-				<button type="submit" form="refundForm">
+				<button type="button" onclick="submitRefundForm()">
 					<spring:message code="label.Info.RefundRequest" />
 				</button>
 

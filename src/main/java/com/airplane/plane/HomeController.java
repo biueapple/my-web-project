@@ -54,10 +54,10 @@ public class HomeController
 	@RequestMapping("/")
 	public String home(Model model, Locale locale, HttpSession session)
 	{
-		alarmService.myMap.put("time", new PresentTime());
-		AirplaneAlarm alarm = new AirplaneAlarm(alarmService.alarmMapper);
-		alarmService.myMap.put("user", alarm);
-		alarmService.myMap2.put("user2", () -> alarm.function());
+//		alarmService.myMap.put("time", new PresentTime());
+//		AirplaneAlarm alarm = new AirplaneAlarm(alarmService.alarmMapper);
+//		alarmService.myMap.put("user", alarm);
+//		alarmService.myMap2.put("user2", () -> alarm.function());
 
 		//비행기가 출발하는 순서로 받아오기
 		List<Plane> recently = planeService.selectRecently();
