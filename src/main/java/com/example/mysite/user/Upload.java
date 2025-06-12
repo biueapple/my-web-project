@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class Upload {
-	
+	//사진 서버 디렉토리에 저장, 저장된 파일명 반환
 	public String fileUpload(String savePath, MultipartFile file)
 	{
 		String path = null;

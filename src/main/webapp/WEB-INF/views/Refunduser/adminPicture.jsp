@@ -68,7 +68,7 @@ h2, p {
 
 	<div class="center-container">
 		<c:forEach var="p" items="${path}">
-			<img src="<c:url value='/upload/${p.savepath}'/>" alt="damage photo" />
+			<img src="${p}"/>
 		</c:forEach>
 
 		<button class="styled-button" onclick="location.href='/airplane';"><spring:message code="label.board.Home" /></button>
