@@ -228,6 +228,21 @@ td.title-cell, th.title-cell {
 .board-header h1 a:hover {
   color: #0d6efd;
 }
+
+.notice-title {
+  font-weight: 700;
+  color: #d63384;
+  position: relative;
+}
+
+.notice-title::before {
+  font-size: 16px;
+  margin-right: 4px;
+}
+
+.notice-title:hover {
+  color: #a61e4d;
+}
 </style>
 </head>
 <body>
@@ -262,7 +277,7 @@ td.title-cell, th.title-cell {
             <td class="title-cell">
               <form method="get" action="noticeBoardSelectOne" style="display:inline;">
                 <input type="hidden" name="boardId" value="${boardIdDto.boardId}" />
-                <button type="submit" class="link-button ${boardIdDto.state == '삭제' ? 'deleted-post' : ''}" title="${boardIdDto.boardTitle}">
+                <button type="submit" class="link-button notice-title ${boardIdDto.state == '삭제' ? 'deleted-post' : ''}" title="${boardIdDto.boardTitle}">
                   <spring:message code="board.notification"/> ${boardIdDto.boardTitle}
                 </button>
               </form>
@@ -282,7 +297,15 @@ td.title-cell, th.title-cell {
                 </button>
               </form>
             </td>
-            <td>${boardIdDto.id}</td>
+            <td>
+				<form action="<c:url value='/searchBoard'/>" method="post">
+					<input type="hidden" name="searchType" value="id">
+					<input type="hidden" name="keyword" value="${boardIdDto.id}">
+					<button type="submit" class="link-button">
+						${boardIdDto.id}
+					</button>
+				</form>
+			</td>
             <td>${boardIdDto.formattedRegistDate}</td>
         </tr>
     </c:forEach>
