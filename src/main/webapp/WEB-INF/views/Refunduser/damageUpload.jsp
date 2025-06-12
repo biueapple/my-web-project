@@ -89,6 +89,16 @@ button:hover {
 	color: #d32f2f;
 	font-weight: bold;
 }
+
+input[type="file"] {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    background-color: #f8f8f8;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 </style>
 </head>
 <body>
@@ -101,17 +111,13 @@ button:hover {
 		<h3><spring:message code="label.UploadPhoto" /></h3>
 
 		<form action="<c:url value='/user/damage/upload'/>" method="post" enctype="multipart/form-data">
-			<label for="damagePhotos"><spring:message code="label.breakage" /></label>
 			<input type="file" id="damagePhotos" name="damagePhotos" multiple />
 
 			<div class="buttons-container">
 				<button type="submit"><spring:message code="label.application" /></button>
+				<button type="button" onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
 			</div>
 		</form>
-
-		</br>
-		<button class="styled-button"
-			onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
 	</div>
 </div>
 

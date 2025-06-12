@@ -77,9 +77,8 @@ h2, p {
       </p>
   </c:if>
 
-  <form action="<c:url value='/'/>" method="get">
-      <button type="submit"><spring:message code="label.Home"/></button>
-  </form>
+  <button onclick="location.href='/airplane';"><spring:message code="label.Home" /></button>
+  <button onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
 </div>
 
 </body>

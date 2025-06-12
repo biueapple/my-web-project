@@ -334,7 +334,7 @@ public class HomeController
 		System.out.println(id);
 		//선택한 보험을 적용
 		refundUserService.updateInsurance(id, insuranceId);
-	    return "redirect:/"; // /WEB-INF/views/insuranceList.jsp
+	    return "redirect:/user/regist"; // /WEB-INF/views/insuranceList.jsp
 	}
 	
 	private boolean Admin(HttpSession session)
