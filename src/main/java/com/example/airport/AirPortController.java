@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.airplane.user.LoginRequestCommand;
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -32,9 +34,14 @@ public class AirPortController {
 	public String submitAirportForm(@Valid AirinfoDto airinfoDto,
 			BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
 		
+		LoginRequestCommand lrc = (LoginRequestCommand)session.getAttribute("loginUser");
+		if(lrc==null) {
+			return "redirect:/login";
+		}
+		
 		//유효성 검사결과=bindingResult
 		if (airinfoDto.getDeparture().equals(airinfoDto.getDestination())) {
-			bindingResult.rejectValue("destination", "error.destination", "출발지와 도착지는 같을 수 없습니다.");
+			bindingResult.rejectValue("destination", "error.destination.same");
 		}
 
 		Integer number_of_people = airinfoDto.getPassenger_number();
