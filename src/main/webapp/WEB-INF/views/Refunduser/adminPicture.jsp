@@ -71,12 +71,8 @@ h2, p {
 			<img src="<c:url value='/upload/${p.savepath}'/>" alt="damage photo" />
 		</c:forEach>
 
-		<button class="styled-button" onclick="location.href='/airplane';">
-			<spring:message code="label.board.Home" />
-		</button>
-
-		<button class="styled-button"
-			onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
+		<button class="styled-button" onclick="location.href='/airplane';"><spring:message code="label.board.Home" /></button>
+		<button class="styled-button" onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
 	</div>
 
 </body>

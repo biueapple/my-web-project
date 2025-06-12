@@ -69,15 +69,10 @@ h2, p {
 	<div class="center-container">
 		<div class="message-box">${message}</div>
 		
-		<button class="styled-button" onclick="location.href='/airplane';">
-			<spring:message code="label.board.Home" />
-		</button>
-<br/>
-
-
+		<button class="styled-button" onclick="location.href='/airplane';"><spring:message code="label.board.Home" /></button>
+		<br>
 		<!-- 이전 -->
-		<button class="styled-button"
-			onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
+		<button class="styled-button" onclick="location.href='/airplane/user/regist';"><spring:message code="label.List" /></button>
 	</div>
 </body>
 </html>

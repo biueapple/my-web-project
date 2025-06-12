@@ -34,11 +34,6 @@ public class DamageController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String damageResult() {
-		return "home";
-	}
-
 	@RequestMapping(method = RequestMethod.POST)
 	public String damageClaim(@RequestParam(value = "ids", required = false) List<Integer> ids, HttpSession httpSession,
 			Model model) {
