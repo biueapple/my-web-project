@@ -72,7 +72,6 @@ public class DamageController {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String damageSubmit(@RequestParam("damagePhotos") List<MultipartFile> damagePhotos,
 			@ModelAttribute DamageDto damageDto, HttpSession httpSession, Model model) {
-System.out.println("자아악동");
 		LoginRequestCommand lrc = (LoginRequestCommand) httpSession.getAttribute("loginUser");
 		if (lrc == null) {
 			return "redirect:/login";
