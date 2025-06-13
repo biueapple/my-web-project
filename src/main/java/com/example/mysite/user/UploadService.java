@@ -18,8 +18,6 @@ public class UploadService {
 	RefundUserMapper refundUserMapper;
 	
 	public void service(List<Integer> ids, String path) {
-		//String id = lrc.getId();
-		//User user = userService.search(id);
 		for(Integer id : ids) {
 		DamageDto damageDto = new DamageDto();
 		damageDto.setId(id);

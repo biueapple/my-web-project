@@ -1,6 +1,7 @@
 package com.example.mysite.user;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,24 @@ public class DamageController {
 			return "Refunduser/damageUpload";
 		else {
 			List<RefundUser> path = refundUserService.findSavepath(ids);
-			model.addAttribute("path", path);
+			List<RefundUser> imgPaths = new ArrayList<>();
+			for (int i = 0; i < path.size(); i++) 
+			{
+				if (path.get(i).getSavepath() != null) 
+				{
+					String[] strs = path.get(i).getSavepath().split(",");
+					for(int j = 0; j < strs.length; j++)
+					{
+						RefundUser ru = new RefundUser();
+						ru.setSavepath(strs[j]);
+						imgPaths.add(ru);
+					}
+				}
+			}
+			for(RefundUser g : imgPaths) {
+				System.out.println(g.getSavepath());
+			}
+			model.addAttribute("path", imgPaths);
 			return "Refunduser/adminPicture";
 		}
 	}
@@ -62,7 +80,6 @@ public class DamageController {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String damageSubmit(@RequestParam("damagePhotos") List<MultipartFile> damagePhotos,
 			@ModelAttribute DamageDto damageDto, HttpSession httpSession, Model model) {
-
 		LoginRequestCommand lrc = (LoginRequestCommand) httpSession.getAttribute("loginUser");
 		if (lrc == null) {
 			return "redirect:/login";
@@ -71,17 +88,13 @@ public class DamageController {
 		List<Integer> ids = (List<Integer>) httpSession.getAttribute("ticketId");
 
 		List<String> savePath = new ArrayList<>();
-		String realPath = null;
-		for (int id : ids) {
-			boolean updated = true;
-			if (updated) {
-				for (MultipartFile f : damagePhotos) {
-					if (!f.isEmpty()) {
-						realPath = upload.fileUpload("D:/my-web-project/upload/", f);
-						uploadService.service(ids, realPath);
-						savePath.add("/upload/" + f.getName());
-					}
-				}
+
+		for (MultipartFile f : damagePhotos) {
+			if (!f.isEmpty()) {
+				String realPath = upload.fileUpload("D:/my-web-project/upload/", f);
+				String fileName = new java.io.File(realPath).getName();
+
+				savePath.add(fileName);
 			}
 		}
 
@@ -89,18 +102,15 @@ public class DamageController {
 			model.addAttribute("message", "파일을 선택해주세요.");
 			return "Refunduser/damageUpload";
 		}
-		model.addAttribute("savePath", "/upload/" + realPath);
+		String joinPath = String.join(",", savePath);
+		uploadService.service(ids, joinPath); //db저장
+
+		//model.addAttribute("savePath", savePath);
 
 		User user = userService.search(lrc.getId());
 		boolean admin = userService.isAdmin(user.getUserId());
 
-		if (admin) {
-			List<RefundUser> path = refundUserService.findSavepath(ids);
-			model.addAttribute("path", path);
-			return "Refunduser/adminPicture";
-		} else {
 			model.addAttribute("message", "보상 신청이 완료되었습니다.");
 			return "Refunduser/showPicture";
 		}
 	}
-}

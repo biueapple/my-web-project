@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 
 <mapper namespace="com.airplane.mapper.RefundUserMapper">
 
@@ -64,8 +64,8 @@
 	<insert id="insertDamage"
 		parameterType="com.example.mysite.user.DamageDto">
 		INSERT INTO damage (user_id, path)
-		VALUES (#{id},
-		#{savepath})
+		VALUES
+			(#{id}, #{savepath})
 	</insert>
 
 	<update id="updateStatus">
@@ -93,7 +93,7 @@
 			#{id}
 		</foreach>
 	</select>
-	
+
 </mapper>
 
 
