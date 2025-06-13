@@ -55,16 +55,24 @@ public class DamageController {
 			return "Refunduser/damageUpload";
 		else {
 			List<RefundUser> path = refundUserService.findSavepath(ids);
-			List<String> imgPaths = new ArrayList<>();
-			for (RefundUser refundUser : path) {
-				if (refundUser.getSavepath() != null) {
-					imgPaths.addAll(Arrays.asList(refundUser.getSavepath().split(",")));
+			List<RefundUser> imgPaths = new ArrayList<>();
+			for (int i = 0; i < path.size(); i++) 
+			{
+				if (path.get(i).getSavepath() != null) 
+				{
+					String[] strs = path.get(i).getSavepath().split(",");
+					for(int j = 0; j < strs.length; j++)
+					{
+						RefundUser ru = new RefundUser();
+						ru.setSavepath(strs[j]);
+						imgPaths.add(ru);
+					}
 				}
 			}
-			for(String g : imgPaths) {
-			System.out.println(g);
+			for(RefundUser g : imgPaths) {
+				System.out.println(g.getSavepath());
 			}
-			model.addAttribute("path", path);
+			model.addAttribute("path", imgPaths);
 			return "Refunduser/adminPicture";
 		}
 	}
