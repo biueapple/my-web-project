@@ -129,7 +129,7 @@ body {
   white-space: pre-wrap;
   border: 1px solid #ccc;
   border-radius: 6px;
-  padding: 0px;
+  padding: 14px 14px 10px 20px;
   background-color: #fcfcfc;
   font-size: 16px;
   line-height: 1.3;
@@ -175,9 +175,7 @@ body {
   
   <div class="detail-content">
     <span class="detail-label"><spring:message code="label.board"/></span>
-    <div class="content-box">
-      ${boardIdDto.board}
-    </div>
+    <div class="content-box">${boardIdDto.board}</div>
   </div>
 
   <div class="button-box">
