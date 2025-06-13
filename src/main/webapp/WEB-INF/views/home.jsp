@@ -140,7 +140,7 @@ footer {
 }
 
 .recent-item {
-	height: 80px;
+	height: 65px;
 	margin: 4px 0;
 	padding: 8px 4px 8px 12px;
 	background: rgba(255, 255, 255, 0.92);
